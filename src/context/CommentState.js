@@ -3,6 +3,8 @@ import CommentReducer from './CommentReducer'
 
 import { COMMENT } from './actions'
 
+import { newComment } from '../utils/newComment'
+
 const initialState = {
 	paging: {},
 	results: [],
@@ -24,6 +26,42 @@ export const CommentProvider = ({ children, comment }) => {
 
 	const getReplies = () => {
 		try {
+
+
+		} catch (error) {
+
+		}
+	}
+
+	const postReply = (body, user) => {
+		try {
+
+			dispatch({
+				type: COMMENT.REPLY_LOADING
+			})
+
+			dispatch({ type: COMMENT.OPEN_REPLY, payload: { isReplying: false } })
+
+			dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: true } })
+
+			setTimeout(() => {
+
+				comment.reply.total += 1
+
+				if (!comment.reply.has_replies) {
+					comment.reply.has_replies = true
+				}
+
+				const reply = newComment(user, body, Date.now())
+
+				dispatch({
+					type: COMMENT.POST_REPLY,
+					payload: {
+						reply
+					}
+				})
+
+			}, 250);
 
 
 		} catch (error) {
@@ -54,7 +92,8 @@ export const CommentProvider = ({ children, comment }) => {
 			state,
 			comment,
 			seeMore,
-			openReply
+			openReply,
+			postReply
 		}}>
 			{children}
 		</CommentContext.Provider>

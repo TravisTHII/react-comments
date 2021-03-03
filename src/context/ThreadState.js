@@ -4,6 +4,7 @@ import ThreadReducer from './ThreadReducer'
 import { THREAD } from './actions'
 
 import { SEED } from '../data'
+
 import { newComment } from '../utils/newComment'
 
 const initialState = {

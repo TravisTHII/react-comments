@@ -78,15 +78,20 @@ Thread
 .thread_comments > div:not(:last-child) {
 	margin-bottom: 9px;
 }
-
+.thread_comments > .comment > .comment_replies,
+.thread_comments > .comment > .comment_replies > .replies > .comment > .comment_replies {
+	margin-left: 25px;
+}
 .thread_form, 
 .thread_comments > .comment {
 	background-color: rgba(10, 10, 10,0.9);
 }
-
 .thread_form > div:not(:last-child),
 .comment_post > div:not(:last-child) {
 	margin-bottom: 5px;
+}
+.comment .comment{
+	padding: 0;
 }
 
 .comment_header {

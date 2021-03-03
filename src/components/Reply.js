@@ -24,11 +24,11 @@ export function Reply() {
 	}
 
 	const submitReply = () => {
-		// if (!validText(value)) {
-		// 	setValue('')
+		if (!validText(value)) {
+			setValue('')
 
-		// 	postReply(value, user.slug)
-		// }
+			postReply(value, user)
+		}
 	}
 
 	reply =
