@@ -138,11 +138,10 @@ Thread
 	display: inline-block;
 	margin-right: 9px;
 }
-
-.comment_author .author_info {
-	position: relative;
+.author_info {
 	height: 100%;
-	text-align: left;
+	position: relative;
+	text-align: left !important;
 }
 
 .author_info .author_username {

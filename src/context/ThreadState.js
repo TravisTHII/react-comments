@@ -4,6 +4,7 @@ import ThreadReducer from './ThreadReducer'
 import { THREAD } from './actions'
 
 import { SEED } from '../data'
+import { newComment } from '../utils/newComment'
 
 const initialState = {
 	total: 0,
@@ -56,10 +57,40 @@ export const ThreadProvider = ({ children }) => {
 		}
 	}
 
+	const postComment = (body, user) => {
+		try {
+
+			if (!state.postLoad) {
+
+				const comment = newComment(user, body, Date.now())
+
+				dispatch({
+					type: THREAD.TP_LOAD
+				})
+
+				setTimeout(() => {
+
+					dispatch({
+						type: THREAD.POST_COMMENT,
+						payload: {
+							comment
+						}
+					})
+
+				}, 250);
+
+			}
+
+		} catch (error) {
+
+		}
+	}
+
 	return (
 		<ThreadContext.Provider value={{
 			state,
-			getThread
+			getThread,
+			postComment
 		}}>
 			{children}
 		</ThreadContext.Provider>

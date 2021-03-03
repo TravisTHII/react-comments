@@ -11,10 +11,25 @@ export default (state, action) => {
 		}
 	}
 
+	if (type === THREAD.POST_COMMENT) {
+		return {
+			...state,
+			postLoad: false,
+			comments: [payload.comment, ...state.comments]
+		}
+	}
+
 	if (type === THREAD.LOAD_THREAD) {
 		return {
 			...state,
 			loading: true
+		}
+	}
+
+	if (type === THREAD.TP_LOAD) {
+		return {
+			...state,
+			postLoad: true
 		}
 	}
 

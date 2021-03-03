@@ -1,21 +1,5 @@
-export function Capitalize([firstLetter, ...rest]) {
-	return [firstLetter.toLocaleUpperCase(), ...rest].join('')
-}
-
 export function Slugify(s) {
 	return s.replace(/[^A-Z0-9]+/ig, "-").toLowerCase()
-}
-
-export function WeaveArray(array, weaveValue) {
-	const { length } = array
-	return array.reduce((result, value, i) => {
-		if (i < length - 1) {
-			result.push(value, weaveValue)
-		} else {
-			result.push(value)
-		}
-		return result
-	}, [])
 }
 
 function preventDefault(e) {
@@ -40,28 +24,6 @@ export function StopScrolling(x) {
 	})
 }
 
-export function debounce(func, wait, immediate) {
-	var timeout
-
-	return function executedFunction() {
-		var context = this
-		var args = arguments
-
-		var later = function () {
-			timeout = null
-			if (!immediate) func.apply(context, args)
-		}
-
-		var callNow = immediate && !timeout
-
-		clearTimeout(timeout)
-
-		timeout = setTimeout(later, wait)
-
-		if (callNow) func.apply(context, args)
-	}
-}
-
 export function offset(el) {
 	var rect = el.getBoundingClientRect(),
 		scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
@@ -81,4 +43,23 @@ export function expandTextarea(t, h) {
 
 export function invalidValue(s, l) {
 	return s === null || (/^ *$/).test(s) || s.length > l
+}
+
+export function random_str(length, keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+	let s = ''
+		, l = keyspace.length
+
+	for (let i = 0; i < length; i++) {
+		s += keyspace.charAt(Math.floor(Math.random() * l))
+	}
+
+	return s
+}
+
+export function isOverflowed(content) {
+
+	let s = content.split(/\r\n|\r|\n/m)
+
+	return (s.length > 9 || content.length > 999) ? true : false
+
 }

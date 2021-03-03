@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 
+import { GlobalContext } from '../context/GlobalState'
 import { CommentContext } from '../context/CommentState'
 
 import { validText, expandTextarea } from '../utils/functions'
@@ -7,6 +8,8 @@ import { validText, expandTextarea } from '../utils/functions'
 import { Spinner } from './includes/Spinner'
 
 export function Reply() {
+
+	const { state: { user } } = useContext(GlobalContext)
 
 	const { state: { replyLoad, isReplying }, postReply, openReply } = useContext(CommentContext)
 
@@ -32,7 +35,7 @@ export function Reply() {
 		<div className="comment_reply">
 			<div className="reply_content">
 				<div className='reply_user'>
-					<div className='background-ui' style={{ backgroundImage: "url('/images/users/geralt.png')" }}></div>
+					<div className='background-ui' style={{ backgroundImage: `url(${user.image.avatar})` }}></div>
 				</div>
 				<div className={`reply_txt${replyLoad ? ' disabled' : ''}`}>
 					<textarea
