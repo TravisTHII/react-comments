@@ -15,7 +15,9 @@ const initialState = {
 	fetched: false,
 	loading: false,
 	replyLoad: false,
-	moreLoading: false
+	moreLoading: false,
+	limit: 9,
+	allReplies: []
 }
 
 export const CommentContext = createContext(initialState)
@@ -27,6 +29,68 @@ export const CommentProvider = ({ children, comment }) => {
 	const getReplies = () => {
 		try {
 
+			dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: !state.showReplies } })
+
+			if (!state.fetched && !state.showReplies) {
+
+				dispatch({
+					type: COMMENT.LOADING
+				})
+
+				setTimeout(() => {
+
+					const total = state.results.length
+						, end = total <= state.limit
+						, cursor = state.results.lastIndexOf(state.results[state.results.length - 1])
+
+					dispatch({
+						type: COMMENT.GET_REPLIES,
+						payload: {
+							paging: {
+								total,
+								end,
+								cursor
+							},
+							replies: end ? state.results : state.results.slice(0, state.limit),
+							allReplies: state.results
+						}
+					})
+
+				}, 250)
+
+			}
+
+		} catch (error) {
+
+		}
+	}
+
+	const moreReplies = () => {
+		try {
+
+			if (!state.moreLoading) {
+
+				dispatch({
+					type: COMMENT.REPLIES_LOADING
+				})
+
+				setTimeout(() => {
+
+					const cursor = (state.results.lastIndexOf(state.results[state.results.length - 1]) + 1)
+
+					dispatch({
+						type: COMMENT.MORE_REPLIES,
+						payload: {
+							paging: {
+								...state.paging
+							},
+							replies: state.allReplies.slice(cursor, (cursor + state.limit))
+						}
+					})
+
+				}, 250)
+
+			}
 
 		} catch (error) {
 
@@ -61,7 +125,7 @@ export const CommentProvider = ({ children, comment }) => {
 					}
 				})
 
-			}, 250);
+			}, 0)
 
 
 		} catch (error) {
@@ -91,6 +155,8 @@ export const CommentProvider = ({ children, comment }) => {
 		<CommentContext.Provider value={{
 			state,
 			comment,
+			getReplies,
+			moreReplies,
 			seeMore,
 			openReply,
 			postReply

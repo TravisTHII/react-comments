@@ -75,7 +75,8 @@ Thread
 }
 
 .thread-column > div:not(:last-child),
-.thread_comments > div:not(:last-child) {
+.thread_comments > div:not(:last-child),
+.comment .comment:not(:last-child) {
 	margin-bottom: 9px;
 }
 .thread_comments > .comment > .comment_replies,
