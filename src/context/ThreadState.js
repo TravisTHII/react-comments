@@ -24,7 +24,9 @@ const initialState = {
 		dispaly: false,
 		commentRef: null,
 		data: []
-	}
+	},
+	limit: 2,
+	allComments: []
 }
 
 export const ThreadContext = createContext(initialState)
@@ -42,11 +44,25 @@ export const ThreadProvider = ({ children }) => {
 
 			setTimeout(() => {
 
+				const total = SEED.comments.length
+				const end = total <= state.limit
+
+				const comments = end ? SEED.comments : SEED.comments.slice(0, state.limit)
+
+				const cursor = (comments.lastIndexOf(comments[comments.length - 1]) + 1)
+
 				dispatch({
 					type: THREAD.GET_THREAD,
 					payload: {
 						...SEED,
-						total: SEED.comments.length
+						paging: {
+							total,
+							end,
+							cursor
+						},
+						total,
+						comments,
+						allComments: SEED.comments
 					}
 				})
 
@@ -54,6 +70,35 @@ export const ThreadProvider = ({ children }) => {
 
 		} catch (error) {
 
+
+		}
+	}
+
+	const loadMoreComments = () => {
+		try {
+
+			if (!state.moreLoad) {
+
+				dispatch({
+					type: THREAD.LOAD_T_MORE
+				})
+
+				setTimeout(() => {
+
+					const cursor = (state.comments.lastIndexOf(state.comments[state.comments.length - 1]) + 1)
+
+					dispatch({
+						type: THREAD.MORE_THREAD,
+						payload: {
+							comments: state.allComments.slice(cursor, (cursor + state.limit))
+						}
+					})
+
+				}, 250)
+
+			}
+
+		} catch (error) {
 
 		}
 	}
@@ -91,7 +136,8 @@ export const ThreadProvider = ({ children }) => {
 		<ThreadContext.Provider value={{
 			state,
 			getThread,
-			postComment
+			postComment,
+			loadMoreComments
 		}}>
 			{children}
 		</ThreadContext.Provider>

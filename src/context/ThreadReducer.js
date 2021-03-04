@@ -11,6 +11,23 @@ export default (state, action) => {
 		}
 	}
 
+	if (type === THREAD.MORE_THREAD) {
+
+		const comments = state.comments.concat(payload.comments)
+			, cursor = comments.lastIndexOf(comments[comments.length - 1])
+
+		return {
+			...state,
+			moreLoad: false,
+			paging: {
+				...state.paging,
+				cursor,
+				end: comments.length === state.paging.total
+			},
+			comments
+		}
+	}
+
 	if (type === THREAD.POST_COMMENT) {
 		return {
 			...state,
@@ -30,6 +47,13 @@ export default (state, action) => {
 		return {
 			...state,
 			postLoad: true
+		}
+	}
+
+	if (type === THREAD.LOAD_T_MORE) {
+		return {
+			...state,
+			moreLoad: true
 		}
 	}
 

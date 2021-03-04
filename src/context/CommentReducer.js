@@ -23,7 +23,7 @@ export default (state, action) => {
 			...state,
 			moreLoading: false,
 			paging: {
-				...payload.paging,
+				...state.paging,
 				cursor,
 				end: results.length === state.paging.total
 			},

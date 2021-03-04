@@ -16,7 +16,7 @@ const initialState = {
 	loading: false,
 	replyLoad: false,
 	moreLoading: false,
-	limit: 9,
+	limit: 2,
 	allReplies: []
 }
 
@@ -40,8 +40,11 @@ export const CommentProvider = ({ children, comment }) => {
 				setTimeout(() => {
 
 					const total = state.results.length
-						, end = total <= state.limit
-						, cursor = state.results.lastIndexOf(state.results[state.results.length - 1])
+					const end = total <= state.limit
+
+					const replies = end ? state.results : state.results.slice(0, state.limit)
+
+					const cursor = (replies.lastIndexOf(replies[replies.length - 1]) + 1)
 
 					dispatch({
 						type: COMMENT.GET_REPLIES,
@@ -51,7 +54,7 @@ export const CommentProvider = ({ children, comment }) => {
 								end,
 								cursor
 							},
-							replies: end ? state.results : state.results.slice(0, state.limit),
+							replies,
 							allReplies: state.results
 						}
 					})
@@ -81,9 +84,6 @@ export const CommentProvider = ({ children, comment }) => {
 					dispatch({
 						type: COMMENT.MORE_REPLIES,
 						payload: {
-							paging: {
-								...state.paging
-							},
 							replies: state.allReplies.slice(cursor, (cursor + state.limit))
 						}
 					})

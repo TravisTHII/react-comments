@@ -1,10 +1,5 @@
 export const SEED = {
 	threadName: 'Hello',
-	paging: {
-		cursor: 1,
-		end: true,
-		total: 0
-	},
 	data: {
 		hasPinned: false,
 		has_comments: false,
