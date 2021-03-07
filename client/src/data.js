@@ -1,3 +1,5 @@
+import { format, formatDistance } from 'date-fns'
+
 export const SEED = {
 	threadName: 'Hello',
 	data: {
@@ -14,8 +16,9 @@ export const SEED = {
 I shall remember the expression in their eyes.
 I hope the memory of those eyes will stop me making a similar mistake.`,
 			date: {
-				published: "10 days ago",
-				posted: "February 20th, 2021 | 1:53 PM"
+				published: formatDistance(1614745918 * 1000, Date.now(), { addSuffix: true }),
+				posted: format(1614745918 * 1000, 'MMMM do, y | h:mm a'),
+				timestamp: 1614745918 * 1000
 			},
 			reply: {
 				has_replies: false,
@@ -55,8 +58,9 @@ I hope the memory of those eyes will stop me making a similar mistake.`,
 `No! I will not give in and I won't be swayed! I am the "Fourteenth of the Hill"!
 I am not a little frightened girl from a dark Maribor Tower anymore...`,
 			date: {
-				published: "10 days ago",
-				posted: "February 20th, 2021 | 1:53 PM"
+				published: formatDistance(1614660927 * 1000, Date.now(), { addSuffix: true }),
+				posted: format(1614660927 * 1000, 'MMMM do, y | h:mm a'),
+				timestamp: 1614660927 * 1000
 			},
 			reply: {
 				has_replies: false,
@@ -94,8 +98,9 @@ I am not a little frightened girl from a dark Maribor Tower anymore...`,
 			comment_id: "Ziwt33CZIBC7HzzCsAiA",
 			content: `It’s good to see you, Geralt. I…I’d even embrace you…were you not covered in blood.`,
 			date: {
-				published: "10 days ago",
-				posted: "February 20th, 2021 | 1:53 PM"
+				published: formatDistance(1614401727 * 1000, Date.now(), { addSuffix: true }),
+				posted: format(1614401727 * 1000, 'MMMM do, y | h:mm a'),
+				timestamp: 1614401727 * 1000
 			},
 			reply: {
 				has_replies: false,
@@ -147,8 +152,9 @@ Death's waiting ended on the mournful day when the Wild Hunt descended on Kaer M
 Vesemir gave his all to protect his former ward, whom he had always treated like an adopted granddaughter, 
 and died a hero's death at the hands of Imlerith, the Hunt's cruel general.`,
 			date: {
-				published: "10 days ago",
-				posted: "February 20th, 2021 | 1:53 PM"
+				published: formatDistance(1613278527 * 1000, Date.now(), { addSuffix: true }),
+				posted: format(1613278527 * 1000, 'MMMM do, y | h:mm a'),
+				timestamp: 1613278527 * 1000
 			},
 			reply: {
 				has_replies: false,
@@ -191,8 +197,9 @@ You ask me what I believe in, in that case
 
 I believe in the sword`,
 			date: {
-				published: "10 days ago",
-				posted: "February 20th, 2021 | 1:53 PM"
+				published: formatDistance(1611464127 * 1000, Date.now(), { addSuffix: true }),
+				posted: format(1611464127 * 1000, 'MMMM do, y | h:mm a'),
+				timestamp: 1611464127 * 1000
 			},
 			reply: {
 				has_replies: false,

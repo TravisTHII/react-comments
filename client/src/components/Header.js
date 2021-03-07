@@ -6,7 +6,7 @@ import useOutsideClick from '../hooks/useOutsideClick'
 
 export function Header() {
 
-	const { state: { total } } = useContext(ThreadContext)
+	const { state: { total }, sortThread } = useContext(ThreadContext)
 
 	const [open, setOpen] = useState(false)
 
@@ -26,8 +26,18 @@ export function Header() {
 			>
 				<div className="menu-item">Sort</div>
 				<ul className={open ? 'menu-open' : ''}>
-					<li className="menu-item">Newest</li>
-					<li className="menu-item">Oldest</li>
+					<li
+						className="menu-item"
+						onClick={() => sortThread('newest')}
+					>
+						Newest
+					</li>
+					<li
+						className="menu-item"
+						onClick={() => sortThread('oldest')}
+					>
+						Oldest
+					</li>
 				</ul>
 			</div>
 		</div>

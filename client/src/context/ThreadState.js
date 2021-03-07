@@ -10,7 +10,9 @@ import { newComment } from '../utils/newComment'
 const initialState = {
 	total: 0,
 	hasPinned: false,
-	paging: {},
+	paging: {
+		end: true
+	},
 	pinned: {},
 	comments: [],
 	sort: 'newest',
@@ -51,6 +53,14 @@ export const ThreadProvider = ({ children }) => {
 
 				const cursor = (comments.lastIndexOf(comments[comments.length - 1]) + 1)
 
+				const comments_initial_sorted = comments.sort((o1, o2) => {
+					if (state.sort === 'newest') {
+						return o2.date.timestamp - o1.date.timestamp
+					} else if (state.sort === 'oldest') {
+						return o1.date.timestamp - o2.date.timestamp
+					}
+				})
+
 				dispatch({
 					type: THREAD.GET_THREAD,
 					payload: {
@@ -61,7 +71,7 @@ export const ThreadProvider = ({ children }) => {
 							cursor
 						},
 						total,
-						comments,
+						comments: comments_initial_sorted,
 						allComments: SEED.comments
 					}
 				})
@@ -70,6 +80,55 @@ export const ThreadProvider = ({ children }) => {
 
 		} catch (error) {
 
+
+		}
+	}
+
+	const sortThread = (sort) => {
+		try {
+
+			if (!state.sortLoad) {
+
+				dispatch({
+					type: THREAD.LOAD_SORT
+				})
+
+				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
+
+				setTimeout(() => {
+
+					const total = state.allComments.length
+					const end = total <= state.limit
+
+					const comments = end ? state.allComments : state.allComments.slice(0, state.limit)
+
+					const cursor = (comments.lastIndexOf(comments[comments.length - 1]) + 1)
+
+					const comments_sorted = comments.sort((o1, o2) => {
+						if (sort === 'newest') {
+							return o2.date.timestamp - o1.date.timestamp
+						} else if (sort === 'oldest') {
+							return o1.date.timestamp - o2.date.timestamp
+						}
+					})
+
+					dispatch({
+						type: THREAD.SORT_THREAD,
+						payload: {
+							paging: {
+								total,
+								end,
+								cursor
+							},
+							comments: comments_sorted
+						}
+					})
+
+				}, 250)
+
+			}
+
+		} catch (error) {
 
 		}
 	}
@@ -136,6 +195,7 @@ export const ThreadProvider = ({ children }) => {
 		<ThreadContext.Provider value={{
 			state,
 			getThread,
+			sortThread,
 			postComment,
 			loadMoreComments
 		}}>

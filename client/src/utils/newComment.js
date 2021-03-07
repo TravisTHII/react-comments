@@ -15,6 +15,7 @@ export function newComment(user, content, date) {
 		date: {
 			published: formatDistance(date, Date.now(), { addSuffix: true }),
 			posted: format(date, 'MMMM do, y | h:mm a'),
+			timestamp: Date.now()
 		},
 		reply: {
 			has_replies: false,

@@ -11,6 +11,15 @@ export default (state, action) => {
 		}
 	}
 
+	if (type === THREAD.SORT_THREAD) {
+		return {
+			...state,
+			sortLoad: false,
+			paging: payload.paging,
+			comments: payload.comments
+		}
+	}
+
 	if (type === THREAD.MORE_THREAD) {
 
 		const comments = state.comments.concat(payload.comments)
@@ -32,7 +41,15 @@ export default (state, action) => {
 		return {
 			...state,
 			postLoad: false,
-			comments: [payload.comment, ...state.comments]
+			comments: [payload.comment, ...state.comments],
+			allComments: [payload.comment, ...state.allComments]
+		}
+	}
+
+	if (type === THREAD.SET_T_SORT) {
+		return {
+			...state,
+			sort: payload.sort
 		}
 	}
 
@@ -47,6 +64,13 @@ export default (state, action) => {
 		return {
 			...state,
 			postLoad: true
+		}
+	}
+
+	if (type === THREAD.LOAD_SORT) {
+		return {
+			...state,
+			sortLoad: true
 		}
 	}
 

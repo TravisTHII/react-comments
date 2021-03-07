@@ -18,6 +18,7 @@ export function Thread() {
 	}, [])
 
 	let content
+		, sorted
 
 	const Loading =
 		<Spinner style={{ display: 'block', margin: '0 auto', paddingTop: '50px' }} />
@@ -28,10 +29,13 @@ export function Thread() {
 
 	} else {
 
-		content =
-			<>
-				<Header />
-				<Poster />
+		if (state.sortLoad) {
+
+			sorted = Loading
+
+		} else {
+
+			sorted =
 				<div className="thread">
 					<div className="thread_comments">
 
@@ -65,6 +69,14 @@ export function Thread() {
 					}
 
 				</div>
+
+		}
+
+		content =
+			<>
+				<Header />
+				<Poster />
+				{sorted}
 			</>
 
 	}

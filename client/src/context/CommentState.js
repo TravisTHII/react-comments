@@ -125,7 +125,7 @@ export const CommentProvider = ({ children, comment }) => {
 					}
 				})
 
-			}, 0)
+			}, 250)
 
 
 		} catch (error) {
