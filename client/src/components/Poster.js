@@ -47,7 +47,7 @@ export function Poster() {
 
 			cancelPost()
 
-			postComment(value, user)
+			postComment(value, user._id)
 
 		}
 	}

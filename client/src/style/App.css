@@ -410,3 +410,12 @@ Common classes
 	background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0));
 	background: linear-gradient(to top, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0));
 }
+
+.sitc{
+	height: 50px;
+	line-height: 50px;
+}
+
+.fwn{
+	font-weight: normal;
+}

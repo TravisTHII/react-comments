@@ -7,7 +7,12 @@ export default (state, action) => {
 		return {
 			...state,
 			loading: false,
-			...payload
+			fetched: true,
+			total: payload.total,
+			// hasPinned: payload.hasPinned,
+			// paging: payload.paging,
+			// pinned: payload.pinned,
+			comments: payload.comments
 		}
 	}
 
@@ -15,25 +20,19 @@ export default (state, action) => {
 		return {
 			...state,
 			sortLoad: false,
+			hasPinned: payload.hasPinned,
 			paging: payload.paging,
+			pinned: payload.pinned,
 			comments: payload.comments
 		}
 	}
 
 	if (type === THREAD.MORE_THREAD) {
-
-		const comments = state.comments.concat(payload.comments)
-			, cursor = comments.lastIndexOf(comments[comments.length - 1])
-
 		return {
 			...state,
 			moreLoad: false,
-			paging: {
-				...state.paging,
-				cursor,
-				end: comments.length === state.paging.total
-			},
-			comments
+			paging: payload.paging,
+			comments: state.comments.concat(payload.comments)
 		}
 	}
 
@@ -41,8 +40,29 @@ export default (state, action) => {
 		return {
 			...state,
 			postLoad: false,
-			comments: [payload.comment, ...state.comments],
-			allComments: [payload.comment, ...state.allComments]
+			comments: [payload.comment, ...state.comments]
+		}
+	}
+
+	if (type === THREAD.GET_MENU) {
+		return {
+			...state,
+			menu: {
+				dispaly: true,
+				commentRef: payload.commentRef,
+				data: payload.menu
+			}
+		}
+	}
+
+	if (type === THREAD.DESTROY_MENU) {
+		return {
+			...state,
+			menu: {
+				dispaly: false,
+				commentRef: null,
+				data: []
+			}
 		}
 	}
 
@@ -60,13 +80,6 @@ export default (state, action) => {
 		}
 	}
 
-	if (type === THREAD.TP_LOAD) {
-		return {
-			...state,
-			postLoad: true
-		}
-	}
-
 	if (type === THREAD.LOAD_SORT) {
 		return {
 			...state,
@@ -78,6 +91,27 @@ export default (state, action) => {
 		return {
 			...state,
 			moreLoad: true
+		}
+	}
+
+	if (type === THREAD.TP_LOAD) {
+		return {
+			...state,
+			postLoad: true
+		}
+	}
+
+	if (type === THREAD.RESET_THREAD) {
+		return {
+			...payload
+		}
+	}
+
+	if (type === THREAD.THREAD_ERROR) {
+		return {
+			...state,
+			loading: false,
+			error: true
 		}
 	}
 

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.19"
@@ -9,7 +10,7 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "yarn start --prefix client",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\" "
+    "dev": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "name": "react-comments",
   "description": "React commenting system",

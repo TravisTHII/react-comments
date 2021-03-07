@@ -27,7 +27,14 @@ export function Thread() {
 
 		content = Loading
 
-	} else {
+	} else if (state.error) {
+
+		content =
+			<div className='sitc'>
+				<h3 className='text-ui fwn'>An error occurred while retrieving this thread...</h3>
+			</div>
+
+	} else if (state.fetched) {
 
 		if (state.sortLoad) {
 
@@ -45,7 +52,7 @@ export function Thread() {
 
 						{state.comments.map(c => (
 							<CommentInstance
-								key={`${c.comment_id}`}
+								key={`${c._id}`}
 								comment={c}
 							/>
 						))}

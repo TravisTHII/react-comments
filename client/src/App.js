@@ -13,7 +13,7 @@ export function App() {
 		<div className="App">
 			<div id="Main">
 				<GlobalProvider>
-					<ThreadProvider>
+					<ThreadProvider thread="60441afc7505b1ec9a6ea667">
 						<Thread />
 					</ThreadProvider>
 				</GlobalProvider>

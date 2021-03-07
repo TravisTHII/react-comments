@@ -5,6 +5,7 @@ import { GLOBAL } from './actions'
 
 const initialState = {
 	user: {
+		_id: '6044f35b98b59e39f46961b9',
 		username: 'Geralt',
 		slug: 'geralt',
 		motto: 'White Wolf',
