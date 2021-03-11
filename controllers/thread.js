@@ -54,7 +54,7 @@ exports.getThread = async (req, res) => {
 exports.getThreads = async (req, res) => {
 	try {
 
-		const threads = await Thread.find();
+		const threads = await Thread.find()
 
 		return res.status(200).json({
 			data: threads
@@ -71,12 +71,12 @@ exports.getThreads = async (req, res) => {
 }
 
 // @desc Post a comment
-// @route GET /api/hmd/thread/comment
+// @route POST /api/hmd/thread/comment
 // @access Public
 exports.Comment = async (req, res) => {
 	try {
 
-		const { thread, _id, content } = req.body
+		const { thread, _id, body } = req.body
 
 		if (!_id)
 			throw new Error
@@ -85,11 +85,28 @@ exports.Comment = async (req, res) => {
 
 		const newComment = new Comment({
 			thread,
-			content,
-			user
+			body,
+			user,
+			date: Date.now()
 		})
 
-		const comment = await newComment.save()
+		await newComment.save()
+
+		const comment = await Comment
+			.findById({ _id: newComment._id })
+			.populate('user')
+			.lean()
+			.exec()
+			.then(comment => {
+
+				comment.date = {
+					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
+					posted: format(comment.date, 'MMMM do, y | h:mm a')
+				}
+
+				return comment
+
+			})
 
 		return res.status(200).json({
 			comment

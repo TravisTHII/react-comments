@@ -1,17 +1,14 @@
 const mongoose = require('mongoose')
 
-const { format, formatDistance } = require('date-fns')
-
 const CommentSchema = new mongoose.Schema({
 	thread: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Thread',
 		required: true
 	},
-	content: String,
+	body: String,
 	date: {
-		type: Date,
-		default: Date.now()
+		type: Date
 	},
 	reply: {
 		hasReplies: {
@@ -47,18 +44,6 @@ const CommentSchema = new mongoose.Schema({
 			default: false
 		},
 	}
-})
-
-// fire a function before doc saved to db
-CommentSchema.pre('save', async function (next) {
-
-	this.date = {
-		published: formatDistance(new Date(this.date), Date.now(), { addSuffix: true }),
-		posted: format(new Date(this.date), 'MMMM do, y | h:mm a')
-	}
-
-	next()
-
 })
 
 module.exports = mongoose.model('Comment', CommentSchema)

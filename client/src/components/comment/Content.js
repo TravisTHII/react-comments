@@ -4,12 +4,12 @@ import { CommentContext } from '../../context/CommentState'
 
 export function Content() {
 
-	const { state: { showMore }, comment: { content, data }, seeMore } = useContext(CommentContext)
+	const { state: { showMore }, comment: { body, data }, seeMore } = useContext(CommentContext)
 
 	return (
 		<div className={`comment_content${data.overflow && !showMore ? ' show_less' : ''}`}>
 			<div className="comment-text text-ui">
-				{content}
+				{body}
 			</div>
 
 			{data.overflow &&
