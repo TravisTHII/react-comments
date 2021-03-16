@@ -1,9 +1,13 @@
 const { Router } = require('express')
 const router = Router()
-const { getUsers, createUser } = require('../controllers/user')
+const { Reply, Replies } = require('../controllers/comment')
 
 router
-	.route('/')
-	.get(getUsers)
+	.route('/reply')
+	.post(Reply)
+
+router
+	.route('/replies')
+	.get(Replies)
 
 module.exports = router

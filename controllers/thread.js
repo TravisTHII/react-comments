@@ -10,32 +10,31 @@ const { format, formatDistance } = require('date-fns')
 exports.getThread = async (req, res) => {
 	try {
 
-		const { thread } = req.query
+		const { _thread_name } = req.params
 
-		const comments = await Comment
-			.find({ thread })
-			.sort({ date: 'descending' })
+		const thread = await Thread
+			.findById({ _id: _thread_name }, ' -_id')
 			.lean()
 			.populate('user')
 			.exec()
-			.then(comment => {
+			.then(thread => {
 
-				for (const i of comment) {
+				for (const i of thread.comments) {
 					i.date = {
 						published: formatDistance(i.date, Date.now(), { addSuffix: true }),
 						posted: format(i.date, 'MMMM do, y | h:mm a')
 					}
 				}
 
-				return comment
+				return thread
 
 			})
 
 		return res.status(200).json({
 			data: {
-				total: comments.length
+				total: thread.comments.length
 			},
-			comments
+			thread
 		})
 
 	} catch (error) {
@@ -48,65 +47,49 @@ exports.getThread = async (req, res) => {
 
 }
 
-// @desc 		Get all thread names
-// @route 	GET /api/hmd/thread/all
-// @access 	Public
-exports.getThreads = async (req, res) => {
-	try {
-
-		const threads = await Thread.find()
-
-		return res.status(200).json({
-			data: threads
-		})
-
-	} catch (error) {
-
-		return res.status(500).json({
-			error: 'Server Error'
-		})
-
-	}
-
-}
-
 // @desc Post a comment
 // @route POST /api/hmd/thread/comment
 // @access Public
 exports.Comment = async (req, res) => {
 	try {
 
-		const { thread, _id, body } = req.body
+		const { thread, user, body } = req.body
 
-		if (!_id)
+		if (!user)
 			throw new Error
 
-		const user = await User.findById({ _id })
+		const poster = await User.findById({ _id: user })
 
 		const newComment = new Comment({
 			thread,
 			body,
-			user,
-			date: Date.now()
+			user: poster
 		})
 
 		await newComment.save()
 
 		const comment = await Comment
-			.findById({ _id: newComment._id })
-			.populate('user')
+			.findById({ _id: newComment._id }, '-__v')
+			.populate('user', '-__v')
 			.lean()
 			.exec()
 			.then(comment => {
 
-				comment.date = {
-					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
-					posted: format(comment.date, 'MMMM do, y | h:mm a')
-				}
+				comment.date = Date.now()
 
 				return comment
 
 			})
+
+		await Thread.findByIdAndUpdate(
+			{ _id: thread },
+			{ $push: { "comments": comment } }
+		)
+
+		comment.date = {
+			published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
+			posted: format(comment.date, 'MMMM do, y | h:mm a')
+		}
 
 		return res.status(200).json({
 			comment

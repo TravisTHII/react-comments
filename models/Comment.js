@@ -3,13 +3,10 @@ const mongoose = require('mongoose')
 const CommentSchema = new mongoose.Schema({
 	thread: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Thread',
-		required: true
+		ref: 'Thread'
 	},
 	body: String,
-	date: {
-		type: Date
-	},
+	date: Date,
 	reply: {
 		hasReplies: {
 			type: Boolean,
@@ -19,13 +16,13 @@ const CommentSchema = new mongoose.Schema({
 			type: Number,
 			default: 0
 		},
-		replies: Array
+		replies: [Object]
 	},
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	menu: Array,
+	menu: [Array],
 	data: {
 		edited: {
 			type: Boolean,
