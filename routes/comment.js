@@ -8,6 +8,6 @@ router
 
 router
 	.route('/replies')
-	.get(Replies)
+	.post(Replies)
 
 module.exports = router

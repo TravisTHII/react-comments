@@ -2,7 +2,6 @@ const User = require("../models/User")
 const Comment = require("../models/Comment")
 
 const { format, formatDistance } = require('date-fns')
-const { findById } = require("../models/User")
 
 // @desc 		Post Reply
 // @route 	POST /api/hmd/comment/reply
@@ -10,42 +9,49 @@ const { findById } = require("../models/User")
 exports.Reply = async (req, res) => {
 	try {
 
-		const { _id, body, user } = req.body
+		const { comment, body, user } = req.body
 
-		// const poster = await User.findById({ _id: user })
+		// get user
+		const u = await User.findById({ _id: user })
 
-		// const test = await Comment.findById({ _id })
+		// get comment to reply to
+		const c = await Comment.findById({ _id: comment })
 
-		const reply_to_comment = new Comment({
+		// create reply
+		const r = new Comment({
 			body,
+			user: u,
 			date: Date.now()
 		})
 
-		await Comment.findOneAndUpdate(
-			{ _id },
-			{ "reply": { $push: { "replies": [reply_to_comment] } } },
+		// save reply
+		await r.save()
+
+		// save comment_ref_id to replies array of comment
+		await Comment.findByIdAndUpdate(
+			{ _id: comment },
+			{ $push: { "reply.replies": r } },
 		)
 
-		// const comment = await Comment
-		// 	.findById({ _id: reply_to_comment._id })
-		// 	.populate('user')
-		// 	.lean()
-		// 	.exec()
-		// 	.then(comment => {
+		// get reply to return
+		const reply = await Comment
+			.findById({ _id: r._id }, '-__v')
+			.lean()
+			.populate('user', '-__v')
+			.exec()
+			.then(comment => {
 
-		// 		// comment.date = {
-		// 		// 	published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
-		// 		// 	posted: format(comment.date, 'MMMM do, y | h:mm a')
-		// 		// }
+				comment.date = {
+					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
+					posted: format(comment.date, 'MMMM do, y | h:mm a')
+				}
 
-		// 		// return comment
+				return comment
 
-		// 		console.log(comment)
-
-		// 	})
+			})
 
 		return res.status(200).json({
-			reply_to_comment
+			comment: reply
 		})
 
 	} catch (error) {
@@ -64,7 +70,46 @@ exports.Reply = async (req, res) => {
 exports.Replies = async (req, res) => {
 	try {
 
+		const { comment } = req.body
 
+		const { reply: { replies } } = await Comment
+			.findById({ _id: comment }, '-_id reply.replies')
+			.lean()
+			.populate({
+				path: 'reply.replies',
+				populate: {
+					path: 'user',
+					select: '-__v'
+				},
+				select: '-__v'
+			})
+			.exec()
+			.then(doc => {
+
+				const { reply: { replies } } = doc
+
+				for (const i of replies) {
+
+					i.reply.total = i.reply.replies.length
+					i.reply.hasReplies = i.reply.total ? true : false
+
+					i.date = {
+						published: formatDistance(i.date, Date.now(), { addSuffix: true }),
+						posted: format(i.date, 'MMMM do, y | h:mm a')
+					}
+
+				}
+
+				return doc
+
+			})
+
+		return res.status(200).json({
+			paging: {
+				end: true
+			},
+			replies
+		})
 
 	} catch (error) {
 

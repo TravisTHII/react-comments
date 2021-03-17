@@ -27,7 +27,7 @@ export function Reply() {
 		if (!validText(value)) {
 			setValue('')
 
-			postReply(value, user)
+			postReply(value, user._id)
 		}
 	}
 

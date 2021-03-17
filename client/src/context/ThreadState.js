@@ -38,7 +38,7 @@ export const ThreadProvider = ({ children, thread }) => {
 				type: THREAD.LOAD_THREAD
 			})
 
-			const { data: { data: { total }, comments } } = await axios.get(`/api/hmd/thread?thread=${thread}`)
+			const { data: { data: { total }, comments } } = await axios.get(`/api/hmd/thread/${thread}`)
 
 			dispatch({
 				type: THREAD.GET_THREAD,
@@ -138,7 +138,7 @@ export const ThreadProvider = ({ children, thread }) => {
 		}
 	}
 
-	const postComment = async (body, _id) => {
+	const postComment = async (body, user) => {
 		try {
 
 			if (!state.postLoad) {
@@ -147,7 +147,7 @@ export const ThreadProvider = ({ children, thread }) => {
 					type: THREAD.TP_LOAD
 				})
 
-				const { data: { comment } } = await axios.post('/api/hmd/thread/comment', { thread, _id, body })
+				const { data: { comment } } = await axios.post('/api/hmd/thread/comment', { thread, user, body })
 
 				dispatch({
 					type: THREAD.POST_COMMENT,

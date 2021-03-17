@@ -10,7 +10,7 @@ export function Actions() {
 
 	return (
 		<div className="comment_actions">
-			{reply.has_replies &&
+			{reply.hasReplies &&
 				<button
 					type="button"
 					className={`cmt_btn${showReplies ? ' cmt_active' : ''}`}

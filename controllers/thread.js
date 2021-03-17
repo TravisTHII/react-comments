@@ -15,18 +15,30 @@ exports.getThread = async (req, res) => {
 		const thread = await Thread
 			.findById({ _id: _thread_name }, ' -_id')
 			.lean()
-			.populate('user')
+			.populate({
+				path: 'comments',
+				populate: {
+					path: 'user',
+					select: '-__v'
+				},
+				select: '-__v'
+			})
 			.exec()
-			.then(thread => {
+			.then(doc => {
 
-				for (const i of thread.comments) {
+				for (const i of doc.comments) {
+
+					i.reply.total = i.reply.replies.length
+					i.reply.hasReplies = i.reply.total ? true : false
+
 					i.date = {
 						published: formatDistance(i.date, Date.now(), { addSuffix: true }),
 						posted: format(i.date, 'MMMM do, y | h:mm a')
 					}
+
 				}
 
-				return thread
+				return doc
 
 			})
 
@@ -34,7 +46,7 @@ exports.getThread = async (req, res) => {
 			data: {
 				total: thread.comments.length
 			},
-			thread
+			...thread
 		})
 
 	} catch (error) {
@@ -55,41 +67,46 @@ exports.Comment = async (req, res) => {
 
 		const { thread, user, body } = req.body
 
+		// if no user throw error
 		if (!user)
 			throw new Error
 
-		const poster = await User.findById({ _id: user })
+		// get user
+		const u = await User.findById({ _id: user })
 
-		const newComment = new Comment({
+		// create comment
+		const c = new Comment({
 			thread,
 			body,
-			user: poster
+			user: u,
+			date: Date.now()
 		})
 
-		await newComment.save()
+		// save comment to comments document
+		await c.save()
 
+		// push comment_id_ref to thread comments array
+		await Thread.findByIdAndUpdate(
+			{ _id: thread },
+			{ $push: { "comments": c } }
+		)
+
+		// get comment to return
 		const comment = await Comment
-			.findById({ _id: newComment._id }, '-__v')
-			.populate('user', '-__v')
+			.findById({ _id: c._id }, '-__v')
 			.lean()
+			.populate('user', '-__v')
 			.exec()
 			.then(comment => {
 
-				comment.date = Date.now()
+				comment.date = {
+					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
+					posted: format(comment.date, 'MMMM do, y | h:mm a')
+				}
 
 				return comment
 
 			})
-
-		await Thread.findByIdAndUpdate(
-			{ _id: thread },
-			{ $push: { "comments": comment } }
-		)
-
-		comment.date = {
-			published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
-			posted: format(comment.date, 'MMMM do, y | h:mm a')
-		}
 
 		return res.status(200).json({
 			comment

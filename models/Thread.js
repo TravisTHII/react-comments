@@ -6,7 +6,12 @@ const ThreadSchema = new mongoose.Schema({
 		required: true
 	},
 	pinned: String,
-	comments: [Object]
+	comments: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Comment'
+		}
+	]
 })
 
 module.exports = mongoose.model('Thread', ThreadSchema)

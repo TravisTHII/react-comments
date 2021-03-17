@@ -1,9 +1,9 @@
 import React, { createContext, useReducer } from 'react'
+import axios from 'axios'
+
 import CommentReducer from './CommentReducer'
 
 import { COMMENT } from './actions'
-
-import { newComment } from '../utils/newComment'
 
 const initialState = {
 	paging: {},
@@ -15,9 +15,7 @@ const initialState = {
 	fetched: false,
 	loading: false,
 	replyLoad: false,
-	moreLoading: false,
-	limit: 2,
-	allReplies: []
+	moreLoading: false
 }
 
 export const CommentContext = createContext(initialState)
@@ -26,7 +24,7 @@ export const CommentProvider = ({ children, comment }) => {
 
 	const [state, dispatch] = useReducer(CommentReducer, initialState)
 
-	const getReplies = () => {
+	const getReplies = async () => {
 		try {
 
 			dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: !state.showReplies } })
@@ -37,29 +35,15 @@ export const CommentProvider = ({ children, comment }) => {
 					type: COMMENT.LOADING
 				})
 
-				setTimeout(() => {
+				const { data: { paging, replies } } = await axios.post('/api/hmd/comment/replies', { comment: comment._id })
 
-					const total = state.results.length
-					const end = total <= state.limit
-
-					const replies = end ? state.results : state.results.slice(0, state.limit)
-
-					const cursor = (replies.lastIndexOf(replies[replies.length - 1]) + 1)
-
-					dispatch({
-						type: COMMENT.GET_REPLIES,
-						payload: {
-							paging: {
-								total,
-								end,
-								cursor
-							},
-							replies,
-							allReplies: state.results
-						}
-					})
-
-				}, 250)
+				dispatch({
+					type: COMMENT.GET_REPLIES,
+					payload: {
+						paging,
+						replies
+					}
+				})
 
 			}
 
@@ -97,36 +81,35 @@ export const CommentProvider = ({ children, comment }) => {
 		}
 	}
 
-	const postReply = (body, user) => {
+	const postReply = async (body, user) => {
 		try {
 
-			dispatch({
-				type: COMMENT.REPLY_LOADING
-			})
+			if (!state.replyLoad) {
 
-			dispatch({ type: COMMENT.OPEN_REPLY, payload: { isReplying: false } })
+				dispatch({
+					type: COMMENT.REPLY_LOADING
+				})
 
-			dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: true } })
+				dispatch({ type: COMMENT.OPEN_REPLY, payload: { isReplying: false } })
 
-			setTimeout(() => {
+				dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: true } })
+
+				const { data } = await axios.post('/api/hmd/comment/reply', { comment: comment._id, body, user })
 
 				comment.reply.total += 1
 
-				if (!comment.reply.has_replies) {
-					comment.reply.has_replies = true
+				if (!comment.reply.hasReplies) {
+					comment.reply.hasReplies = true
 				}
-
-				const reply = newComment(user, body, Date.now())
 
 				dispatch({
 					type: COMMENT.POST_REPLY,
 					payload: {
-						reply
+						reply: data.comment
 					}
 				})
 
-			}, 250)
-
+			}
 
 		} catch (error) {
 
