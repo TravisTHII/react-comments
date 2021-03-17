@@ -4,17 +4,18 @@ import { GlobalContext } from '../context/GlobalState'
 import { ThreadProvider } from '../context/ThreadState'
 
 import { SelectUser } from './SelectUser'
+import { SelectThread } from './SelectThread'
 import { Thread } from './Thread'
 
 import { Spinner } from './includes/Spinner'
 
 export function ReactComments() {
 
-	const { state: { loading, fetched }, getUsers } = useContext(GlobalContext)
+	const { state: { thread, loading, fetched }, getThreadsAndUsers } = useContext(GlobalContext)
 
 	useEffect(() => {
 
-		getUsers()
+		getThreadsAndUsers()
 
 	}, [])
 
@@ -29,10 +30,11 @@ export function ReactComments() {
 
 		content =
 			<>
-				<div className="rc_top flex-ui">
+				<div className="thread_components flex-ui">
 					<SelectUser />
+					<SelectThread />
 				</div>
-				<ThreadProvider thread="604ab2c196cae0233adb0fa9">
+				<ThreadProvider thread={thread}>
 					<Thread />
 				</ThreadProvider>
 			</>

@@ -33,7 +33,7 @@ exports.createUser = async (req, res) => {
 		const { username, motto, badge, image } = req.body
 
 		if (!username)
-			return res.status(400).json({ message: 'Please enter a username' })
+			throw new Error('Please enter a username.')
 
 		const newUser = new User({
 			username,

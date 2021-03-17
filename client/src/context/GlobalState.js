@@ -6,6 +6,8 @@ import GlobalReducer from './GlobalReducer'
 import { GLOBAL } from './actions'
 
 const initialState = {
+	thread: "",
+	threads: [],
 	user: {},
 	users: [],
 	loading: false,
@@ -18,20 +20,22 @@ export const GlobalProvider = ({ children }) => {
 
 	const [state, dispatch] = useReducer(GlobalReducer, initialState)
 
-	const getUsers = async () => {
+	const getThreadsAndUsers = async () => {
 		try {
 
 			dispatch({
 				type: GLOBAL.LOADING
 			})
 
-			const { data: { users } } = await axios.get('/api/hmd/user')
+			const { data: { threads, users } } = await axios.get('/api/hmd/thread/all')
 
+			selectThread(threads[1]._id)
 			selectUser(users[2])
 
 			dispatch({
-				type: GLOBAL.GET_USERS,
+				type: GLOBAL.GET_THREADS_AND_USERS,
 				payload: {
+					threads,
 					users
 				}
 			})
@@ -39,6 +43,15 @@ export const GlobalProvider = ({ children }) => {
 		} catch (error) {
 
 		}
+	}
+
+	const selectThread = (thread) => {
+		dispatch({
+			type: GLOBAL.SELECT_THREAD,
+			payload: {
+				thread
+			}
+		})
 	}
 
 	const selectUser = (user) => {
@@ -53,7 +66,8 @@ export const GlobalProvider = ({ children }) => {
 	return (
 		<GlobalContext.Provider value={{
 			state,
-			getUsers,
+			getThreadsAndUsers,
+			selectThread,
 			selectUser
 		}}>
 			{children}

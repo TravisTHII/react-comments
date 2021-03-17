@@ -5,7 +5,10 @@ const ThreadSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	pinned: String,
+	pinned: {
+		type: String,
+		default: ""
+	},
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

@@ -1,6 +1,14 @@
 const { Router } = require('express')
 const router = Router()
-const { getThread, Comment } = require('../controllers/thread')
+const { getThreads, createThread, getThread, Comment } = require('../controllers/thread')
+
+router
+	.route('/all')
+	.get(getThreads)
+
+router
+	.route('/create')
+	.post(createThread)
 
 router
 	.route('/:_thread_name')

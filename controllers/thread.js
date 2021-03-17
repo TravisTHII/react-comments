@@ -4,6 +4,60 @@ const Comment = require("../models/Comment")
 
 const { format, formatDistance } = require('date-fns')
 
+// @desc 		Get all threads
+// @route 	GET /api/hmd/thread/all
+// @access 	Public
+exports.getThreads = async (req, res) => {
+	try {
+
+		const threads = await Thread.find().select('_id name')
+
+		const users = await User.find().select('-__v')
+
+		return res.status(200).json({
+			threads,
+			users
+		})
+
+	} catch (error) {
+
+		return res.status(500).json({
+			error: error.message
+		})
+
+	}
+}
+
+// @desc 		Create a thread
+// @route 	GET /api/hmd/thread/create
+// @access 	Public
+exports.createThread = async (req, res) => {
+	try {
+
+		const { name } = req.body
+
+		if (!name)
+			throw new Error('Please enter a thread name.')
+
+		const thread = new Thread({
+			name
+		})
+
+		await thread.save()
+
+		return res.status(200).json({
+			message: `successfully created Thread ${name}!`
+		})
+
+	} catch (error) {
+
+		return res.status(500).json({
+			error: error.message
+		})
+
+	}
+}
+
 // @desc 		Get a thread
 // @route 	GET /api/hmd/thread
 // @access 	Public
@@ -13,7 +67,7 @@ exports.getThread = async (req, res) => {
 		const { _thread_name } = req.params
 
 		const thread = await Thread
-			.findById({ _id: _thread_name }, ' -_id')
+			.findById({ _id: _thread_name }, ' -_id -__v')
 			.lean()
 			.populate({
 				path: 'comments',
@@ -42,9 +96,12 @@ exports.getThread = async (req, res) => {
 
 			})
 
+		const total = thread.comments.length
+
 		return res.status(200).json({
 			data: {
-				total: thread.comments.length
+				total,
+				hasComments: (total > 0) ? true : false
 			},
 			...thread
 		})

@@ -13,22 +13,26 @@
 
 /*
 =============== 
-SelectUser
+SelectUser & SelectThread
 ===============
 */
 
-.rc_top {
+.thread_components {
 	width: 100%;
 	margin: 0 auto;
 	margin-bottom: 30px;
+	flex-direction: column;
+}
+.thread_components > div:not(:last-child) {
+	margin-bottom: 20px;
 }
 
-.users {
+.users, .st-threads {
 	display: flex;
 	justify-content: space-evenly;
 	width: 600px;
 }
-.su-header {
+.su-header, .st-header {
 	color: #fff;
 	padding: 5px 0;
 	margin-bottom: 1px;
@@ -40,8 +44,26 @@ SelectUser
 	cursor: pointer;
 }
 .user-select:hover,
-.user-is-selected {
+.user-is-selected {  
 	background-color: var(--red);
+}
+
+.st-threads {
+	justify-content: initial;
+}
+.thread-selector {
+	height: 30px;
+	padding: 5px;
+	color: #fff;
+	opacity: 0.5;
+	cursor: pointer;
+}
+.thread-selector:not(:last-child) {
+	margin-right: 15px;
+}
+.thread-is-selected,
+.thread-selector:hover {
+	opacity: 1;
 }
 
 /*

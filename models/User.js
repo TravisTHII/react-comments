@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		trim: true,
-		required: [true, 'Please enter a username']
+		required: true
 	},
 	slug: String,
 	motto: String,
