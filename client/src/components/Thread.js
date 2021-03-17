@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
+import { GlobalContext } from '../context/GlobalState'
 import { ThreadContext } from '../context/ThreadState'
 
 import { Header } from '../components/Header'
@@ -11,11 +12,13 @@ import { Spinner } from './includes/Spinner'
 
 export function Thread() {
 
+	const { state: { thread } } = useContext(GlobalContext)
+
 	const { state, getThread, loadMoreComments } = useContext(ThreadContext)
 
 	useEffect(() => {
 		getThread()
-	}, [])
+	}, [thread])
 
 	let content
 		, sorted
@@ -48,6 +51,12 @@ export function Thread() {
 
 						{state.postLoad &&
 							<Spinner stroke="#fff" style={{ display: 'block', margin: '10px auto' }} />
+						}
+
+						{!state.comments.length &&
+							<div className='sitc'>
+								<h3 className='text-ui fwn'>There are no comments, be the first.</h3>
+							</div>
 						}
 
 						{state.comments.map(c => (

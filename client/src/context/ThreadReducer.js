@@ -20,9 +20,9 @@ export default (state, action) => {
 		return {
 			...state,
 			sortLoad: false,
-			hasPinned: payload.hasPinned,
-			paging: payload.paging,
-			pinned: payload.pinned,
+			// hasPinned: payload.hasPinned,
+			// paging: payload.paging,
+			// pinned: payload.pinned,
 			comments: payload.comments
 		}
 	}

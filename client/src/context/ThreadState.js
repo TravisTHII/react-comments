@@ -60,49 +60,30 @@ export const ThreadProvider = ({ children, thread }) => {
 		}
 	}
 
-	const sortThread = (sort) => {
+	const sortThread = async (sort) => {
 		try {
 
-			// if (!state.sortLoad) {
+			if (!state.sortLoad) {
 
-			// 	dispatch({
-			// 		type: THREAD.LOAD_SORT
-			// 	})
+				dispatch({
+					type: THREAD.LOAD_SORT
+				})
 
-			// 	dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
+				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
 
-			// 	setTimeout(() => {
+				const { data: { comments } } = await axios.get(`/api/hmd/thread/${thread}?sort=${sort}`)
 
-			// 		const total = state.allComments.length
-			// 		const end = total <= state.limit
+				dispatch({
+					type: THREAD.SORT_THREAD,
+					payload: {
+						// hasPinned,
+						// paging,
+						// pinned,
+						comments
+					}
+				})
 
-			// 		const comments = end ? state.allComments : state.allComments.slice(0, state.limit)
-
-			// 		const cursor = (comments.lastIndexOf(comments[comments.length - 1]) + 1)
-
-			// 		const comments_sorted = comments.sort((o1, o2) => {
-			// 			if (sort === 'newest') {
-			// 				return o2.date.timestamp - o1.date.timestamp
-			// 			} else if (sort === 'oldest') {
-			// 				return o1.date.timestamp - o2.date.timestamp
-			// 			}
-			// 		})
-
-			// 		dispatch({
-			// 			type: THREAD.SORT_THREAD,
-			// 			payload: {
-			// 				paging: {
-			// 					total,
-			// 					end,
-			// 					cursor
-			// 				},
-			// 				comments: comments_sorted
-			// 			}
-			// 		})
-
-			// 	}, 250)
-
-			// }
+			}
 
 		} catch (error) {
 

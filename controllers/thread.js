@@ -66,6 +66,8 @@ exports.getThread = async (req, res) => {
 
 		const { _thread_name } = req.params
 
+		const { sort } = req.query
+
 		const thread = await Thread
 			.findById({ _id: _thread_name }, ' -_id -__v')
 			.lean()
@@ -75,7 +77,10 @@ exports.getThread = async (req, res) => {
 					path: 'user',
 					select: '-__v'
 				},
-				select: '-__v'
+				select: '-__v',
+				options: {
+					sort: { 'date': sort === 'oldest' ? 1 : -1 }
+				}
 			})
 			.exec()
 			.then(doc => {
