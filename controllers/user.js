@@ -8,7 +8,7 @@ const { Slugify } = require("../utils/functions")
 exports.getUsers = async (req, res) => {
 	try {
 
-		const users = await User.find()
+		const users = await User.find().select('-__v')
 
 		return res.status(200).json({
 			users

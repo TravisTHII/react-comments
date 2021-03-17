@@ -2,12 +2,6 @@
 	--red: #9A0909;
 }
 
-/*
-=============== 
-Thread
-===============
-*/
-
 .App {
 	width: 100%;
 }
@@ -16,6 +10,45 @@ Thread
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
+
+/*
+=============== 
+SelectUser
+===============
+*/
+
+.rc_top {
+	width: 100%;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
+.users {
+	display: flex;
+	justify-content: space-evenly;
+	width: 600px;
+}
+.su-header {
+	color: #fff;
+	padding: 5px 0;
+	margin-bottom: 1px;
+}
+.user-select {
+	width: 60px;
+	height: 60px;
+	padding: 5px;
+	cursor: pointer;
+}
+.user-select:hover,
+.user-is-selected {
+	background-color: var(--red);
+}
+
+/*
+=============== 
+Thread
+===============
+*/
 
 .thread-column {
 	width: 600px;

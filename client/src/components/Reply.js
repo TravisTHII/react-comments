@@ -35,7 +35,7 @@ export function Reply() {
 		<div className="comment_reply">
 			<div className="reply_content">
 				<div className='reply_user'>
-					<div className='background-ui' style={{ backgroundImage: `url(${user.image.avatar})` }}></div>
+					<div className='background-ui' style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}></div>
 				</div>
 				<div className={`reply_txt${replyLoad ? ' disabled' : ''}`}>
 					<textarea
