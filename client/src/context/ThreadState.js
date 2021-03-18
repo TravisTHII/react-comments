@@ -38,14 +38,14 @@ export const ThreadProvider = ({ children, thread }) => {
 				type: THREAD.LOAD_THREAD
 			})
 
-			const { data: { data: { total }, comments } } = await axios.get(`/api/hmd/thread/${thread}`)
+			const { data: { data: { total }, paging, comments } } = await axios.get(`/api/hmd/thread/${thread}`)
 
 			dispatch({
 				type: THREAD.GET_THREAD,
 				payload: {
 					total,
 					// hasPinned,
-					// paging,
+					paging,
 					// pinned,
 					comments
 				}
@@ -71,13 +71,13 @@ export const ThreadProvider = ({ children, thread }) => {
 
 				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
 
-				const { data: { comments } } = await axios.get(`/api/hmd/thread/${thread}?sort=${sort}`)
+				const { data: { paging, comments } } = await axios.get(`/api/hmd/thread/${thread}?sort=${sort}`)
 
 				dispatch({
 					type: THREAD.SORT_THREAD,
 					payload: {
 						// hasPinned,
-						// paging,
+						paging,
 						// pinned,
 						comments
 					}

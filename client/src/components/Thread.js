@@ -3,8 +3,8 @@ import React, { useContext, useEffect } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { ThreadContext } from '../context/ThreadState'
 
-import { Header } from '../components/Header'
-import { Poster } from '../components/Poster'
+import { Header } from './thread/Header'
+import { Poster } from './thread/Poster'
 
 import { CommentInstance } from './CommentInstance'
 

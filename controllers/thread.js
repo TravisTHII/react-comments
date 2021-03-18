@@ -66,10 +66,15 @@ exports.getThread = async (req, res) => {
 
 		const { _thread_name } = req.params
 
-		const { sort } = req.query
+		let { sort, cursor } = req.query
+
+		cursor = cursor ? cursor : 1
+
+		const limit = 18
 
 		const thread = await Thread
 			.findById({ _id: _thread_name }, ' -_id -__v')
+			// .skip(1 * limit)
 			.lean()
 			.populate({
 				path: 'comments',
@@ -79,7 +84,8 @@ exports.getThread = async (req, res) => {
 				},
 				select: '-__v',
 				options: {
-					sort: { 'date': sort === 'oldest' ? 1 : -1 }
+					sort: { 'date': sort === 'oldest' ? 1 : -1 },
+					// limit
 				}
 			})
 			.exec()
@@ -103,10 +109,17 @@ exports.getThread = async (req, res) => {
 
 		const total = thread.comments.length
 
+		// cursor = total ? thread.comments.indexOf(thread.comments[thread.comments.length - 1]) : false
+		// cursor = total ? thread.comments.indexOf(thread.comments[thread.comments.length - 1]) : false
+
 		return res.status(200).json({
 			data: {
+				total
+			},
+			paging: {
 				total,
-				hasComments: (total > 0) ? true : false
+				end: total <= limit,
+				cursor
 			},
 			...thread
 		})

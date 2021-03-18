@@ -3,8 +3,8 @@ import React, { useContext, useEffect } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { ThreadProvider } from '../context/ThreadState'
 
-import { SelectUser } from './SelectUser'
-import { SelectThread } from './SelectThread'
+import { SelectUser } from './thread/SelectUser'
+import { SelectThread } from './thread/SelectThread'
 import { Thread } from './Thread'
 
 import { Spinner } from './includes/Spinner'
@@ -14,9 +14,7 @@ export function ReactComments() {
 	const { state: { thread, loading, fetched }, getThreadsAndUsers } = useContext(GlobalContext)
 
 	useEffect(() => {
-
 		getThreadsAndUsers()
-
 	}, [])
 
 	let content

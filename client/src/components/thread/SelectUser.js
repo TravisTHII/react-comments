@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 
-import { GlobalContext } from '../context/GlobalState'
+import { GlobalContext } from '../../context/GlobalState'
 
-import { User } from './User'
+import { SelectUserItem } from '../thread/SelectUserItem'
 
 export function SelectUser() {
 
@@ -15,7 +15,7 @@ export function SelectUser() {
 			</div>
 			<div className="users">
 				{users.map(u => (
-					<User
+					<SelectUserItem
 						key={u._id}
 						user={u}
 						image={u.image.avatar}

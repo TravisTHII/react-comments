@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { GlobalContext } from '../context/GlobalState'
+import { GlobalContext } from '../../context/GlobalState'
 
 export function SelectThreadItem({ thread: { _id, name }, selected }) {
 

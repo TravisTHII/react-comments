@@ -1,12 +1,12 @@
 import React, { useContext, useRef, useState } from 'react'
 
-import { GlobalContext } from '../context/GlobalState'
-import { ThreadContext } from '../context/ThreadState'
+import { GlobalContext } from '../../context/GlobalState'
+import { ThreadContext } from '../../context/ThreadState'
 
-import { Badge } from './includes/Badge'
-import { Spinner } from './includes/Spinner'
+import { Badge } from '../includes/Badge'
+import { Spinner } from '../includes/Spinner'
 
-import { validText, expandTextarea } from '../utils/functions'
+import { validText, expandTextarea } from '../../utils/functions'
 
 export function Poster() {
 

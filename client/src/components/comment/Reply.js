@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 
-import { GlobalContext } from '../context/GlobalState'
-import { CommentContext } from '../context/CommentState'
+import { GlobalContext } from '../../context/GlobalState'
+import { CommentContext } from '../../context/CommentState'
 
-import { validText, expandTextarea } from '../utils/functions'
+import { validText, expandTextarea } from '../../utils/functions'
 
-import { Spinner } from './includes/Spinner'
+import { Spinner } from '../includes/Spinner'
 
 export function Reply() {
 

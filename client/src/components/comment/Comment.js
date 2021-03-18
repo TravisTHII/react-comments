@@ -1,10 +1,10 @@
 import React, { useRef } from 'react'
 
-import { Header } from './comment/Header'
-import { Content } from './comment/Content'
-import { Actions } from './comment/Actions'
+import { Header } from './Header'
+import { Content } from './Content'
+import { Actions } from './Actions'
 import { Reply } from './Reply'
-import { Replies } from './comment/Replies'
+import { Replies } from './Replies'
 
 export function Comment() {
 

@@ -10,7 +10,7 @@ export default (state, action) => {
 			fetched: true,
 			total: payload.total,
 			// hasPinned: payload.hasPinned,
-			// paging: payload.paging,
+			paging: payload.paging,
 			// pinned: payload.pinned,
 			comments: payload.comments
 		}
@@ -21,7 +21,7 @@ export default (state, action) => {
 			...state,
 			sortLoad: false,
 			// hasPinned: payload.hasPinned,
-			// paging: payload.paging,
+			paging: payload.paging,
 			// pinned: payload.pinned,
 			comments: payload.comments
 		}
