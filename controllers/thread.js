@@ -1,10 +1,8 @@
-const uniqueString = require('unique-string')
-
 const User = require("../models/User")
 const Thread = require("../models/Thread")
 const Comment = require("../models/Comment")
 
-const { format, formatDistance } = require('date-fns')
+const { generateComment } = require('../utils/generateComment')
 
 // @desc 		Get users & threads
 // @route 	GET /api/v1/thread/selectors
@@ -70,12 +68,15 @@ exports.getThread = async (req, res) => {
 
 		let { sort, cursor } = req.query
 
-		const limit = 2
+		const limit = 9
 
 		const { pinned } = await Thread.findById({ _id: _thread_name }).select('pinned')
 
 		const { total, end, comments } = await Comment
-			.paginate({ thread: _thread_name },
+			.paginate(
+				{
+					thread: _thread_name
+				},
 				{
 					offset: cursor || 0,
 					limit,
@@ -92,25 +93,21 @@ exports.getThread = async (req, res) => {
 						hasNextPage: 'end'
 					}
 				})
-			.then(doc => {
+			.then(async doc => {
 
-				for (const i of doc.comments) {
+				const a = []
+
+				for (let i of doc.comments) {
 
 					delete i.id
 
-					i.reply.total = i.reply.replies.length
-					i.reply.hasReplies = i.reply.total ? true : false
+					const total = await Comment.find({ "reply.to": i._id }).countDocuments()
 
-					i.date = {
-						published: formatDistance(i.date, Date.now(), { addSuffix: true }),
-						posted: format(i.date, 'MMMM do, y | h:mm a')
-					}
-
-					i.react = {
-						key: uniqueString()
-					}
+					a.push(generateComment(i, total))
 
 				}
+
+				doc.comments = a
 
 				return doc
 
@@ -167,30 +164,14 @@ exports.Comment = async (req, res) => {
 		// save comment to comments document
 		await c.save()
 
-		// push comment_id_ref to thread comments array
-		await Thread.findByIdAndUpdate(
-			{ _id: thread },
-			{ $push: { "comments": c } }
-		)
-
 		// get comment to return
 		const comment = await Comment
 			.findById({ _id: c._id }, '-__v')
 			.lean()
 			.populate('user', '-__v')
-			.exec()
 			.then(comment => {
 
-				comment.date = {
-					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
-					posted: format(comment.date, 'MMMM do, y | h:mm a')
-				}
-
-				comment.react = {
-					key: uniqueString()
-				}
-
-				return comment
+				return generateComment(comment)
 
 			})
 

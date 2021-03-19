@@ -52,7 +52,7 @@ export const CommentProvider = ({ children, comment }) => {
 		}
 	}
 
-	const moreReplies = () => {
+	const moreReplies = async () => {
 		try {
 
 			if (!state.moreLoading) {
@@ -61,18 +61,15 @@ export const CommentProvider = ({ children, comment }) => {
 					type: COMMENT.REPLIES_LOADING
 				})
 
-				setTimeout(() => {
+				const { data: { paging, replies } } = await axios.post(`/api/v1/comment/replies?cursor=${state.paging.cursor}`, { comment: comment._id })
 
-					const cursor = (state.results.lastIndexOf(state.results[state.results.length - 1]) + 1)
-
-					dispatch({
-						type: COMMENT.MORE_REPLIES,
-						payload: {
-							replies: state.allReplies.slice(cursor, (cursor + state.limit))
-						}
-					})
-
-				}, 250)
+				dispatch({
+					type: COMMENT.MORE_REPLIES,
+					payload: {
+						paging,
+						replies
+					}
+				})
 
 			}
 

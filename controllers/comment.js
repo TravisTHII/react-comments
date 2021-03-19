@@ -1,9 +1,7 @@
-const uniqueString = require("unique-string")
-
 const User = require("../models/User")
 const Comment = require("../models/Comment")
 
-const { format, formatDistance } = require('date-fns')
+const { generateComment } = require('../utils/generateComment')
 
 // @desc 		Post Reply
 // @route 	POST /api/v1/comment/reply
@@ -22,6 +20,11 @@ exports.Reply = async (req, res) => {
 		// create reply
 		const r = new Comment({
 			body,
+			reply: {
+				total: 0,
+				hasReplies: false,
+				to: c
+			},
 			user: u,
 			date: Date.now()
 		})
@@ -29,30 +32,14 @@ exports.Reply = async (req, res) => {
 		// save reply
 		await r.save()
 
-		// save comment_ref_id to replies array of comment
-		await Comment.findByIdAndUpdate(
-			{ _id: comment },
-			{ $push: { "reply.replies": r } },
-		)
-
 		// get reply to return
 		const reply = await Comment
 			.findById({ _id: r._id }, '-__v')
 			.lean()
 			.populate('user', '-__v')
-			.exec()
 			.then(comment => {
 
-				comment.date = {
-					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
-					posted: format(comment.date, 'MMMM do, y | h:mm a')
-				}
-
-				comment.react = {
-					key: uniqueString()
-				}
-
-				return comment
+				return generateComment(comment)
 
 			})
 
@@ -78,45 +65,56 @@ exports.Replies = async (req, res) => {
 
 		const { comment } = req.body
 
-		const { reply: { replies } } = await Comment
-			.findById({ _id: comment }, '-_id reply.replies')
-			.lean()
-			.populate({
-				path: 'reply.replies',
-				populate: {
-					path: 'user',
-					select: '-__v'
+		let { cursor } = req.query
+
+		const limit = 1
+
+		const { end, replies } = await Comment
+			.paginate(
+				{
+					"reply.to": comment
 				},
-				select: '-__v'
-			})
-			.exec()
-			.then(doc => {
-
-				const { reply: { replies } } = doc
-
-				for (const i of replies) {
-
-					i.reply.total = i.reply.replies.length
-					i.reply.hasReplies = i.reply.total ? true : false
-
-					i.date = {
-						published: formatDistance(i.date, Date.now(), { addSuffix: true }),
-						posted: format(i.date, 'MMMM do, y | h:mm a')
+				{
+					offset: cursor || 0,
+					limit,
+					lean: true,
+					select: '-__v',
+					sort: { date: 'desc' },
+					populate: {
+						path: 'user',
+						select: '-__v'
+					},
+					customLabels: {
+						docs: 'replies',
+						hasNextPage: 'end'
 					}
+				})
+			.then(async doc => {
 
-					i.react = {
-						key: uniqueString()
-					}
+				const a = []
+
+				for (const i of doc.replies) {
+
+					delete i.id
+
+					const total = await Comment.find({ "reply.to": i._id }).countDocuments()
+
+					a.push(generateComment(i, total))
 
 				}
+
+				doc.replies = a
 
 				return doc
 
 			})
 
+		cursor = parseInt(cursor) + limit || limit
+
 		return res.status(200).json({
 			paging: {
-				end: true
+				end: !end,
+				cursor
 			},
 			replies
 		})

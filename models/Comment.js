@@ -9,20 +9,10 @@ const CommentSchema = new mongoose.Schema({
 	body: String,
 	date: Date,
 	reply: {
-		hasReplies: {
-			type: Boolean,
-			default: false
-		},
-		total: {
-			type: Number,
-			default: 0
-		},
-		replies: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Comment'
-			}
-		]
+		to: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Comment'
+		}
 	},
 	user: {
 		type: mongoose.Schema.Types.ObjectId,

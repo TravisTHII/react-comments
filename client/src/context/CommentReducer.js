@@ -9,25 +9,16 @@ export default (state, action) => {
 			fetched: true,
 			loading: false,
 			paging: payload.paging,
-			results: payload.replies,
-			allReplies: payload.allReplies
+			results: payload.replies
 		}
 	}
 
 	if (type === COMMENT.MORE_REPLIES) {
-
-		const results = state.results.concat(payload.replies)
-			, cursor = results.lastIndexOf(results[results.length - 1])
-
 		return {
 			...state,
 			moreLoading: false,
-			paging: {
-				...state.paging,
-				cursor,
-				end: results.length === state.paging.total
-			},
-			results
+			paging: payload.paging,
+			results: state.results.concat(payload.replies)
 		}
 	}
 
