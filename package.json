@@ -1,9 +1,9 @@
 {
-	"name": "react-comments",
+  "name": "react-comments",
   "description": "React commenting system",
   "version": "1.0.0",
   "main": "server.js",
-	"scripts": {
+  "scripts": {
     "start": "node server",
     "server": "nodemon server",
     "client": "yarn start --prefix client",
@@ -14,7 +14,9 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.19"
+    "mongoose": "^5.11.19",
+    "mongoose-paginate-v2": "^1.3.16",
+    "unique-string": "^2.0.0"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",

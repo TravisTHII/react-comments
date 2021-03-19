@@ -38,7 +38,7 @@ export const ThreadProvider = ({ children, thread }) => {
 				type: THREAD.LOAD_THREAD
 			})
 
-			const { data: { data: { total }, paging, comments } } = await axios.get(`/api/hmd/thread/${thread}`)
+			const { data: { data: { total }, paging, comments } } = await axios.get(`/api/v1/thread/${thread}`)
 
 			dispatch({
 				type: THREAD.GET_THREAD,
@@ -71,7 +71,7 @@ export const ThreadProvider = ({ children, thread }) => {
 
 				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
 
-				const { data: { paging, comments } } = await axios.get(`/api/hmd/thread/${thread}?sort=${sort}`)
+				const { data: { paging, comments } } = await axios.get(`/api/v1/thread/${thread}?sort=${sort}`)
 
 				dispatch({
 					type: THREAD.SORT_THREAD,
@@ -90,29 +90,26 @@ export const ThreadProvider = ({ children, thread }) => {
 		}
 	}
 
-	const loadMoreComments = () => {
+	const loadMoreComments = async () => {
 		try {
 
-			// if (!state.moreLoad) {
+			if (!state.moreLoad) {
 
-			// 	dispatch({
-			// 		type: THREAD.LOAD_T_MORE
-			// 	})
+				dispatch({
+					type: THREAD.LOAD_T_MORE
+				})
 
-			// 	setTimeout(() => {
+				const { data: { paging, comments } } = await axios.get(`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`)
 
-			// 		const cursor = (state.comments.lastIndexOf(state.comments[state.comments.length - 1]) + 1)
+				dispatch({
+					type: THREAD.MORE_THREAD,
+					payload: {
+						paging,
+						comments
+					}
+				})
 
-			// 		dispatch({
-			// 			type: THREAD.MORE_THREAD,
-			// 			payload: {
-			// 				comments: state.allComments.slice(cursor, (cursor + state.limit))
-			// 			}
-			// 		})
-
-			// 	}, 250)
-
-			// }
+			}
 
 		} catch (error) {
 
@@ -128,7 +125,7 @@ export const ThreadProvider = ({ children, thread }) => {
 					type: THREAD.TP_LOAD
 				})
 
-				const { data: { comment } } = await axios.post('/api/hmd/thread/comment', { thread, user, body })
+				const { data: { comment } } = await axios.post('/api/v1/thread/comment', { thread, user, body })
 
 				dispatch({
 					type: THREAD.POST_COMMENT,

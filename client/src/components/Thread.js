@@ -61,7 +61,7 @@ export function Thread() {
 
 						{state.comments.map(c => (
 							<CommentInstance
-								key={`${c._id}`}
+								key={`${c.react.key}`}
 								comment={c}
 							/>
 						))}

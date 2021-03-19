@@ -1,13 +1,15 @@
+const uniqueString = require('unique-string')
+
 const User = require("../models/User")
 const Thread = require("../models/Thread")
 const Comment = require("../models/Comment")
 
 const { format, formatDistance } = require('date-fns')
 
-// @desc 		Get all threads
-// @route 	GET /api/hmd/thread/all
+// @desc 		Get users & threads
+// @route 	GET /api/v1/thread/selectors
 // @access 	Public
-exports.getThreads = async (req, res) => {
+exports.Selectors = async (req, res) => {
 	try {
 
 		const threads = await Thread.find().select('_id name')
@@ -29,7 +31,7 @@ exports.getThreads = async (req, res) => {
 }
 
 // @desc 		Create a thread
-// @route 	GET /api/hmd/thread/create
+// @route 	GET /api/v1/thread/create
 // @access 	Public
 exports.createThread = async (req, res) => {
 	try {
@@ -59,7 +61,7 @@ exports.createThread = async (req, res) => {
 }
 
 // @desc 		Get a thread
-// @route 	GET /api/hmd/thread
+// @route 	GET /api/v1/thread
 // @access 	Public
 exports.getThread = async (req, res) => {
 	try {
@@ -68,30 +70,33 @@ exports.getThread = async (req, res) => {
 
 		let { sort, cursor } = req.query
 
-		cursor = cursor ? cursor : 1
+		const limit = 2
 
-		const limit = 18
+		const { pinned } = await Thread.findById({ _id: _thread_name }).select('pinned')
 
-		const thread = await Thread
-			.findById({ _id: _thread_name }, ' -_id -__v')
-			// .skip(1 * limit)
-			.lean()
-			.populate({
-				path: 'comments',
-				populate: {
-					path: 'user',
-					select: '-__v'
-				},
-				select: '-__v',
-				options: {
-					sort: { 'date': sort === 'oldest' ? 1 : -1 },
-					// limit
-				}
-			})
-			.exec()
+		const { total, end, comments } = await Comment
+			.paginate({ thread: _thread_name },
+				{
+					offset: cursor || 0,
+					limit,
+					lean: true,
+					select: '-__v',
+					sort: { date: (sort === 'oldest') ? 'desc' : 'asc' },
+					populate: {
+						path: 'user',
+						select: '-__v'
+					},
+					customLabels: {
+						totalDocs: 'total',
+						docs: 'comments',
+						hasNextPage: 'end'
+					}
+				})
 			.then(doc => {
 
 				for (const i of doc.comments) {
+
+					delete i.id
 
 					i.reply.total = i.reply.replies.length
 					i.reply.hasReplies = i.reply.total ? true : false
@@ -101,27 +106,29 @@ exports.getThread = async (req, res) => {
 						posted: format(i.date, 'MMMM do, y | h:mm a')
 					}
 
+					i.react = {
+						key: uniqueString()
+					}
+
 				}
 
 				return doc
 
 			})
 
-		const total = thread.comments.length
-
-		// cursor = total ? thread.comments.indexOf(thread.comments[thread.comments.length - 1]) : false
-		// cursor = total ? thread.comments.indexOf(thread.comments[thread.comments.length - 1]) : false
+		cursor = parseInt(cursor) + limit || limit
 
 		return res.status(200).json({
 			data: {
-				total
+				total,
+				hasPinned: pinned ? true : false
 			},
 			paging: {
-				total,
-				end: total <= limit,
+				end: !end,
 				cursor
 			},
-			...thread
+			pinned,
+			comments
 		})
 
 	} catch (error) {
@@ -135,7 +142,7 @@ exports.getThread = async (req, res) => {
 }
 
 // @desc Post a comment
-// @route POST /api/hmd/thread/comment
+// @route POST /api/v1/thread/comment
 // @access Public
 exports.Comment = async (req, res) => {
 	try {
@@ -177,6 +184,10 @@ exports.Comment = async (req, res) => {
 				comment.date = {
 					published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
 					posted: format(comment.date, 'MMMM do, y | h:mm a')
+				}
+
+				comment.react = {
+					key: uniqueString()
 				}
 
 				return comment

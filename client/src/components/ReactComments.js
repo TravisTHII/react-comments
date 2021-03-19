@@ -11,10 +11,10 @@ import { Spinner } from './includes/Spinner'
 
 export function ReactComments() {
 
-	const { state: { thread, loading, fetched }, getThreadsAndUsers } = useContext(GlobalContext)
+	const { state: { thread, loading, fetched }, getSelectors } = useContext(GlobalContext)
 
 	useEffect(() => {
-		getThreadsAndUsers()
+		getSelectors()
 	}, [])
 
 	let content

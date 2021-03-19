@@ -1,10 +1,10 @@
 const { Router } = require('express')
 const router = Router()
-const { getThreads, createThread, getThread, Comment } = require('../controllers/thread')
+const { Selectors, createThread, getThread, Comment } = require('../controllers/thread')
 
 router
-	.route('/all')
-	.get(getThreads)
+	.route('/selectors')
+	.get(Selectors)
 
 router
 	.route('/create')

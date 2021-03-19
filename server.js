@@ -15,9 +15,9 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 5000
 
-app.use('/api/hmd/user', require('./routes/user'))
-app.use('/api/hmd/thread', require('./routes/thread'))
-app.use('/api/hmd/comment', require('./routes/comment'))
+app.use('/api/v1/user', require('./routes/user'))
+app.use('/api/v1/thread', require('./routes/thread'))
+app.use('/api/v1/comment', require('./routes/comment'))
 
 app.listen(
 	PORT,

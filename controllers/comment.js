@@ -1,10 +1,12 @@
+const uniqueString = require("unique-string")
+
 const User = require("../models/User")
 const Comment = require("../models/Comment")
 
 const { format, formatDistance } = require('date-fns')
 
 // @desc 		Post Reply
-// @route 	POST /api/hmd/comment/reply
+// @route 	POST /api/v1/comment/reply
 // @access 	Public
 exports.Reply = async (req, res) => {
 	try {
@@ -46,6 +48,10 @@ exports.Reply = async (req, res) => {
 					posted: format(comment.date, 'MMMM do, y | h:mm a')
 				}
 
+				comment.react = {
+					key: uniqueString()
+				}
+
 				return comment
 
 			})
@@ -65,7 +71,7 @@ exports.Reply = async (req, res) => {
 }
 
 // @desc 		Get Replies
-// @route 	POST /api/hmd/comment/replies
+// @route 	POST /api/v1/comment/replies
 // @access 	Public
 exports.Replies = async (req, res) => {
 	try {
@@ -96,6 +102,10 @@ exports.Replies = async (req, res) => {
 					i.date = {
 						published: formatDistance(i.date, Date.now(), { addSuffix: true }),
 						posted: format(i.date, 'MMMM do, y | h:mm a')
+					}
+
+					i.react = {
+						key: uniqueString()
 					}
 
 				}

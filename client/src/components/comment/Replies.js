@@ -35,7 +35,10 @@ export function Replies() {
 
 		content =
 			results.map(c => (
-				<CommentInstance key={`${c._id}`} comment={c} />
+				<CommentInstance
+					key={`${c.react.key}`}
+					comment={c}
+				/>
 			))
 
 	}

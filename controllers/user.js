@@ -3,7 +3,7 @@ const User = require("../models/User")
 const { Slugify } = require("../utils/functions")
 
 // @desc 		Get all users
-// @route 	GET /api/hmd/user
+// @route 	GET /api/v1/user
 // @access 	Public
 exports.getUsers = async (req, res) => {
 	try {
@@ -25,7 +25,7 @@ exports.getUsers = async (req, res) => {
 }
 
 // @desc 		Create a user
-// @route 	GET /api/hmd/user/create
+// @route 	GET /api/v1/user/create
 // @access 	Public
 exports.createUser = async (req, res) => {
 	try {
