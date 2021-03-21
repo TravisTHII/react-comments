@@ -5,12 +5,17 @@ const Auth = (req, res, next) => {
 
 		const access = req.header('_token')
 
-		if (!access)
-			return res.status(401).json('authorization denied.')
+		if (!access) {
 
-		const verified = jwt.verify(access, process.env.ACCESS_SIGNATURE)
+			req.token = { _id: "" }
 
-		req.token = verified
+		} else {
+
+			const verified = jwt.verify(access, process.env.ACCESS_SIGNATURE)
+
+			req.token = verified
+
+		}
 
 		next()
 

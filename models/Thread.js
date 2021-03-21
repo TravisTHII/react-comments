@@ -7,7 +7,8 @@ const ThreadSchema = new mongoose.Schema({
 	},
 	pinned: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Comment'
+		ref: 'Comment',
+		default: null
 	}
 })
 

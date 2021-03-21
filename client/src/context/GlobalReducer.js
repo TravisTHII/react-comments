@@ -3,14 +3,13 @@ import { GLOBAL } from './actions'
 export default (state, action) => {
 	const { type, payload } = action
 
-	if (type === GLOBAL.GET_THREADS_AND_USERS) {
+	if (type === GLOBAL.SELECTORS) {
 		return {
 			...state,
 			loading: false,
 			fetched: true,
 			threads: payload.threads,
-			users: payload.users,
-			token: payload.token
+			users: payload.users
 		}
 	}
 
@@ -21,9 +20,12 @@ export default (state, action) => {
 		}
 	}
 
-	if (type === GLOBAL.SELECT_USER) {
+	if (type === GLOBAL.AUTH) {
 		return {
 			...state,
+			loading: false,
+			loggedIn: payload.loggedIn,
+			token: payload.token,
 			user: payload.user
 		}
 	}

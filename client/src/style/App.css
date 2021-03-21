@@ -520,3 +520,7 @@ Common classes
 .fwn{
 	font-weight: normal;
 }
+
+.highlight-red {
+	color: var(--red);
+}

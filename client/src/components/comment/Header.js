@@ -33,8 +33,10 @@ export function Header({ refrence }) {
 	}, [])
 
 	const activateMenu = () => {
-		setActive(!active)
-		getMenu(refrence.current, menu)
+		if (menu) {
+			setActive(!active)
+			getMenu(refrence.current, menu)
+		}
 	}
 
 	return (

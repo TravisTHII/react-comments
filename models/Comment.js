@@ -19,10 +19,14 @@ const CommentSchema = new mongoose.Schema({
 		ref: 'User'
 	},
 	data: {
+		pinned: {
+			type: Boolean,
+			default: false
+		},
 		edited: {
 			type: Boolean,
 			default: false
-		}
+		},
 	}
 })
 

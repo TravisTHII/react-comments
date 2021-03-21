@@ -3,8 +3,6 @@ const Thread = require("../models/Thread")
 const Comment = require("../models/Comment")
 
 const { generateComment } = require('../utils/generateComment')
-const { createAccessToken } = require("../utils/createToken")
-const { sendCookieToken } = require("../utils/sendCookieToken")
 
 // @desc 		Get users & threads
 // @route 	GET /api/v1/thread/selectors
@@ -16,17 +14,9 @@ exports.Selectors = async (req, res) => {
 
 		const users = await User.find().select('-__v')
 
-		// automatically "sign in" as second user
-		// same as front end
-		// demonstration purposes only
-		const token = createAccessToken(users[2])
-
-		sendCookieToken(res, token)
-
 		return res.status(200).json({
 			threads,
-			users,
-			token
+			users
 		})
 
 	} catch (error) {

@@ -20,7 +20,7 @@ const initialState = {
 
 export const CommentContext = createContext(initialState)
 
-export const CommentProvider = ({ children, comment }) => {
+export const CommentProvider = ({ children, comment, token }) => {
 
 	const [state, dispatch] = useReducer(CommentReducer, initialState)
 
@@ -35,7 +35,7 @@ export const CommentProvider = ({ children, comment }) => {
 					type: COMMENT.LOADING
 				})
 
-				const { data: { paging, replies } } = await axios.post('/api/v1/comment/replies', { comment: comment._id })
+				const { data: { paging, replies } } = await axios.post('/api/v1/comment/replies', { comment: comment._id }, { headers: { '_token': token } })
 
 				dispatch({
 					type: COMMENT.GET_REPLIES,
@@ -61,7 +61,7 @@ export const CommentProvider = ({ children, comment }) => {
 					type: COMMENT.REPLIES_LOADING
 				})
 
-				const { data: { paging, replies } } = await axios.post(`/api/v1/comment/replies?cursor=${state.paging.cursor}`, { comment: comment._id })
+				const { data: { paging, replies } } = await axios.post(`/api/v1/comment/replies?cursor=${state.paging.cursor}`, { comment: comment._id }, { headers: { '_token': token } })
 
 				dispatch({
 					type: COMMENT.MORE_REPLIES,
@@ -91,7 +91,7 @@ export const CommentProvider = ({ children, comment }) => {
 
 				dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: true } })
 
-				const { data } = await axios.post('/api/v1/comment/reply', { comment: comment._id, body, user })
+				const { data } = await axios.post('/api/v1/comment/reply', { comment: comment._id, body, user }, { headers: { '_token': token } })
 
 				comment.reply.total += 1
 

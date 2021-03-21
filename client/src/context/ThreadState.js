@@ -71,7 +71,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 
 				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
 
-				const { data: { data: { hasPinned }, paging, pinned, comments } } = await axios.get(`/api/v1/thread/${thread}?sort=${sort}`)
+				const { data: { data: { hasPinned }, paging, pinned, comments } } = await axios.get(`/api/v1/thread/${thread}?sort=${sort}`, { headers: { '_token': token } })
 
 				dispatch({
 					type: THREAD.SORT_THREAD,
@@ -99,7 +99,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.LOAD_T_MORE
 				})
 
-				const { data: { paging, comments } } = await axios.get(`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`)
+				const { data: { paging, comments } } = await axios.get(`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`, { headers: { '_token': token } })
 
 				dispatch({
 					type: THREAD.MORE_THREAD,
@@ -125,7 +125,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.TP_LOAD
 				})
 
-				const { data: { comment } } = await axios.post('/api/v1/thread/comment', { thread, user, body })
+				const { data: { comment } } = await axios.post('/api/v1/thread/comment', { thread, user, body }, { headers: { '_token': token } })
 
 				dispatch({
 					type: THREAD.POST_COMMENT,

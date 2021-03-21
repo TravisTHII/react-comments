@@ -140,19 +140,20 @@ exports.Pin = async (req, res) => {
 
 		const { thread, comment } = req.body
 
-		let isPinned = false
-
-		const { pinned } = await Thread.findById({ _id: thread }).select('pinned')
-
-		if (pinned) isPinned = true
+		const { data: { pinned } } = await Comment.findById({ _id: comment }).select('data.pinned')
 
 		await Thread.findByIdAndUpdate(
 			{ _id: thread },
-			{ pinned: isPinned ? null : comment }
+			{ pinned: pinned ? null : comment }
+		)
+
+		await Comment.findByIdAndUpdate(
+			{ _id: comment },
+			{ "data.pinned": !pinned }
 		)
 
 		return res.status(200).json({
-			message: `Comment successfully ${isPinned ? 'Unpinned' : 'Pinned'}.`
+			message: `Comment successfully ${pinned ? 'Unpinned' : 'Pinned'}.`
 		})
 
 	} catch (error) {

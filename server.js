@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 5000
 app.use('/api/v1/user', require('./routes/user'))
 app.use('/api/v1/thread', require('./routes/thread'))
 app.use('/api/v1/comment', require('./routes/comment'))
+app.use('/api/v1/token', require('./routes/token'))
 
 app.listen(
 	PORT,

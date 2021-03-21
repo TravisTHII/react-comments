@@ -6,13 +6,15 @@ import GlobalReducer from './GlobalReducer'
 import { GLOBAL } from './actions'
 
 const initialState = {
-	thread: "",
-	threads: [],
 	user: {},
 	users: [],
 	token: '',
+	loggedIn: false,
+	thread: "",
+	threads: [],
 	loading: false,
-	fetched: false
+	fetched: false,
+	updating: false
 }
 
 export const GlobalContext = createContext(initialState)
@@ -28,17 +30,15 @@ export const GlobalProvider = ({ children }) => {
 				type: GLOBAL.LOADING
 			})
 
-			const { data: { threads, users, token } } = await axios.get('/api/v1/thread/selectors')
+			const { data: { threads, users } } = await axios.get('/api/v1/thread/selectors')
 
 			selectThread(threads[1]._id)
-			selectUser(users[2])
 
 			dispatch({
-				type: GLOBAL.GET_THREADS_AND_USERS,
+				type: GLOBAL.SELECTORS,
 				payload: {
 					threads,
-					users,
-					token
+					users
 				}
 			})
 
@@ -56,13 +56,42 @@ export const GlobalProvider = ({ children }) => {
 		})
 	}
 
-	const selectUser = (user) => {
-		dispatch({
-			type: GLOBAL.SELECT_USER,
-			payload: {
-				user
+	const selectUser = async (user) => {
+		try {
+
+			if (state.loggedIn && state.user === user) {
+
+				dispatch({
+					type: GLOBAL.AUTH,
+					payload: {
+						loggedIn: false,
+						token: "",
+						user: {}
+					}
+				})
+
+			} else {
+
+				dispatch({
+					type: GLOBAL.LOADING
+				})
+
+				const { data: { token } } = await axios.post('/api/v1/token', { user })
+
+				dispatch({
+					type: GLOBAL.AUTH,
+					payload: {
+						user: user,
+						loggedIn: true,
+						token
+					}
+				})
+
 			}
-		})
+
+		} catch (error) {
+
+		}
 	}
 
 	return (

@@ -9,9 +9,7 @@ exports.generateComment = async (comment, _id) => {
 
 	const total = await Comment.find({ "reply.to": comment._id }).countDocuments()
 
-	const pinned = await Thread.findOne().where('pinned').equals(comment._id)
-
-	const { data: { edited } } = await Comment.findById({ _id: comment._id }).select('data.edited')
+	const { data: { edited, pinned } } = await Comment.findById({ _id: comment._id }).select('data')
 
 	return {
 		...comment,
@@ -24,9 +22,9 @@ exports.generateComment = async (comment, _id) => {
 			published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
 			posted: format(comment.date, 'MMMM do, y | h:mm a')
 		},
-		menu: await generateMenu(comment, _id, pinned),
+		menu: _id ? await generateMenu(comment, _id, pinned) : null,
 		data: {
-			pinned: pinned ? true : false,
+			pinned,
 			edited,
 			overflow: isOverflowed(comment.body)
 		},
@@ -47,17 +45,19 @@ const isOverflowed = (content) => {
 
 const generateMenu = async (comment, _id, pinned) => {
 
-	const isPinned = pinned ? 'Unpin' : 'Pin'
-
 	let menu
+
+	const { admin } = await User.findById({ _id }).select('-_id admin').lean()
 
 	const myComment = String(comment.user._id) === _id
 
-	if (comment.user.admin) {
+	const isPinned = pinned ? 'Unpin' : 'Pin'
+
+	if (admin) {
 
 		if (myComment) {
 
-			menu = [isPinned, 'Edit', 'Delete', 'Report']
+			menu = [isPinned, 'Edit', 'Delete']
 
 		} else {
 
