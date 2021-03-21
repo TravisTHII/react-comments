@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const router = Router()
+const Auth = require('../middleware/auth')
 const { Selectors, createThread, getThread, Comment } = require('../controllers/thread')
 
 router
@@ -12,10 +13,10 @@ router
 
 router
 	.route('/:_thread_name')
-	.get(getThread)
+	.get(Auth, getThread)
 
 router
 	.route('/comment')
-	.post(Comment)
+	.post(Auth, Comment)
 
 module.exports = router

@@ -10,6 +10,7 @@ export default (state, action) => {
 			fetched: true,
 			threads: payload.threads,
 			users: payload.users,
+			token: payload.token
 		}
 	}
 

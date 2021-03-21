@@ -9,9 +9,9 @@ export default (state, action) => {
 			loading: false,
 			fetched: true,
 			total: payload.total,
-			// hasPinned: payload.hasPinned,
+			hasPinned: payload.hasPinned,
 			paging: payload.paging,
-			// pinned: payload.pinned,
+			pinned: payload.pinned,
 			comments: payload.comments
 		}
 	}
@@ -20,9 +20,9 @@ export default (state, action) => {
 		return {
 			...state,
 			sortLoad: false,
-			// hasPinned: payload.hasPinned,
+			hasPinned: payload.hasPinned,
 			paging: payload.paging,
-			// pinned: payload.pinned,
+			pinned: payload.pinned,
 			comments: payload.comments
 		}
 	}
@@ -41,6 +41,28 @@ export default (state, action) => {
 			...state,
 			postLoad: false,
 			comments: [payload.comment, ...state.comments]
+		}
+	}
+
+	if (type === THREAD.GET_MENU) {
+		return {
+			...state,
+			menu: {
+				dispaly: true,
+				commentRef: payload.commentRef,
+				data: payload.menu
+			}
+		}
+	}
+
+	if (type === THREAD.DESTROY_MENU) {
+		return {
+			...state,
+			menu: {
+				dispaly: false,
+				commentRef: null,
+				data: []
+			}
 		}
 	}
 

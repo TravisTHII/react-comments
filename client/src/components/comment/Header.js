@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-// import { ThreadContext } from '../../../context/thread/ThreadState'
+import { ThreadContext } from '../../context/ThreadState'
 import { CommentContext } from '../../context/CommentState'
 
 import useOutsideClick from '../../hooks/useOutsideClick'
@@ -8,11 +8,11 @@ import useOutsideClick from '../../hooks/useOutsideClick'
 import { Badge } from '../includes/Badge'
 
 import Dots from '@material-ui/icons/MoreVert'
-import PinSVG from '../../svg/pin.svg'
+import { TiPin } from 'react-icons/ti'
 
 export function Header({ refrence }) {
 
-	// const { getMenu } = useContext(ThreadContext)
+	const { getMenu } = useContext(ThreadContext)
 
 	const { comment: { user, date, data, menu } } = useContext(CommentContext)
 
@@ -22,21 +22,19 @@ export function Header({ refrence }) {
 		setActive(false)
 	}, 'outside')
 
-	// useEffect(() => {
-	// 	const y = () => {
-	// 		setActive(false)
-	// 	}
+	useEffect(() => {
+		const y = () => {
+			setActive(false)
+		}
 
-	// 	const s = document.querySelector('#profile_content')
+		window.addEventListener('scroll', y)
 
-	// 	s.addEventListener('scroll', y)
-
-	// 	return () => s.removeEventListener('scroll', y)
-	// }, [])
+		return () => window.removeEventListener('scroll', y)
+	}, [])
 
 	const activateMenu = () => {
 		setActive(!active)
-		// getMenu(refrence.current, menu)
+		getMenu(refrence.current, menu)
 	}
 
 	return (
@@ -50,9 +48,14 @@ export function Header({ refrence }) {
 
 				<div className="author_info text-ui">
 					<div className="author_username">
-						<div>{user.username}</div>
+						<div>
+							{user.username}
+						</div>
 						{user.badge.title &&
 							<Badge badge={user.badge} />
+						}
+						{user.admin &&
+							<span className="userIsAdmin">(Admin)</span>
 						}
 					</div>
 
@@ -70,7 +73,9 @@ export function Header({ refrence }) {
 			<div className="comment_options">
 
 				{data.pinned &&
-					<span className="opt_ui cmt_pin"><PinSVG /></span>
+					<span className="opt_ui cmt_pin flex-ui">
+						<TiPin />
+					</span>
 				}
 
 				<button

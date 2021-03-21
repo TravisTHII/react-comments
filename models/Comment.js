@@ -18,24 +18,11 @@ const CommentSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	menu: [Array],
 	data: {
 		edited: {
 			type: Boolean,
 			default: false
-		},
-		pinned: {
-			type: Boolean,
-			default: false
-		},
-		reported: {
-			type: Boolean,
-			default: false
-		},
-		overflow: {
-			type: Boolean,
-			default: false
-		},
+		}
 	}
 })
 

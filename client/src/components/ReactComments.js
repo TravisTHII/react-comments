@@ -11,7 +11,7 @@ import { Spinner } from './includes/Spinner'
 
 export function ReactComments() {
 
-	const { state: { thread, loading, fetched }, getSelectors } = useContext(GlobalContext)
+	const { state: { thread, token, loading, fetched }, getSelectors } = useContext(GlobalContext)
 
 	useEffect(() => {
 		getSelectors()
@@ -32,7 +32,7 @@ export function ReactComments() {
 					<SelectUser />
 					<SelectThread />
 				</div>
-				<ThreadProvider thread={thread}>
+				<ThreadProvider thread={thread} token={token}>
 					<Thread />
 				</ThreadProvider>
 			</>

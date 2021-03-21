@@ -1,4 +1,5 @@
 const User = require("../models/User")
+const Thread = require("../models/Thread")
 const Comment = require("../models/Comment")
 
 const { generateComment } = require('../utils/generateComment')
@@ -8,6 +9,8 @@ const { generateComment } = require('../utils/generateComment')
 // @access 	Public
 exports.Reply = async (req, res) => {
 	try {
+
+		const { _id } = req.token
 
 		const { comment, body, user } = req.body
 
@@ -37,9 +40,9 @@ exports.Reply = async (req, res) => {
 			.findById({ _id: r._id }, '-__v')
 			.lean()
 			.populate('user', '-__v')
-			.then(comment => {
+			.then(async comment => {
 
-				return generateComment(comment)
+				return await generateComment(comment, _id)
 
 			})
 
@@ -63,11 +66,13 @@ exports.Reply = async (req, res) => {
 exports.Replies = async (req, res) => {
 	try {
 
+		const { _id } = req.token
+
 		const { comment } = req.body
 
 		let { cursor } = req.query
 
-		const limit = 1
+		const limit = 9
 
 		const { end, replies } = await Comment
 			.paginate(
@@ -97,9 +102,7 @@ exports.Replies = async (req, res) => {
 
 					delete i.id
 
-					const total = await Comment.find({ "reply.to": i._id }).countDocuments()
-
-					a.push(generateComment(i, total))
+					a.push(await generateComment(i, _id))
 
 				}
 
@@ -127,4 +130,94 @@ exports.Replies = async (req, res) => {
 
 	}
 
+}
+
+// @desc 		Pin a comment
+// @route 	POST /api/v1/comment/pin
+// @access 	Public
+exports.Pin = async (req, res) => {
+	try {
+
+		const { thread, comment } = req.body
+
+		let isPinned = false
+
+		const { pinned } = await Thread.findById({ _id: thread }).select('pinned')
+
+		if (pinned) isPinned = true
+
+		await Thread.findByIdAndUpdate(
+			{ _id: thread },
+			{ pinned: isPinned ? null : comment }
+		)
+
+		return res.status(200).json({
+			message: `Comment successfully ${isPinned ? 'Unpinned' : 'Pinned'}.`
+		})
+
+	} catch (error) {
+
+		return res.status(500).json({
+			error: error.message
+		})
+
+	}
+}
+
+// @desc 		Edit a comment
+// @route 	POST /api/v1/comment/edit
+// @access 	Public
+exports.Edit = async (req, res) => {
+	try {
+
+		const { comment, body } = req.body
+
+		await Comment.findByIdAndUpdate(
+			{ _id: comment },
+			{
+				body,
+				data: {
+					edited: true
+				}
+			}
+		)
+
+		return res.status(200).json({
+			message: 'Comment was updated successfully.'
+		})
+
+	} catch (error) {
+
+		return res.status(500).json({
+			error: error.message
+		})
+
+	}
+}
+
+// @desc 		Delete a comment
+// @route 	POST /api/v1/comment/delete
+// @access 	Public
+exports.Delete = async (req, res) => {
+	try {
+
+		const { comment } = req.body
+
+		const deleteComment = await Comment.findByIdAndDelete({ _id: comment })
+
+		let message = deleteComment
+			? 'Comment deleted successfully.'
+			: 'Comment could not be deleted.'
+
+		return res.status(200).json({
+			message
+		})
+
+	} catch (error) {
+
+		return res.status(500).json({
+			error: error.message
+		})
+
+	}
 }

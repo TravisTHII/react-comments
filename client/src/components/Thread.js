@@ -5,6 +5,7 @@ import { ThreadContext } from '../context/ThreadState'
 
 import { Header } from './thread/Header'
 import { Poster } from './thread/Poster'
+import { Menu } from './thread/Menu'
 
 import { CommentInstance } from './CommentInstance'
 
@@ -12,13 +13,13 @@ import { Spinner } from './includes/Spinner'
 
 export function Thread() {
 
-	const { state: { thread } } = useContext(GlobalContext)
+	const { state: { user, thread } } = useContext(GlobalContext)
 
 	const { state, getThread, loadMoreComments } = useContext(ThreadContext)
 
 	useEffect(() => {
 		getThread()
-	}, [thread])
+	}, [user, thread])
 
 	let content
 		, sorted
@@ -48,6 +49,12 @@ export function Thread() {
 			sorted =
 				<div className="thread">
 					<div className="thread_comments">
+
+						{state.hasPinned &&
+							<CommentInstance
+								comment={state.pinned}
+							/>
+						}
 
 						{state.postLoad &&
 							<Spinner stroke="#fff" style={{ display: 'block', margin: '10px auto' }} />
@@ -93,6 +100,7 @@ export function Thread() {
 				<Header />
 				<Poster />
 				{sorted}
+				{state.menu.dispaly && <Menu />}
 			</>
 
 	}

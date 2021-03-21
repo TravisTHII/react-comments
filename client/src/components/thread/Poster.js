@@ -72,10 +72,15 @@ export function Poster() {
 						{user.badge.title &&
 							<Badge badge={user.badge} />
 						}
+						{user.admin &&
+							<span className="userIsAdmin">(Admin)</span>
+						}
 					</div>
+
 					{user.motto &&
 						<div className="author_motto">{user.motto}</div>
 					}
+
 				</div>
 			</div>
 

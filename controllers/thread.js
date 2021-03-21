@@ -3,6 +3,8 @@ const Thread = require("../models/Thread")
 const Comment = require("../models/Comment")
 
 const { generateComment } = require('../utils/generateComment')
+const { createAccessToken } = require("../utils/createToken")
+const { sendCookieToken } = require("../utils/sendCookieToken")
 
 // @desc 		Get users & threads
 // @route 	GET /api/v1/thread/selectors
@@ -14,9 +16,17 @@ exports.Selectors = async (req, res) => {
 
 		const users = await User.find().select('-__v')
 
+		// automatically "sign in" as second user
+		// same as front end
+		// demonstration purposes only
+		const token = createAccessToken(users[2])
+
+		sendCookieToken(res, token)
+
 		return res.status(200).json({
 			threads,
-			users
+			users,
+			token
 		})
 
 	} catch (error) {
@@ -64,13 +74,34 @@ exports.createThread = async (req, res) => {
 exports.getThread = async (req, res) => {
 	try {
 
+		const { _id } = req.token
+
 		const { _thread_name } = req.params
 
 		let { sort, cursor } = req.query
 
-		const limit = 9
+		const limit = 18
 
-		const { pinned } = await Thread.findById({ _id: _thread_name }).select('pinned')
+		const { pinned } = await Thread
+			.findById({ _id: _thread_name })
+			.lean()
+			.populate({
+				path: 'pinned',
+				select: '-__v',
+				populate: {
+					path: 'user',
+					select: '-__v'
+				}
+			})
+			.then(async doc => {
+
+				if (doc.pinned) {
+					doc.pinned = await generateComment(doc.pinned, _id)
+				}
+
+				return doc
+
+			})
 
 		const { total, end, comments } = await Comment
 			.paginate(
@@ -82,7 +113,7 @@ exports.getThread = async (req, res) => {
 					limit,
 					lean: true,
 					select: '-__v',
-					sort: { date: (sort === 'oldest') ? 'desc' : 'asc' },
+					sort: { date: (sort === 'oldest') ? 'asc' : 'desc' },
 					populate: {
 						path: 'user',
 						select: '-__v'
@@ -101,9 +132,7 @@ exports.getThread = async (req, res) => {
 
 					delete i.id
 
-					const total = await Comment.find({ "reply.to": i._id }).countDocuments()
-
-					a.push(generateComment(i, total))
+					a.push(await generateComment(i, _id))
 
 				}
 
@@ -124,7 +153,7 @@ exports.getThread = async (req, res) => {
 				end: !end,
 				cursor
 			},
-			pinned,
+			pinned: pinned || null,
 			comments
 		})
 
@@ -143,6 +172,8 @@ exports.getThread = async (req, res) => {
 // @access Public
 exports.Comment = async (req, res) => {
 	try {
+
+		const { _id } = req.token
 
 		const { thread, user, body } = req.body
 
@@ -169,9 +200,9 @@ exports.Comment = async (req, res) => {
 			.findById({ _id: c._id }, '-__v')
 			.lean()
 			.populate('user', '-__v')
-			.then(comment => {
+			.then(async comment => {
 
-				return generateComment(comment)
+				return await generateComment(comment, _id)
 
 			})
 

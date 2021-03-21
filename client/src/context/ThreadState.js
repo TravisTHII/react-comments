@@ -27,7 +27,7 @@ const initialState = {
 
 export const ThreadContext = createContext(initialState)
 
-export const ThreadProvider = ({ children, thread }) => {
+export const ThreadProvider = ({ children, thread, token }) => {
 
 	const [state, dispatch] = useReducer(ThreadReducer, initialState)
 
@@ -38,15 +38,15 @@ export const ThreadProvider = ({ children, thread }) => {
 				type: THREAD.LOAD_THREAD
 			})
 
-			const { data: { data: { total }, paging, comments } } = await axios.get(`/api/v1/thread/${thread}`)
+			const { data: { data: { total, hasPinned }, paging, pinned, comments } } = await axios.get(`/api/v1/thread/${thread}`, { headers: { '_token': token } })
 
 			dispatch({
 				type: THREAD.GET_THREAD,
 				payload: {
 					total,
-					// hasPinned,
+					hasPinned,
 					paging,
-					// pinned,
+					pinned,
 					comments
 				}
 			})
@@ -71,14 +71,14 @@ export const ThreadProvider = ({ children, thread }) => {
 
 				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
 
-				const { data: { paging, comments } } = await axios.get(`/api/v1/thread/${thread}?sort=${sort}`)
+				const { data: { data: { hasPinned }, paging, pinned, comments } } = await axios.get(`/api/v1/thread/${thread}?sort=${sort}`)
 
 				dispatch({
 					type: THREAD.SORT_THREAD,
 					payload: {
-						// hasPinned,
+						hasPinned,
 						paging,
-						// pinned,
+						pinned,
 						comments
 					}
 				})
@@ -141,13 +141,34 @@ export const ThreadProvider = ({ children, thread }) => {
 		}
 	}
 
+	const getMenu = (ref, menu) => {
+		if (state.menu.commentRef !== ref) {
+
+			destroyMenu()
+			dispatch({ type: THREAD.GET_MENU, payload: { commentRef: ref, menu } })
+
+		} else {
+
+			destroyMenu()
+
+		}
+	}
+
+	const destroyMenu = () => {
+		dispatch({
+			type: THREAD.DESTROY_MENU
+		})
+	}
+
 	return (
 		<ThreadContext.Provider value={{
 			state,
 			getThread,
 			sortThread,
 			postComment,
-			loadMoreComments
+			loadMoreComments,
+			getMenu,
+			destroyMenu,
 		}}>
 			{children}
 		</ThreadContext.Provider>

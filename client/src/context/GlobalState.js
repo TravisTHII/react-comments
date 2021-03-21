@@ -10,6 +10,7 @@ const initialState = {
 	threads: [],
 	user: {},
 	users: [],
+	token: '',
 	loading: false,
 	fetched: false
 }
@@ -27,7 +28,7 @@ export const GlobalProvider = ({ children }) => {
 				type: GLOBAL.LOADING
 			})
 
-			const { data: { threads, users } } = await axios.get('/api/v1/thread/selectors')
+			const { data: { threads, users, token } } = await axios.get('/api/v1/thread/selectors')
 
 			selectThread(threads[1]._id)
 			selectUser(users[2])
@@ -36,7 +37,8 @@ export const GlobalProvider = ({ children }) => {
 				type: GLOBAL.GET_THREADS_AND_USERS,
 				payload: {
 					threads,
-					users
+					users,
+					token
 				}
 			})
 
