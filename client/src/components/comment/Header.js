@@ -3,29 +3,29 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ThreadContext } from '../../context/ThreadState'
 import { CommentContext } from '../../context/CommentState'
 
-import useOutsideClick from '../../hooks/useOutsideClick'
-
 import { Badge } from '../includes/Badge'
 
 import Dots from '@material-ui/icons/MoreVert'
 import { TiPin } from 'react-icons/ti'
 
+import { Spinner } from '../includes/Spinner'
+
 export function Header({ refrence }) {
 
-	const { getMenu } = useContext(ThreadContext)
+	const { state: { menu: { commentRef } }, getMenu } = useContext(ThreadContext)
 
-	const { comment: { user, date, data, menu } } = useContext(CommentContext)
+	const { state: { pinLoad }, comment: { user, date, data, menu } } = useContext(CommentContext)
 
 	const [active, setActive] = useState(false)
 
-	const optiontRef = useOutsideClick(() => {
-		setActive(false)
-	}, 'outside')
-
 	useEffect(() => {
-		const y = () => {
+		if (commentRef !== refrence.current) {
 			setActive(false)
 		}
+	}, [commentRef, refrence])
+
+	useEffect(() => {
+		const y = () => setActive(false)
 
 		window.addEventListener('scroll', y)
 
@@ -77,6 +77,13 @@ export function Header({ refrence }) {
 
 			<div className="comment_options">
 
+				{pinLoad &&
+					<Spinner
+						stroke="#fff"
+						style={{ display: 'block', margin: '0 auto', width: '25px', height: '25px' }}
+					/>
+				}
+
 				{data.pinned &&
 					<span className="opt_ui cmt_pin flex-ui">
 						<TiPin />
@@ -87,7 +94,6 @@ export function Header({ refrence }) {
 					type="button"
 					className={`cp_opt_icn opt_ui${active ? ' cp_opt_on' : ''}`}
 					onClick={activateMenu}
-					ref={optiontRef}
 				>
 					<Dots />
 				</button>

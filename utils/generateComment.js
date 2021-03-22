@@ -9,7 +9,11 @@ exports.generateComment = async (comment, _id) => {
 
 	const total = await Comment.find({ "reply.to": comment._id }).countDocuments()
 
-	const { data: { edited, pinned } } = await Comment.findById({ _id: comment._id }).select('data')
+	const pinned = await Thread.findOne().where('pinned').equals(comment._id)
+
+	const { data: { edited } } = await Comment.findById({ _id: comment._id }).select('data')
+
+	const isPinned = Boolean(pinned)
 
 	return {
 		...comment,
@@ -22,9 +26,9 @@ exports.generateComment = async (comment, _id) => {
 			published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
 			posted: format(comment.date, 'MMMM do, y | h:mm a')
 		},
-		menu: _id ? await generateMenu(comment, _id, pinned) : null,
+		menu: _id ? await generateMenu(comment, _id, isPinned) : null,
 		data: {
-			pinned,
+			pinned: isPinned,
 			edited,
 			overflow: isOverflowed(comment.body)
 		},

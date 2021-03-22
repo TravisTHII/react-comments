@@ -140,16 +140,11 @@ exports.Pin = async (req, res) => {
 
 		const { thread, comment } = req.body
 
-		const { data: { pinned } } = await Comment.findById({ _id: comment }).select('data.pinned')
+		const { pinned } = await Thread.findOne({ _id: thread }).select('pinned')
 
 		await Thread.findByIdAndUpdate(
 			{ _id: thread },
-			{ pinned: pinned ? null : comment }
-		)
-
-		await Comment.findByIdAndUpdate(
-			{ _id: comment },
-			{ "data.pinned": !pinned }
+			{ pinned: (String(pinned) === comment) ? null : comment }
 		)
 
 		return res.status(200).json({
@@ -203,6 +198,15 @@ exports.Delete = async (req, res) => {
 	try {
 
 		const { comment } = req.body
+
+		const pinned = await Thread.findOne().where('pinned').equals(comment)
+
+		if (Boolean(pinned)) {
+			await Thread.findByIdAndUpdate(
+				{ _id: pinned._id },
+				{ pinned: null }
+			)
+		}
 
 		const deleteComment = await Comment.findByIdAndDelete({ _id: comment })
 

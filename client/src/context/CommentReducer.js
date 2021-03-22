@@ -73,5 +73,19 @@ export const CommentReducer = (state, action) => {
 		}
 	}
 
+	if (type === COMMENT.PIN_LOAD) {
+		return {
+			...state,
+			pinLoad: payload.pinLoad
+		}
+	}
+
+	if (type === COMMENT.DELETE_LOAD) {
+		return {
+			...state,
+			deleteLoad: payload.deleteLoad
+		}
+	}
+
 	return state
 }

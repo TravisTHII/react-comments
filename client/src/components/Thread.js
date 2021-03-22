@@ -5,7 +5,6 @@ import { ThreadContext } from '../context/ThreadState'
 
 import { Header } from './thread/Header'
 import { Poster } from './thread/Poster'
-import { Menu } from './thread/Menu'
 
 import { CommentInstance } from './CommentInstance'
 
@@ -102,7 +101,6 @@ export function Thread() {
 				<Header />
 				<Poster />
 				{sorted}
-				{state.menu.dispaly && <Menu />}
 			</>
 
 	}

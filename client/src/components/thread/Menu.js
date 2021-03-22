@@ -1,14 +1,17 @@
 import React, { useContext, useEffect } from 'react'
 
 import { ThreadContext } from '../../context/ThreadState'
+import { CommentContext } from '../../context/CommentState'
 
 import useOutsideClick from '../../hooks/useOutsideClick'
 
 import { offset } from '../../utils/functions'
 
-export function Menu() {
+export function Menu({ deleteRef }) {
 
-	const { state: { menu: { commentRef, data } }, destroyMenu } = useContext(ThreadContext)
+	const { thread, state: { menu: { commentRef, data } }, destroyMenu } = useContext(ThreadContext)
+
+	const { pinComment, editComment, deleteComment } = useContext(CommentContext)
 
 	const menuRef = useOutsideClick((e) => {
 		if (!e.target.closest('.comment_options')) {
@@ -23,7 +26,7 @@ export function Menu() {
 			, elemWidth = parseInt(getComputedStyle(commentRef).width)
 
 		m.style.top = `${elemTop + 5}px`
-		m.style.left = `${elemLeft + elemWidth - 5}px`
+		m.style.left = `${elemLeft + elemWidth}px`
 	}, [commentRef, menuRef])
 
 	useEffect(() => {
@@ -32,8 +35,21 @@ export function Menu() {
 		return () => window.removeEventListener('scroll', destroyMenu)
 	}, [destroyMenu])
 
+	const menuAction = (m) => {
+		switch (m) {
+			case 'Pin': case 'Unpin':
+				pinComment(thread)
+
+				data[data.indexOf(m)] = (m === 'Pin') ? 'Unpin' : 'Pin'
+				break;
+			case 'Edit': editComment(); break;
+			case 'Delete': deleteComment(deleteRef.current); break;
+			default: break;
+		}
+	}
+
 	return (
-		<div
+		<span
 			id="menu_render"
 			className="comment_menu"
 			ref={menuRef}
@@ -43,12 +59,12 @@ export function Menu() {
 					<div
 						key={i}
 						className="opt_menu_item"
-						onClick={() => console.log(m)}
+						onClick={() => menuAction(m)}
 					>
 						{m}
 					</div>
 				))}
 			</div>
-		</div>
+		</span>
 	)
 }

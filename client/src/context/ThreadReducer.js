@@ -48,7 +48,7 @@ export const ThreadReducer = (state, action) => {
 		return {
 			...state,
 			menu: {
-				dispaly: true,
+				display: true,
 				commentRef: payload.commentRef,
 				data: payload.menu
 			}
@@ -59,29 +59,7 @@ export const ThreadReducer = (state, action) => {
 		return {
 			...state,
 			menu: {
-				dispaly: false,
-				commentRef: null,
-				data: []
-			}
-		}
-	}
-
-	if (type === THREAD.GET_MENU) {
-		return {
-			...state,
-			menu: {
-				dispaly: true,
-				commentRef: payload.commentRef,
-				data: payload.menu
-			}
-		}
-	}
-
-	if (type === THREAD.DESTROY_MENU) {
-		return {
-			...state,
-			menu: {
-				dispaly: false,
+				display: false,
 				commentRef: null,
 				data: []
 			}

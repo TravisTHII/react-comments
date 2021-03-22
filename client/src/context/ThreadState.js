@@ -19,7 +19,7 @@ const initialState = {
 	fetched: false,
 	error: false,
 	menu: {
-		dispaly: false,
+		display: false,
 		commentRef: null,
 		data: []
 	}
@@ -211,6 +211,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 	return (
 		<ThreadContext.Provider value={{
 			state,
+			thread,
 			getThread,
 			sortThread,
 			postComment,

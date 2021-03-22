@@ -15,7 +15,9 @@ const initialState = {
 	fetched: false,
 	loading: false,
 	replyLoad: false,
-	moreLoading: false
+	moreLoading: false,
+	pinLoad: false,
+	deleteLoad: false
 }
 
 export const CommentContext = createContext(initialState)
@@ -161,6 +163,76 @@ export const CommentProvider = ({ children, comment, token }) => {
 		})
 	}
 
+	const pinComment = async (thread) => {
+		try {
+
+			dispatch({
+				type: COMMENT.PIN_LOAD,
+				payload: {
+					pinLoad: true
+				}
+			})
+
+			const { data: { message } } = await axios.post('/api/v1/comment/pin', { thread, comment: comment._id })
+
+			comment.data.pinned = !comment.data.pinned
+
+			dispatch({
+				type: COMMENT.PIN_LOAD,
+				payload: {
+					pinLoad: false
+				}
+			})
+
+			console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+
+		} catch (error) {
+
+			console.error(error)
+
+		}
+	}
+
+	const editComment = async () => {
+		try {
+
+		} catch (error) {
+
+			console.error(error)
+
+		}
+	}
+
+	const deleteComment = async (deleteRef) => {
+		try {
+
+			dispatch({
+				type: COMMENT.DELETE_LOAD,
+				payload: {
+					deleteLoad: true
+				}
+			})
+
+			const { data: { message } } = await axios.post('/api/v1/comment/delete', { comment: comment._id })
+
+			deleteRef.parentNode.removeChild(deleteRef)
+
+			dispatch({
+				type: COMMENT.DELETE_LOAD,
+				payload: {
+					deleteLoad: false
+				}
+			})
+
+			console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+
+		} catch (error) {
+
+			console.error(error)
+
+		}
+	}
+
 	return (
 		<CommentContext.Provider value={{
 			state,
@@ -169,7 +241,10 @@ export const CommentProvider = ({ children, comment, token }) => {
 			moreReplies,
 			seeMore,
 			openReply,
-			postReply
+			postReply,
+			pinComment,
+			editComment,
+			deleteComment
 		}}>
 			{children}
 		</CommentContext.Provider>
