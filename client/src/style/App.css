@@ -230,17 +230,18 @@ Thread
 	margin-bottom: 4px;
 }
 
-.author_motto {
-	font-size: 13px;
-	width: 300px;
+.autho_motto_info {
+	display: flex;
 }
-
 .userIsAdmin {
 	display: flex;
 	align-items: center;
-	font-size: 13px;
+	font-size: 12px;
 	color: gold;
 	margin-left: 15px;
+}
+.author_motto {
+	font-size: 13px;
 }
 
 .author_date {

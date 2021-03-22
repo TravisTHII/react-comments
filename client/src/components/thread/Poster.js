@@ -83,14 +83,17 @@ export function Poster() {
 							{user.badge.title &&
 								<Badge badge={user.badge} />
 							}
+						</div>
+
+						<div className="autho_motto_info">
+							{user.motto &&
+								<div className="author_motto ellipsis-ui">{user.motto}</div>
+							}
+
 							{user.admin &&
 								<span className="userIsAdmin">(Admin)</span>
 							}
 						</div>
-
-						{user.motto &&
-							<div className="author_motto">{user.motto}</div>
-						}
 
 					</div>
 				</div>
