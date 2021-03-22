@@ -1,6 +1,6 @@
 import { COMMENT } from './actions'
 
-export default (state, action) => {
+export const CommentReducer = (state, action) => {
 	const { type, payload } = action
 
 	if (type === COMMENT.GET_REPLIES) {

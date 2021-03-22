@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import axios from 'axios'
 
-import GlobalReducer from './GlobalReducer'
+import { GlobalReducer } from './GlobalReducer'
 
 import { GLOBAL } from './actions'
 
@@ -32,7 +32,7 @@ export const GlobalProvider = ({ children }) => {
 
 			const { data: { threads, users } } = await axios.get('/api/v1/thread/selectors')
 
-			selectThread(threads[1]._id)
+			selectThread(threads[0]._id)
 
 			dispatch({
 				type: GLOBAL.SELECTORS,
@@ -43,6 +43,8 @@ export const GlobalProvider = ({ children }) => {
 			})
 
 		} catch (error) {
+
+			console.error(error)
 
 		}
 	}
@@ -90,6 +92,8 @@ export const GlobalProvider = ({ children }) => {
 			}
 
 		} catch (error) {
+
+			console.error(error)
 
 		}
 	}

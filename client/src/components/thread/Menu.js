@@ -24,13 +24,13 @@ export function Menu() {
 
 		m.style.top = `${elemTop + 5}px`
 		m.style.left = `${elemLeft + elemWidth - 5}px`
-	}, [commentRef])
+	}, [commentRef, menuRef])
 
 	useEffect(() => {
 		window.addEventListener('scroll', destroyMenu)
 
 		return () => window.removeEventListener('scroll', destroyMenu)
-	}, [])
+	}, [destroyMenu])
 
 	return (
 		<div

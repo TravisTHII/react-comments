@@ -15,6 +15,8 @@ export function ReactComments() {
 
 	useEffect(() => {
 		getSelectors()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	let content

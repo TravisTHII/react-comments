@@ -1,6 +1,6 @@
 import { THREAD } from './actions'
 
-export default (state, action) => {
+export const ThreadReducer = (state, action) => {
 	const { type, payload } = action
 
 	if (type === THREAD.GET_THREAD) {

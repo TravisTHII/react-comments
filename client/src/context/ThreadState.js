@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import axios from 'axios'
 
-import ThreadReducer from './ThreadReducer'
+import { ThreadReducer } from './ThreadReducer'
 
 import { THREAD } from './actions'
 
@@ -38,7 +38,20 @@ export const ThreadProvider = ({ children, thread, token }) => {
 				type: THREAD.LOAD_THREAD
 			})
 
-			const { data: { data: { total, hasPinned }, paging, pinned, comments } } = await axios.get(`/api/v1/thread/${thread}`, { headers: { '_token': token } })
+			const {
+				data: {
+					data: {
+						total,
+						hasPinned
+					},
+					paging,
+					pinned,
+					comments
+				}
+			} = await axios.get(
+				`/api/v1/thread/${thread}`,
+				{ headers: { '_token': token } }
+			)
 
 			dispatch({
 				type: THREAD.GET_THREAD,
@@ -71,7 +84,19 @@ export const ThreadProvider = ({ children, thread, token }) => {
 
 				dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
 
-				const { data: { data: { hasPinned }, paging, pinned, comments } } = await axios.get(`/api/v1/thread/${thread}?sort=${sort}`, { headers: { '_token': token } })
+				const {
+					data: {
+						data: {
+							hasPinned
+						},
+						paging,
+						pinned,
+						comments
+					}
+				} = await axios.get(
+					`/api/v1/thread/${thread}?sort=${sort}`,
+					{ headers: { '_token': token } }
+				)
 
 				dispatch({
 					type: THREAD.SORT_THREAD,
@@ -87,6 +112,8 @@ export const ThreadProvider = ({ children, thread, token }) => {
 
 		} catch (error) {
 
+			console.error(error)
+
 		}
 	}
 
@@ -99,7 +126,15 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.LOAD_T_MORE
 				})
 
-				const { data: { paging, comments } } = await axios.get(`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`, { headers: { '_token': token } })
+				const {
+					data: {
+						paging,
+						comments
+					}
+				} = await axios.get(
+					`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
+					{ headers: { '_token': token } }
+				)
 
 				dispatch({
 					type: THREAD.MORE_THREAD,
@@ -113,6 +148,8 @@ export const ThreadProvider = ({ children, thread, token }) => {
 
 		} catch (error) {
 
+			console.error(error)
+
 		}
 	}
 
@@ -125,7 +162,16 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.TP_LOAD
 				})
 
-				const { data: { comment } } = await axios.post('/api/v1/thread/comment', { thread, user, body }, { headers: { '_token': token } })
+				const {
+					data:
+					{
+						comment
+					}
+				} = await axios.post(
+					'/api/v1/thread/comment',
+					{ thread, user, body },
+					{ headers: { '_token': token } }
+				)
 
 				dispatch({
 					type: THREAD.POST_COMMENT,
@@ -137,6 +183,8 @@ export const ThreadProvider = ({ children, thread, token }) => {
 			}
 
 		} catch (error) {
+
+			console.error(error)
 
 		}
 	}

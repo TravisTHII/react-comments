@@ -2,7 +2,7 @@ export const GLOBAL = {
 	LOADING: 'LOADING',
 	SELECTORS: 'SELECTORS',
 	SELECT_THREAD: 'SELECT_THREAD',
-	AUTH: 'AUTH'
+	AUTH: 'AUTH',
 }
 
 export const THREAD = {

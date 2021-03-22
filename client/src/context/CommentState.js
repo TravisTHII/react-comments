@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import axios from 'axios'
 
-import CommentReducer from './CommentReducer'
+import { CommentReducer } from './CommentReducer'
 
 import { COMMENT } from './actions'
 
@@ -35,7 +35,16 @@ export const CommentProvider = ({ children, comment, token }) => {
 					type: COMMENT.LOADING
 				})
 
-				const { data: { paging, replies } } = await axios.post('/api/v1/comment/replies', { comment: comment._id }, { headers: { '_token': token } })
+				const {
+					data: {
+						paging,
+						replies
+					}
+				} = await axios.post(
+					'/api/v1/comment/replies',
+					{ comment: comment._id },
+					{ headers: { '_token': token } }
+				)
 
 				dispatch({
 					type: COMMENT.GET_REPLIES,
@@ -49,6 +58,8 @@ export const CommentProvider = ({ children, comment, token }) => {
 
 		} catch (error) {
 
+			console.error(error)
+
 		}
 	}
 
@@ -61,7 +72,16 @@ export const CommentProvider = ({ children, comment, token }) => {
 					type: COMMENT.REPLIES_LOADING
 				})
 
-				const { data: { paging, replies } } = await axios.post(`/api/v1/comment/replies?cursor=${state.paging.cursor}`, { comment: comment._id }, { headers: { '_token': token } })
+				const {
+					data: {
+						paging,
+						replies
+					}
+				} = await axios.post(
+					`/api/v1/comment/replies?cursor=${state.paging.cursor}`,
+					{ comment: comment._id },
+					{ headers: { '_token': token } }
+				)
 
 				dispatch({
 					type: COMMENT.MORE_REPLIES,
@@ -74,6 +94,8 @@ export const CommentProvider = ({ children, comment, token }) => {
 			}
 
 		} catch (error) {
+
+			console.error(error)
 
 		}
 	}
@@ -91,7 +113,13 @@ export const CommentProvider = ({ children, comment, token }) => {
 
 				dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: true } })
 
-				const { data } = await axios.post('/api/v1/comment/reply', { comment: comment._id, body, user }, { headers: { '_token': token } })
+				const {
+					data
+				} = await axios.post(
+					'/api/v1/comment/reply',
+					{ comment: comment._id, body, user },
+					{ headers: { '_token': token } }
+				)
 
 				comment.reply.total += 1
 
@@ -109,6 +137,8 @@ export const CommentProvider = ({ children, comment, token }) => {
 			}
 
 		} catch (error) {
+
+			console.error(error)
 
 		}
 	}

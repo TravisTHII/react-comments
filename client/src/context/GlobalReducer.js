@@ -1,6 +1,6 @@
 import { GLOBAL } from './actions'
 
-export default (state, action) => {
+export const GlobalReducer = (state, action) => {
 	const { type, payload } = action
 
 	if (type === GLOBAL.SELECTORS) {

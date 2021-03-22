@@ -21,7 +21,7 @@ const useOutsideClick = (handler, type, dependency) => {
 		document.addEventListener('click', outsideClick)
 
 		return () => document.removeEventListener('click', outsideClick)
-	}, [dependency])
+	}, [dependency, handler, type])
 
 	return domRef
 }
