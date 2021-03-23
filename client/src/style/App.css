@@ -369,44 +369,11 @@ Thread
 .reply_txt .reply_textarea{
 	height: 45px;
 }
-.rep_post_btn .enspr_red_btn,
-.edit_actions .eabtn{
-	display: inline-block;
-}
-.edit_content{
+.comment_edit .edit_content {
 	margin-bottom: 5px;
 }
-.expanding_area{
-  position: relative;
-}
-.expanding_area .edit_textarea,
-.expanding_area .txt-content{
-  padding: 5px 10px;
-  min-height: 50px;
-  font-size: 16px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  font-family: inherit;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-.expanding_area.content_expanded .edit_textarea{
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  resize: none;
-}
-.expanding_area .txt-content{
-  display: none;
-  margin: 0;
-}
-.expanding_area.content_expanded .txt-content{
-  display: block;
-  visibility: hidden;
+.edit_text {
+	min-height: 45px;
 }
 .load_comments > button {
 	width: 150px;

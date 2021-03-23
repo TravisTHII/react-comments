@@ -166,6 +166,8 @@ exports.Pin = async (req, res) => {
 exports.Edit = async (req, res) => {
 	try {
 
+		const { _id } = req.token
+
 		const { comment, body } = req.body
 
 		await Comment.findByIdAndUpdate(
@@ -178,8 +180,21 @@ exports.Edit = async (req, res) => {
 			}
 		)
 
+		const editedComment = await Comment.findById({ _id: comment }, '-__v')
+			.lean()
+			.populate({
+				path: 'user',
+				select: '-__v'
+			})
+			.then(async doc => {
+
+				return await generateComment(doc, _id)
+
+			})
+
 		return res.status(200).json({
-			message: 'Comment was updated successfully.'
+			message: 'Comment was updated successfully.',
+			comment: editedComment
 		})
 
 	} catch (error) {

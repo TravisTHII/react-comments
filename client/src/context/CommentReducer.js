@@ -31,6 +31,14 @@ export const CommentReducer = (state, action) => {
 		}
 	}
 
+	if (type === COMMENT.EDIT) {
+		return {
+			...state,
+			editLoad: false,
+			isEditing: false
+		}
+	}
+
 	if (type === COMMENT.SHOW_MORE) {
 		return {
 			...state,
@@ -77,6 +85,20 @@ export const CommentReducer = (state, action) => {
 		return {
 			...state,
 			pinLoad: payload.pinLoad
+		}
+	}
+
+	if (type === COMMENT.START_EDITING) {
+		return {
+			...state,
+			isEditing: payload.isEditing
+		}
+	}
+
+	if (type === COMMENT.EDIT_LOAD) {
+		return {
+			...state,
+			editLoad: true
 		}
 	}
 

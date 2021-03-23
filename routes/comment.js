@@ -17,7 +17,7 @@ router
 
 router
 	.route('/edit')
-	.post(Edit)
+	.post(Auth, Edit)
 
 router
 	.route('/delete')

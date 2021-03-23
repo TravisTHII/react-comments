@@ -22,19 +22,11 @@ export function Poster() {
 	let content
 
 	const expandText = e => {
-		if (!validText(e.target.value)) {
+		expandTextarea(e.target, 85)
 
-			expandTextarea(e.target, 85)
+		setValue(e.target.value)
 
-			setValue(e.target.value)
-
-			setCancel(true)
-
-		} else {
-
-			cancelPost()
-
-		}
+		setCancel(true)
 	}
 
 	const cancelPost = () => {
@@ -46,11 +38,9 @@ export function Poster() {
 
 	const submitComment = () => {
 		if (!validText(value)) {
-
 			cancelPost()
 
 			postComment(value, user._id)
-
 		}
 	}
 
@@ -121,7 +111,7 @@ export function Poster() {
 								onClick={cancelPost}
 							>
 								Cancel
-						</button>
+							</button>
 						}
 						<button
 							type="button"

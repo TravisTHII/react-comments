@@ -5,6 +5,7 @@ import { CommentContext } from '../../context/CommentState'
 
 import { Header } from './Header'
 import { Content } from './Content'
+import { Edit } from './Edit'
 import { Actions } from './Actions'
 import { Reply } from './Reply'
 import { Replies } from './Replies'
@@ -17,7 +18,7 @@ export function Comment() {
 
 	const { state: { menu: { display, commentRef: ref } } } = useContext(ThreadContext)
 
-	const { state: { deleteLoad } } = useContext(CommentContext)
+	const { state: { isEditing, deleteLoad } } = useContext(CommentContext)
 
 	const commentRef = useRef()
 
@@ -25,7 +26,10 @@ export function Comment() {
 		<div className="comment" ref={commentRef}>
 			<div className="comment_post">
 				<Header refrence={commentRef} />
-				<Content />
+				{isEditing
+					? <Edit />
+					: <Content />
+				}
 				<Actions />
 				<Reply />
 			</div>

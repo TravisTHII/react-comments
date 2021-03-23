@@ -11,7 +11,7 @@ export function Menu({ deleteRef }) {
 
 	const { thread, state: { menu: { commentRef, data } }, destroyMenu } = useContext(ThreadContext)
 
-	const { pinComment, editComment, deleteComment } = useContext(CommentContext)
+	const { pinComment, startEditing, deleteComment } = useContext(CommentContext)
 
 	const menuRef = useOutsideClick((e) => {
 		if (!e.target.closest('.comment_options')) {
@@ -42,7 +42,7 @@ export function Menu({ deleteRef }) {
 
 				data[data.indexOf(m)] = (m === 'Pin') ? 'Unpin' : 'Pin'
 				break;
-			case 'Edit': editComment(); break;
+			case 'Edit': startEditing(); break;
 			case 'Delete': deleteComment(deleteRef.current); break;
 			default: break;
 		}

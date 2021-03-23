@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 import { GlobalContext } from '../../context/GlobalState'
 import { CommentContext } from '../../context/CommentState'
@@ -16,6 +16,10 @@ export function Reply() {
 	const [value, setValue] = useState('')
 
 	let content
+
+	useEffect(() => {
+		return () => setValue('')
+	}, [isReplying])
 
 	const expandText = e => {
 		expandTextarea(e.target, 45)

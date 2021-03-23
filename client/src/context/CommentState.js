@@ -17,6 +17,8 @@ const initialState = {
 	replyLoad: false,
 	moreLoading: false,
 	pinLoad: false,
+	isEditing: false,
+	editLoad: false,
 	deleteLoad: false
 }
 
@@ -173,7 +175,14 @@ export const CommentProvider = ({ children, comment, token }) => {
 				}
 			})
 
-			const { data: { message } } = await axios.post('/api/v1/comment/pin', { thread, comment: comment._id })
+			const {
+				data: {
+					message
+				}
+			} = await axios.post(
+				'/api/v1/comment/pin',
+				{ thread, comment: comment._id }
+			)
 
 			comment.data.pinned = !comment.data.pinned
 
@@ -193,14 +202,51 @@ export const CommentProvider = ({ children, comment, token }) => {
 		}
 	}
 
-	const editComment = async () => {
+	const editComment = async (body) => {
 		try {
+
+			if (!state.editLoad) {
+
+				dispatch({
+					type: COMMENT.EDIT_LOAD
+				})
+
+				const {
+					data: {
+						comment: editedComment,
+						message
+					}
+				} = await axios.post(
+					'/api/v1/comment/edit',
+					{ comment: comment._id, body },
+					{ headers: { '_token': token } }
+				)
+
+				comment.body = editedComment.body
+				comment.data = editedComment.data
+
+				dispatch({
+					type: COMMENT.EDIT
+				})
+
+				console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+
+			}
 
 		} catch (error) {
 
 			console.error(error)
 
 		}
+	}
+
+	const startEditing = () => {
+		dispatch({
+			type: COMMENT.START_EDITING,
+			payload: {
+				isEditing: !state.isEditing
+			}
+		})
 	}
 
 	const deleteComment = async (deleteRef) => {
@@ -244,6 +290,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 			postReply,
 			pinComment,
 			editComment,
+			startEditing,
 			deleteComment
 		}}>
 			{children}
