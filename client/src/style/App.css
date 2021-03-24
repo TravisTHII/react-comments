@@ -7,8 +7,11 @@
 }
 
 #Main {
-	padding-top: 100px;
-	padding-bottom: 200px;
+	padding-top: 50px;
+	padding-bottom: 500px;
+	width: 600px;
+	margin: 0 auto;
+	min-height: 900px;
 }
 
 /*
@@ -18,8 +21,6 @@ SelectUser & SelectThread
 */
 
 .thread_components {
-	width: 100%;
-	margin: 0 auto;
 	margin-bottom: 30px;
 	flex-direction: column;
 }
@@ -73,8 +74,7 @@ Thread
 */
 
 .thread-column {
-	width: 600px;
-	margin: 0 auto;
+	width: 100%;
 }
 
 /* Thread menu */

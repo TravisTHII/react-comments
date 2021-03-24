@@ -12,9 +12,9 @@ import { Spinner } from '../includes/Spinner'
 
 export function Header({ refrence }) {
 
-	const { state: { menu: { commentRef } }, getMenu } = useContext(ThreadContext)
+	const { state: { pinned: { pinned_id }, menu: { commentRef } }, getMenu } = useContext(ThreadContext)
 
-	const { state: { pinLoad }, comment: { user, date, data, menu } } = useContext(CommentContext)
+	const { state: { pinLoad }, comment: { _id, user, date, data, menu } } = useContext(CommentContext)
 
 	const [active, setActive] = useState(false)
 
@@ -84,7 +84,7 @@ export function Header({ refrence }) {
 					/>
 				}
 
-				{data.pinned &&
+				{(pinned_id === _id) &&
 					<span className="opt_ui cmt_pin flex-ui">
 						<TiPin />
 					</span>

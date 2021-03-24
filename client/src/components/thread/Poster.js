@@ -22,11 +22,14 @@ export function Poster() {
 	let content
 
 	const expandText = e => {
-		expandTextarea(e.target, 85)
-
 		setValue(e.target.value)
 
-		setCancel(true)
+		if (!validText(e.target.value)) {
+			expandTextarea(e.target, 85)
+			setCancel(true)
+		} else {
+			setCancel(false)
+		}
 	}
 
 	const cancelPost = () => {

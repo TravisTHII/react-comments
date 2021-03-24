@@ -14,17 +14,26 @@ export function Reply() {
 	const { state: { replyLoad, isReplying }, postReply, openReply } = useContext(CommentContext)
 
 	const [value, setValue] = useState('')
+	const [active, setActive] = useState(false)
 
 	let content
 
 	useEffect(() => {
-		return () => setValue('')
+		return () => {
+			setValue('')
+			setActive(false)
+		}
 	}, [isReplying])
 
 	const expandText = e => {
-		expandTextarea(e.target, 45)
-
 		setValue(e.target.value)
+
+		if (!validText(e.target.value)) {
+			expandTextarea(e.target, 45)
+			setActive(true)
+		} else {
+			setActive(false)
+		}
 	}
 
 	const submitReply = () => {
@@ -45,7 +54,7 @@ export function Reply() {
 	} else {
 
 		content =
-			<div className="comment_reply">
+			<>
 				<div className="reply_content">
 					<div className='reply_user'>
 						<div
@@ -69,8 +78,19 @@ export function Reply() {
 				</div>
 				<div className={`comment_actions${replyLoad ? ' disabled' : ''}`}>
 					<div className="cac">
-						<button className="enspr_red_btn" type="button" onClick={() => openReply()}>Cancel</button>
-						<button className="enspr_red_btn" type="button" onClick={submitReply}>
+						<button
+							className="enspr_red_btn"
+							type="button"
+							onClick={() => openReply()}
+						>
+							Cancel
+						</button>
+						<button
+							className={`enspr_red_btn${!active ? ' disabled' : ''}`}
+							type="button"
+							disabled={!active ? true : false}
+							onClick={submitReply}
+						>
 							{replyLoad
 								? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '30px', height: '30px' }} />
 								: 'Reply'
@@ -78,13 +98,13 @@ export function Reply() {
 						</button>
 					</div>
 				</div>
-			</div>
+			</>
 
 	}
 
 	return (
-		<>
+		<div className="comment_reply">
 			{isReplying && content}
-		</>
+		</div>
 	)
 }

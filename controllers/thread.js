@@ -3,6 +3,7 @@ const Thread = require("../models/Thread")
 const Comment = require("../models/Comment")
 
 const { generateComment } = require('../utils/generateComment')
+const { getPinnedComment } = require("../utils/getPinnedComment")
 
 // @desc 		Get users & threads
 // @route 	GET /api/v1/thread/selectors
@@ -72,26 +73,7 @@ exports.getThread = async (req, res) => {
 
 		const limit = 18
 
-		const { pinned } = await Thread
-			.findById({ _id: _thread_name })
-			.lean()
-			.populate({
-				path: 'pinned',
-				select: '-__v',
-				populate: {
-					path: 'user',
-					select: '-__v'
-				}
-			})
-			.then(async doc => {
-
-				if (doc.pinned) {
-					doc.pinned = await generateComment(doc.pinned, _id)
-				}
-
-				return doc
-
-			})
+		const pinned = await getPinnedComment(_thread_name, _id)
 
 		const { total, end, comments } = await Comment
 			.paginate(
@@ -136,14 +118,18 @@ exports.getThread = async (req, res) => {
 
 		return res.status(200).json({
 			data: {
-				total,
-				hasPinned: pinned ? true : false
+				total
 			},
 			paging: {
 				end: !end,
 				cursor
 			},
-			pinned: pinned || null,
+			pinned: {
+				pinned_id: Boolean(pinned) ? pinned._id : "",
+				hasPinned: Boolean(pinned),
+				useInitialPinned: Boolean(pinned),
+				comment: pinned || {}
+			},
 			comments
 		})
 
@@ -198,6 +184,30 @@ exports.Comment = async (req, res) => {
 
 		return res.status(200).json({
 			comment
+		})
+
+	} catch (error) {
+
+		return res.status(500).json({
+			error: error.message
+		})
+
+	}
+
+}
+
+// @desc Get pinned comment
+// @route POST /api/v1/thread/pin
+// @access Public
+exports.Pin = async (req, res) => {
+	try {
+
+		const { _id } = req.token
+
+		const { _thread_name } = req.params
+
+		return res.status(200).json({
+			comment: await getPinnedComment(_thread_name, _id)
 		})
 
 	} catch (error) {

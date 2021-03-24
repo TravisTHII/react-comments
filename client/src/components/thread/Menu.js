@@ -9,9 +9,9 @@ import { offset } from '../../utils/functions'
 
 export function Menu({ deleteRef }) {
 
-	const { thread, state: { menu: { commentRef, data } }, destroyMenu } = useContext(ThreadContext)
+	const { thread, state: { menu: { commentRef, data } }, destroyMenu, updatePinnedComment } = useContext(ThreadContext)
 
-	const { pinComment, startEditing, deleteComment } = useContext(CommentContext)
+	const { comment, pinComment, startEditing, deleteComment } = useContext(CommentContext)
 
 	const menuRef = useOutsideClick((e) => {
 		if (!e.target.closest('.comment_options')) {
@@ -35,12 +35,14 @@ export function Menu({ deleteRef }) {
 		return () => window.removeEventListener('scroll', destroyMenu)
 	}, [destroyMenu])
 
-	const menuAction = (m) => {
+	const menuAction = async (m) => {
 		switch (m) {
 			case 'Pin': case 'Unpin':
-				pinComment(thread)
 
+				await pinComment(thread)
+				updatePinnedComment(comment._id, m)
 				data[data.indexOf(m)] = (m === 'Pin') ? 'Unpin' : 'Pin'
+
 				break;
 			case 'Edit': startEditing(); break;
 			case 'Delete': deleteComment(deleteRef.current); break;

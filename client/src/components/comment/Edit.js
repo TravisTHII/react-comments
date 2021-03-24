@@ -39,8 +39,9 @@ export function Edit() {
 					placeholder="Edit away"
 					maxLength="9999"
 					spellCheck="false"
-					className="edit_text comment_textarea"
+					className={`edit_text comment_textarea${editLoad ? ' disabled' : ''}`}
 					onChange={expandText}
+					disabled={editLoad ? true : false}
 					ref={textRef}
 				>
 				</textarea>
@@ -48,18 +49,19 @@ export function Edit() {
 			<div className="edit_actions">
 				<div className='cac'>
 					<button
-						className='enspr_red_btn'
+						className={`enspr_red_btn${editLoad ? ' disabled' : ''}`}
 						type='button'
 						value='cancel'
+						disabled={editLoad ? true : false}
 						onClick={() => startEditing()}
 					>
 						Cancel
 					</button>
 					<button
-						className={`enspr_red_btn ${editLoad ? ' disabled' : ''}`}
+						className={`enspr_red_btn${(body === value) ? ' disabled' : ''}`}
 						type='button'
 						value='edit'
-						disabled={editLoad ? true : false}
+						disabled={(editLoad || (body === value)) ? true : false}
 						onClick={() => submitEdit()}
 					>
 						{editLoad

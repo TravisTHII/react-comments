@@ -7,9 +7,7 @@ import { THREAD } from './actions'
 
 const initialState = {
 	total: 0,
-	hasPinned: false,
 	paging: {},
-	pinned: {},
 	comments: [],
 	sort: 'newest',
 	loading: false,
@@ -18,6 +16,14 @@ const initialState = {
 	postLoad: false,
 	fetched: false,
 	error: false,
+	pinned: {
+		pinned_id: "",
+		hasPinned: false,
+		useInitialPinned: false,
+		useLocalPinned: false,
+		comment: {},
+		loading: false
+	},
 	menu: {
 		display: false,
 		commentRef: null,
@@ -41,8 +47,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 			const {
 				data: {
 					data: {
-						total,
-						hasPinned
+						total
 					},
 					paging,
 					pinned,
@@ -57,7 +62,6 @@ export const ThreadProvider = ({ children, thread, token }) => {
 				type: THREAD.GET_THREAD,
 				payload: {
 					total,
-					hasPinned,
 					paging,
 					pinned,
 					comments
@@ -86,9 +90,6 @@ export const ThreadProvider = ({ children, thread, token }) => {
 
 				const {
 					data: {
-						data: {
-							hasPinned
-						},
 						paging,
 						pinned,
 						comments
@@ -101,7 +102,6 @@ export const ThreadProvider = ({ children, thread, token }) => {
 				dispatch({
 					type: THREAD.SORT_THREAD,
 					payload: {
-						hasPinned,
 						paging,
 						pinned,
 						comments
@@ -189,6 +189,31 @@ export const ThreadProvider = ({ children, thread, token }) => {
 		}
 	}
 
+	const getPinnedComment = async () => {
+		try {
+			console.log('Hello world!');
+			if (!state.pinned.loading) {
+
+				dispatch({
+					type: THREAD.PIN_LOADING
+				})
+
+				const { data: { comment } } = await axios.post(`/api/v1/thread/${thread}/pin`, {}, { headers: { '_token': token } })
+
+				dispatch({
+					type: THREAD.PIN_COMMENT,
+					payload: {
+						comment
+					}
+				})
+
+			}
+
+		} catch (error) {
+
+		}
+	}
+
 	const getMenu = (ref, menu) => {
 		if (state.menu.commentRef !== ref) {
 
@@ -208,6 +233,34 @@ export const ThreadProvider = ({ children, thread, token }) => {
 		})
 	}
 
+	const updatePinnedComment = (_id, type) => {
+		switch (type) {
+			case 'Pin':
+				dispatch({
+					type: THREAD.UPDATE_PIN,
+					payload: {
+						pinned_id: _id,
+						// hasPinned: true,
+						// useInitialPinned: false,
+						useLocalPinned: true,
+					}
+				})
+				break;
+			case 'Unpin':
+				dispatch({
+					type: THREAD.UPDATE_PIN,
+					payload: {
+						pinned_id: "",
+						hasPinned: false,
+						useInitialPinned: false
+					}
+				})
+				break;
+			default:
+				break;
+		}
+	}
+
 	return (
 		<ThreadContext.Provider value={{
 			state,
@@ -218,6 +271,8 @@ export const ThreadProvider = ({ children, thread, token }) => {
 			loadMoreComments,
 			getMenu,
 			destroyMenu,
+			getPinnedComment,
+			updatePinnedComment
 		}}>
 			{children}
 		</ThreadContext.Provider>

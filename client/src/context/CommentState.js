@@ -168,12 +168,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 	const pinComment = async (thread) => {
 		try {
 
-			dispatch({
-				type: COMMENT.PIN_LOAD,
-				payload: {
-					pinLoad: true
-				}
-			})
+			dispatch({ type: COMMENT.PIN_LOAD, payload: { pinLoad: true } })
 
 			const {
 				data: {
@@ -184,16 +179,13 @@ export const CommentProvider = ({ children, comment, token }) => {
 				{ thread, comment: comment._id }
 			)
 
-			comment.data.pinned = !comment.data.pinned
+			// comment.data.pinned = !comment.data.pinned
 
-			dispatch({
-				type: COMMENT.PIN_LOAD,
-				payload: {
-					pinLoad: false
-				}
-			})
+			dispatch({ type: COMMENT.PIN_LOAD, payload: { pinLoad: false } })
 
 			console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+
+			return Promise
 
 		} catch (error) {
 
@@ -241,12 +233,16 @@ export const CommentProvider = ({ children, comment, token }) => {
 	}
 
 	const startEditing = () => {
-		dispatch({
-			type: COMMENT.START_EDITING,
-			payload: {
-				isEditing: !state.isEditing
-			}
-		})
+		if (!state.editLoad) {
+
+			dispatch({
+				type: COMMENT.START_EDITING,
+				payload: {
+					isEditing: !state.isEditing
+				}
+			})
+
+		}
 	}
 
 	const deleteComment = async (deleteRef) => {

@@ -19,6 +19,8 @@ export function ReactComments() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	window.onbeforeunload = () => { window.scrollTo(0, 0) }
+
 	let content
 
 	if (loading) {
@@ -30,7 +32,7 @@ export function ReactComments() {
 
 		content =
 			<>
-				<div className="thread_components flex-ui">
+				<div className="thread_components">
 					<SelectUser />
 					<SelectThread />
 				</div>

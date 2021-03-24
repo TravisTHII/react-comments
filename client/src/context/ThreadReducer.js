@@ -9,9 +9,11 @@ export const ThreadReducer = (state, action) => {
 			loading: false,
 			fetched: true,
 			total: payload.total,
-			hasPinned: payload.hasPinned,
 			paging: payload.paging,
-			pinned: payload.pinned,
+			pinned: {
+				...state.pinned,
+				...payload.pinned
+			},
 			comments: payload.comments
 		}
 	}
@@ -20,9 +22,11 @@ export const ThreadReducer = (state, action) => {
 		return {
 			...state,
 			sortLoad: false,
-			hasPinned: payload.hasPinned,
 			paging: payload.paging,
-			pinned: payload.pinned,
+			pinned: {
+				...state.pinned,
+				...payload.pinned
+			},
 			comments: payload.comments
 		}
 	}
@@ -41,6 +45,27 @@ export const ThreadReducer = (state, action) => {
 			...state,
 			postLoad: false,
 			comments: [payload.comment, ...state.comments]
+		}
+	}
+
+	if (type === THREAD.PIN_COMMENT) {
+		return {
+			...state,
+			pinned: {
+				...state.pinned,
+				comment: payload.comment,
+				loading: false
+			}
+		}
+	}
+
+	if (type === THREAD.UPDATE_PIN) {
+		return {
+			...state,
+			pinned: {
+				...state.pinned,
+				...payload
+			}
 		}
 	}
 
@@ -98,6 +123,18 @@ export const ThreadReducer = (state, action) => {
 		return {
 			...state,
 			postLoad: true
+		}
+	}
+
+	if (type === THREAD.PIN_LOADING) {
+		return {
+			...state,
+			pinned: {
+				...state.pinned,
+				loading: true,
+				hasPinned: true,
+				useInitialPinned: false
+			}
 		}
 	}
 

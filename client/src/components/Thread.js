@@ -5,6 +5,7 @@ import { ThreadContext } from '../context/ThreadState'
 
 import { Header } from './thread/Header'
 import { Poster } from './thread/Poster'
+import { Pinned } from './thread/Pinned'
 
 import { CommentInstance } from './CommentInstance'
 
@@ -51,12 +52,8 @@ export function Thread() {
 				<div className="thread">
 					<div className="thread_comments">
 
-						{state.hasPinned &&
-							<CommentInstance
-								comment={state.pinned}
-							/>
-						}
-
+						<Pinned />
+						
 						{state.postLoad &&
 							<Spinner stroke="#fff" style={{ display: 'block', margin: '10px auto' }} />
 						}
