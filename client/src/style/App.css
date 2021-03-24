@@ -152,6 +152,7 @@ Thread
 
 .comment_header {
 	display: flex;
+	justify-content: space-between;
 	position: relative;
 	width: 100%;
 	height: 60px;
@@ -229,15 +230,13 @@ Thread
 	margin-bottom: 4px;
 }
 
-.autho_motto_info {
-	display: flex;
-}
 .userIsAdmin {
 	display: flex;
 	align-items: center;
-	font-size: 12px;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
 	color: gold;
-	margin-left: 15px;
 }
 .author_motto {
 	font-size: 13px;

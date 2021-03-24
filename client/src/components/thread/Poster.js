@@ -1,5 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 
+import { FaUserShield } from 'react-icons/fa'
+
 import { GlobalContext } from '../../context/GlobalState'
 import { ThreadContext } from '../../context/ThreadState'
 
@@ -60,35 +62,37 @@ export function Poster() {
 			<div className="thread_form comment">
 
 				<div className="comment_header">
-					<div className="author_picture">
-						<div
-							className="background-ui"
-							style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}
-						>
-						</div>
-					</div>
-
-					<div className="author_info text-ui">
-						<div className="author_username">
-							<div>
-								{user.username}
+					<div className="comment_author">
+						<div className="author_picture">
+							<div
+								className="background-ui"
+								style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}
+							>
 							</div>
-							{user.badge.title &&
-								<Badge badge={user.badge} />
-							}
 						</div>
 
-						<div className="autho_motto_info">
+						<div className="author_info text-ui">
+							<div className="author_username">
+								<div>
+									{user.username}
+								</div>
+								{user.badge.title &&
+									<Badge badge={user.badge} />
+								}
+							</div>
+
 							{user.motto &&
 								<div className="author_motto ellipsis-ui">{user.motto}</div>
 							}
 
-							{user.admin &&
-								<span className="userIsAdmin">(Admin)</span>
-							}
 						</div>
-
 					</div>
+
+					{user.admin &&
+						<span className="userIsAdmin" title="Administrator">
+							<FaUserShield />
+						</span>
+					}
 				</div>
 
 				<div className={`comment_content${postLoad ? ' disabled' : ''}`}>

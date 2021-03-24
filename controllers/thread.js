@@ -11,9 +11,15 @@ const { getPinnedComment } = require("../utils/getPinnedComment")
 exports.Selectors = async (req, res) => {
 	try {
 
-		const threads = await Thread.find().select('_id name')
+		const threads = await Thread
+			.find()
+			.select('_id name')
+			.sort({ name: 'asc' })
 
-		const users = await User.find().select('-__v')
+		const users = await User
+			.find()
+			.select('-__v')
+			.sort({ username: 'asc' })
 
 		return res.status(200).json({
 			threads,

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 
+import Dots from '@material-ui/icons/MoreVert'
+import { TiPin } from 'react-icons/ti'
+import { FaUserShield } from 'react-icons/fa'
+
 import { ThreadContext } from '../../context/ThreadState'
 import { CommentContext } from '../../context/CommentState'
 
 import { Badge } from '../includes/Badge'
-
-import Dots from '@material-ui/icons/MoreVert'
-import { TiPin } from 'react-icons/ti'
-
 import { Spinner } from '../includes/Spinner'
 
 export function Header({ refrence }) {
@@ -58,15 +58,9 @@ export function Header({ refrence }) {
 						}
 					</div>
 
-					<div className="autho_motto_info">
-						{user.motto &&
-							<div className="author_motto ellipsis-ui">{user.motto}</div>
-						}
-
-						{user.admin &&
-							<span className="userIsAdmin">(Admin)</span>
-						}
-					</div>
+					{user.motto &&
+						<div className="author_motto ellipsis-ui">{user.motto}</div>
+					}
 
 					<div title={date.posted} className="author_date">
 						{`${date.published} ${data.edited ? '(edited)' : ''}`}
@@ -77,14 +71,15 @@ export function Header({ refrence }) {
 
 			<div className="comment_options">
 
-				{pinLoad &&
-					<Spinner
-						stroke="#fff"
-						style={{ display: 'block', margin: '0 auto', width: '25px', height: '25px' }}
-					/>
+				{user.admin &&
+					<span className="userIsAdmin" title="Administrator">
+						<FaUserShield />
+					</span>
 				}
 
-				{(pinned_id === _id) &&
+				{pinLoad
+					? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '25px', height: '25px' }} />
+					: (pinned_id === _id) &&
 					<span className="opt_ui cmt_pin flex-ui">
 						<TiPin />
 					</span>
