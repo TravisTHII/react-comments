@@ -179,8 +179,6 @@ export const CommentProvider = ({ children, comment, token }) => {
 				{ thread, comment: comment._id }
 			)
 
-			// comment.data.pinned = !comment.data.pinned
-
 			dispatch({ type: COMMENT.PIN_LOAD, payload: { pinLoad: false } })
 
 			console.log(`%c${message}`, 'color: #fff; font-size: 15px')

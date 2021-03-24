@@ -191,7 +191,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 
 	const getPinnedComment = async () => {
 		try {
-			console.log('Hello world!');
+
 			if (!state.pinned.loading) {
 
 				dispatch({
@@ -240,8 +240,6 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.UPDATE_PIN,
 					payload: {
 						pinned_id: _id,
-						// hasPinned: true,
-						// useInitialPinned: false,
 						useLocalPinned: true,
 					}
 				})
@@ -252,7 +250,8 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					payload: {
 						pinned_id: "",
 						hasPinned: false,
-						useInitialPinned: false
+						useInitialPinned: false,
+						comment: {}
 					}
 				})
 				break;

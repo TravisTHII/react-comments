@@ -27,6 +27,8 @@ export function Pinned() {
 	useEffect(() => {
 		if (useLocalPinned)
 			getPinnedComment()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pinned_id, useLocalPinned])
 
 	if (loading) {
@@ -36,7 +38,7 @@ export function Pinned() {
 				<Spinner style={{ display: 'block', margin: '0 auto' }} />
 			</div>
 
-	} else {
+	} else if (comment) {
 
 		content =
 			<CommentInstance

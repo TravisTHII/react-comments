@@ -11,7 +11,6 @@ export const ThreadReducer = (state, action) => {
 			total: payload.total,
 			paging: payload.paging,
 			pinned: {
-				...state.pinned,
 				...payload.pinned
 			},
 			comments: payload.comments
@@ -24,7 +23,6 @@ export const ThreadReducer = (state, action) => {
 			sortLoad: false,
 			paging: payload.paging,
 			pinned: {
-				...state.pinned,
 				...payload.pinned
 			},
 			comments: payload.comments
