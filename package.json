@@ -39,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://react-comments-tthii.herokuapp.com"
+  "proxy": "https://react-comments-backend.herokuapp.com"
 }
