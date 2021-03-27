@@ -54,7 +54,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					comments
 				}
 			} = await axios.get(
-				`https://react-comments-backend.herokuapp.com/api/v1/thread/${thread}`,
+				`/api/v1/thread/${thread}`,
 				{ headers: { '_token': token } }
 			)
 
@@ -95,7 +95,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comments
 					}
 				} = await axios.get(
-					`https://react-comments-backend.herokuapp.com/api/v1/thread/${thread}?sort=${sort}`,
+					`/api/v1/thread/${thread}?sort=${sort}`,
 					{ headers: { '_token': token } }
 				)
 
@@ -132,7 +132,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comments
 					}
 				} = await axios.get(
-					`https://react-comments-backend.herokuapp.com/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
+					`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
 					{ headers: { '_token': token } }
 				)
 
@@ -168,7 +168,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comment
 					}
 				} = await axios.post(
-					'https://react-comments-backend.herokuapp.com/api/v1/thread/comment',
+					'/api/v1/thread/comment',
 					{ thread, user, body },
 					{ headers: { '_token': token } }
 				)
@@ -198,7 +198,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.PIN_LOADING
 				})
 
-				const { data: { comment } } = await axios.post(`https://react-comments-backend.herokuapp.com/api/v1/thread/${thread}/pin`, {}, { headers: { '_token': token } })
+				const { data: { comment } } = await axios.post(`/api/v1/thread/${thread}/pin`, {}, { headers: { '_token': token } })
 
 				dispatch({
 					type: THREAD.PIN_COMMENT,

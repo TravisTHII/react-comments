@@ -490,3 +490,23 @@ Common classes
 .highlight-red {
 	color: var(--red);
 }
+
+/*
+=============== 
+Not Found
+===============
+*/
+
+#not-found {
+	width: 100%;
+	height: 250px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.red_link {
+	color: var(--red);
+	text-decoration: none;
+}

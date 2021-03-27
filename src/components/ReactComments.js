@@ -44,8 +44,10 @@ export function ReactComments() {
 	}
 
 	return (
-		<>
-			{content}
-		</>
+		<div className="App">
+			<div id="Main">
+				{content}
+			</div>
+		</div>
 	)
 }
