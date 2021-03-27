@@ -5,6 +5,8 @@ import { ThreadReducer } from './ThreadReducer'
 
 import { THREAD } from './actions'
 
+import { API_URL } from '../variables'
+
 const initialState = {
 	total: 0,
 	paging: {},
@@ -54,7 +56,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					comments
 				}
 			} = await axios.get(
-				`/api/v1/thread/${thread}`,
+				`${API_URL}/api/v1/thread/${thread}`,
 				{ headers: { '_token': token } }
 			)
 
@@ -95,7 +97,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comments
 					}
 				} = await axios.get(
-					`/api/v1/thread/${thread}?sort=${sort}`,
+					`${API_URL}/api/v1/thread/${thread}?sort=${sort}`,
 					{ headers: { '_token': token } }
 				)
 
@@ -132,7 +134,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comments
 					}
 				} = await axios.get(
-					`/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
+					`${API_URL}/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
 					{ headers: { '_token': token } }
 				)
 
@@ -168,7 +170,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comment
 					}
 				} = await axios.post(
-					'/api/v1/thread/comment',
+					`${API_URL}/api/v1/thread/comment`,
 					{ thread, user, body },
 					{ headers: { '_token': token } }
 				)
@@ -198,7 +200,15 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					type: THREAD.PIN_LOADING
 				})
 
-				const { data: { comment } } = await axios.post(`/api/v1/thread/${thread}/pin`, {}, { headers: { '_token': token } })
+				const {
+					data: {
+						comment
+					}
+				} = await axios.post(
+					`${API_URL}/api/v1/thread/${thread}/pin`,
+					{},
+					{ headers: { '_token': token } }
+				)
 
 				dispatch({
 					type: THREAD.PIN_COMMENT,

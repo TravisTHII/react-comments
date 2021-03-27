@@ -5,6 +5,8 @@ import { CommentReducer } from './CommentReducer'
 
 import { COMMENT } from './actions'
 
+import { API_URL } from '../variables'
+
 const initialState = {
 	paging: {},
 	results: [],
@@ -45,7 +47,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 						replies
 					}
 				} = await axios.post(
-					'/api/v1/comment/replies',
+					`${API_URL}/api/v1/comment/replies`,
 					{ comment: comment._id },
 					{ headers: { '_token': token } }
 				)
@@ -82,7 +84,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 						replies
 					}
 				} = await axios.post(
-					`/api/v1/comment/replies?cursor=${state.paging.cursor}`,
+					`${API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
 					{ comment: comment._id },
 					{ headers: { '_token': token } }
 				)
@@ -120,7 +122,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 				const {
 					data
 				} = await axios.post(
-					'/api/v1/comment/reply',
+					`${API_URL}/api/v1/comment/reply`,
 					{ comment: comment._id, body, user },
 					{ headers: { '_token': token } }
 				)
@@ -175,7 +177,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 					message
 				}
 			} = await axios.post(
-				'/api/v1/comment/pin',
+				`${API_URL}/api/v1/comment/pin`,
 				{ thread, comment: comment._id }
 			)
 
@@ -207,7 +209,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 						message
 					}
 				} = await axios.post(
-					'/api/v1/comment/edit',
+					`${API_URL}/api/v1/comment/edit`,
 					{ comment: comment._id, body },
 					{ headers: { '_token': token } }
 				)
@@ -253,7 +255,14 @@ export const CommentProvider = ({ children, comment, token }) => {
 				}
 			})
 
-			const { data: { message } } = await axios.post('/api/v1/comment/delete', { comment: comment._id })
+			const {
+				data: {
+					message
+				}
+			} = await axios.post(
+				`${API_URL}/api/v1/comment/delete`,
+				{ comment: comment._id }
+			)
 
 			deleteRef.parentNode.removeChild(deleteRef)
 

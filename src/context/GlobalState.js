@@ -5,6 +5,8 @@ import { GlobalReducer } from './GlobalReducer'
 
 import { GLOBAL } from './actions'
 
+import { API_URL } from '../variables'
+
 const initialState = {
 	user: {},
 	users: [],
@@ -30,7 +32,7 @@ export const GlobalProvider = ({ children }) => {
 				type: GLOBAL.LOADING
 			})
 
-			const { data: { threads, users } } = await axios.get('/api/v1/thread/selectors')
+			const { data: { threads, users } } = await axios.get(`${API_URL}/api/v1/thread/selectors`)
 
 			selectThread(threads[0]._id)
 
@@ -78,7 +80,7 @@ export const GlobalProvider = ({ children }) => {
 					type: GLOBAL.LOADING
 				})
 
-				const { data: { token } } = await axios.post('/api/v1/token', { user })
+				const { data: { token } } = await axios.post(`${API_URL}/api/v1/token`, { user })
 
 				dispatch({
 					type: GLOBAL.AUTH,
