@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { GlobalContext } from '../../context/GlobalState'
 
@@ -6,7 +6,9 @@ import { SelectUserItem } from '../thread/SelectUserItem'
 
 export function SelectUser() {
 
-	const { state: { user, users } } = useContext(GlobalContext)
+	const { state: { users } } = useContext(GlobalContext)
+
+	const [localUser, setLocalUser] = useState({})
 
 	return (
 		<div className="select-user">
@@ -19,7 +21,9 @@ export function SelectUser() {
 						key={u._id}
 						user={u}
 						image={u.image.avatar}
-						selected={user === u}
+						selected={localUser === u}
+						localUser={localUser}
+						setLocalUser={setLocalUser}
 					/>
 				))}
 			</div>

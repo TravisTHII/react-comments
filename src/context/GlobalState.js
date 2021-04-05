@@ -15,6 +15,7 @@ const initialState = {
 	thread: "",
 	threads: [],
 	loading: false,
+	userLoading: false,
 	fetched: false,
 	updating: false
 }
@@ -77,7 +78,7 @@ export const GlobalProvider = ({ children }) => {
 			} else {
 
 				dispatch({
-					type: GLOBAL.LOADING
+					type: GLOBAL.CHANGE_USER
 				})
 
 				const { data: { token } } = await axios.post(`${API_URL}/api/v1/token`, { user })

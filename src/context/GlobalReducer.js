@@ -24,9 +24,17 @@ export const GlobalReducer = (state, action) => {
 		return {
 			...state,
 			loading: false,
+			userLoading: false,
 			loggedIn: payload.loggedIn,
 			token: payload.token,
 			user: payload.user
+		}
+	}
+
+	if (type === GLOBAL.CHANGE_USER) {
+		return {
+			...state,
+			userLoading: true
 		}
 	}
 

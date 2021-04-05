@@ -13,7 +13,7 @@ import { Spinner } from './includes/Spinner'
 
 export function Thread() {
 
-	const { state: { user, thread } } = useContext(GlobalContext)
+	const { state: { user, thread, userLoading } } = useContext(GlobalContext)
 
 	const { state, getThread, loadMoreComments } = useContext(ThreadContext)
 
@@ -29,7 +29,7 @@ export function Thread() {
 	const Loading =
 		<Spinner style={{ display: 'block', margin: '0 auto', paddingTop: '50px' }} />
 
-	if (state.loading) {
+	if (state.loading || userLoading) {
 
 		content = Loading
 
@@ -53,7 +53,7 @@ export function Thread() {
 					<div className="thread_comments">
 
 						<Pinned />
-						
+
 						{state.postLoad &&
 							<Spinner stroke="#fff" style={{ display: 'block', margin: '10px auto' }} />
 						}
