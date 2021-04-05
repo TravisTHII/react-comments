@@ -22,5 +22,5 @@ app.use('/api/v1/token', require('./routes/token'))
 
 app.listen(
 	PORT,
-	console.log(`Running server on port ${PORT}`.yellow.bold)
+	console.log(`Running server on port ${PORT}`.yellow)
 )
