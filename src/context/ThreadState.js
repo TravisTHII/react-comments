@@ -5,7 +5,7 @@ import { ThreadReducer } from './ThreadReducer'
 
 import { THREAD } from './actions'
 
-import { API_URL } from '../variables'
+const { REACT_APP_API_URL } = process.env
 
 const initialState = {
 	total: 0,
@@ -56,7 +56,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 					comments
 				}
 			} = await axios.get(
-				`${API_URL}/api/v1/thread/${thread}`,
+				`${REACT_APP_API_URL}/api/v1/thread/${thread}`,
 				{ headers: { '_token': token } }
 			)
 
@@ -97,7 +97,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comments
 					}
 				} = await axios.get(
-					`${API_URL}/api/v1/thread/${thread}?sort=${sort}`,
+					`${REACT_APP_API_URL}/api/v1/thread/${thread}?sort=${sort}`,
 					{ headers: { '_token': token } }
 				)
 
@@ -134,7 +134,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comments
 					}
 				} = await axios.get(
-					`${API_URL}/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
+					`${REACT_APP_API_URL}/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
 					{ headers: { '_token': token } }
 				)
 
@@ -170,7 +170,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comment
 					}
 				} = await axios.post(
-					`${API_URL}/api/v1/thread/comment`,
+					`${REACT_APP_API_URL}/api/v1/thread/comment`,
 					{ thread, user, body },
 					{ headers: { '_token': token } }
 				)
@@ -205,7 +205,7 @@ export const ThreadProvider = ({ children, thread, token }) => {
 						comment
 					}
 				} = await axios.post(
-					`${API_URL}/api/v1/thread/${thread}/pin`,
+					`${REACT_APP_API_URL}/api/v1/thread/${thread}/pin`,
 					{},
 					{ headers: { '_token': token } }
 				)

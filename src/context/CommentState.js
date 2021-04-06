@@ -5,7 +5,7 @@ import { CommentReducer } from './CommentReducer'
 
 import { COMMENT } from './actions'
 
-import { API_URL } from '../variables'
+const { REACT_APP_API_URL } = process.env
 
 const initialState = {
 	paging: {},
@@ -47,7 +47,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 						replies
 					}
 				} = await axios.post(
-					`${API_URL}/api/v1/comment/replies`,
+					`${REACT_APP_API_URL}/api/v1/comment/replies`,
 					{ comment: comment._id },
 					{ headers: { '_token': token } }
 				)
@@ -84,7 +84,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 						replies
 					}
 				} = await axios.post(
-					`${API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
+					`${REACT_APP_API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
 					{ comment: comment._id },
 					{ headers: { '_token': token } }
 				)
@@ -122,7 +122,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 				const {
 					data
 				} = await axios.post(
-					`${API_URL}/api/v1/comment/reply`,
+					`${REACT_APP_API_URL}/api/v1/comment/reply`,
 					{ comment: comment._id, body, user },
 					{ headers: { '_token': token } }
 				)
@@ -177,7 +177,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 					message
 				}
 			} = await axios.post(
-				`${API_URL}/api/v1/comment/pin`,
+				`${REACT_APP_API_URL}/api/v1/comment/pin`,
 				{ thread, comment: comment._id }
 			)
 
@@ -209,7 +209,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 						message
 					}
 				} = await axios.post(
-					`${API_URL}/api/v1/comment/edit`,
+					`${REACT_APP_API_URL}/api/v1/comment/edit`,
 					{ comment: comment._id, body },
 					{ headers: { '_token': token } }
 				)
@@ -260,7 +260,7 @@ export const CommentProvider = ({ children, comment, token }) => {
 					message
 				}
 			} = await axios.post(
-				`${API_URL}/api/v1/comment/delete`,
+				`${REACT_APP_API_URL}/api/v1/comment/delete`,
 				{ comment: comment._id }
 			)
 

@@ -4,16 +4,17 @@ import { GlobalContext } from '../../context/GlobalState'
 
 export function SelectUserItem({ user, image, selected, localUser, setLocalUser }) {
 
-	const { selectUser } = useContext(GlobalContext)
+	const { state: { userLoading }, selectUser } = useContext(GlobalContext)
 
 	const setUser = () => {
-		selectUser(user)
+		if (!userLoading) {
+			selectUser(user)
 
-		if (localUser === user)
-			return setLocalUser({})
+			if (localUser === user)
+				return setLocalUser({})
 
-		setLocalUser(user)
-
+			setLocalUser(user)
+		}
 	}
 
 	return (
