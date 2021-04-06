@@ -103,7 +103,7 @@ export function Thread() {
 	}
 
 	return (
-		<div className="thread-column">
+		<div className="thread_column">
 			{content}
 		</div>
 	)

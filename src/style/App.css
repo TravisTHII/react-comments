@@ -1,5 +1,7 @@
 :root {
 	--red: #9A0909;
+	--skeleton-color-dark-one: #444;
+	--skeleton-color-dark-two: #777;
 }
 
 .App {
@@ -22,16 +24,14 @@ SelectUser & SelectThread
 
 .thread_components {
 	margin-bottom: 30px;
-	flex-direction: column;
 }
 .thread_components > div:not(:last-child) {
 	margin-bottom: 20px;
 }
 
-.users, .st-threads {
+.users {
 	display: flex;
 	justify-content: space-evenly;
-	width: 600px;
 }
 .su-header, .st-header {
 	color: #fff;
@@ -50,7 +50,7 @@ SelectUser & SelectThread
 }
 
 .st-threads {
-	justify-content: initial;
+	display: flex;
 }
 .thread-selector {
 	height: 30px;
@@ -73,7 +73,7 @@ Thread
 ===============
 */
 
-.thread-column {
+.thread_column {
 	width: 100%;
 }
 
@@ -128,7 +128,7 @@ Thread
 	box-sizing: border-box;
 }
 
-.thread-column > div:not(:last-child),
+.thread_column > div:not(:last-child),
 .thread_comments > div:not(:last-child),
 .comment .comment:not(:last-child),
 .thread > div:not(:last-child) {
@@ -491,6 +491,11 @@ Common classes
 	color: var(--red);
 }
 
+.has_shimmer {
+	position: relative;
+	overflow: hidden;
+}
+
 /*
 =============== 
 Not Found
@@ -509,4 +514,117 @@ Not Found
 .red_link {
 	color: var(--red);
 	text-decoration: none;
+}
+
+/*
+===============
+Skeleton Loaders
+===============
+*/
+
+.selectors_skeleton {
+	height: 190px;
+	margin-bottom: 30px;
+}
+.selectors_skeleton > div:not(:last-child) {
+	margin-bottom: 20px;
+}
+.select_user_header_skeleton, .select_thread_header_skeleton {
+	background-color: var(--skeleton-color-dark-one);
+	height: 19px;
+	padding: 5px 0;
+  margin-bottom: 1px;
+}
+.select_user_users_skeleton {
+	display: flex;
+  justify-content: space-evenly;
+}
+.select_user_square_skeleton {
+	background: var(--skeleton-color-dark-one);
+	width: 60px;
+	height: 60px;
+	padding: 5px;
+}
+.select_thread_threads_skeleton {
+	display: flex;
+}
+.select_thread_item_skeleton {
+	background: var(--skeleton-color-dark-one);
+	height: 30px;
+	width: 60px;
+	padding: 5px;
+}
+.select_thread_item_skeleton:not(:last-child) {
+	margin-right: 15px;
+}
+
+.thread_column_skeleton > div:not(:last-child) {
+	margin-bottom: 9px;
+}
+.thread_header_skeleton {
+	display: flex;
+	justify-content: space-between;
+}
+.thread_header_item_skeleton {
+	background: var(--skeleton-color-dark-one);
+	width: 150px;
+	height: 35px;
+}
+.thread_sitc_skeleton {
+	background: var(--skeleton-color-dark-one);
+	height: 50px;
+}
+
+.comment_skeleton {
+	background: var(--skeleton-color-dark-one);
+	width: 100%;
+	height: 170px;
+	padding: 5px;
+	box-sizing: border-box;
+	display: flex;
+}
+.thread_comment_skeleton > div:not(:last-child) {
+	margin-bottom: 9px;
+}
+.comment_picture_skeleton {
+	background: var(--skeleton-color-dark-two);
+	opacity: 0.5;
+	width: 60px;
+	height: 60px;
+	margin-right: 9px;
+}
+.comment_info_skeleton {
+	height: 60px;
+}
+.comment_info_skeleton > div:not(:last-child) {
+	margin-bottom: 15px;
+}
+.paragraph_skeleton {
+	background: var(--skeleton-color-dark-two);
+	opacity: 0.5;
+	height: 10px;
+	width: 350px;
+}
+
+/* animation effects */
+.shimmer-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	animation: loading 1.5s infinite;
+}
+.shimmer {
+	width: 50%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.05);
+	transform: skewX(-20deg);
+	box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes loading {
+	0% {transform: translateX(-150%);}
+	50% {transform: translateX(-50%);}
+	100% {transform: translateX(150%);}
 }

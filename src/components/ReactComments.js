@@ -7,7 +7,7 @@ import { SelectUser } from './thread/SelectUser'
 import { SelectThread } from './thread/SelectThread'
 import { Thread } from './Thread'
 
-import { Spinner } from './includes/Spinner'
+import { Selectors } from './skeleton/Selectors'
 
 export function ReactComments() {
 
@@ -26,7 +26,7 @@ export function ReactComments() {
 	if (loading) {
 
 		content =
-			<Spinner style={{ display: 'block', margin: '0 auto', paddingTop: '50px' }} />
+			<Selectors />
 
 	} else if (fetched) {
 
