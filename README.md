@@ -6,6 +6,6 @@ React commenting system
 ## Installation
 
 1. Clone this repo
-2. `install packages for both directories`
+2. `yarn install`
 3. `cd server`
 4. `npm run dev`
