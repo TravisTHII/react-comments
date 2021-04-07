@@ -1,3 +1,5 @@
+![react-comments-git-logo](https://user-images.githubusercontent.com/75787788/113927690-ce415a00-97bb-11eb-8cf0-e03e0427890b.png)
+
 # React-comments
 React commenting system
 
