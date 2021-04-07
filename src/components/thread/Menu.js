@@ -74,6 +74,9 @@ export function Menu({ deleteRef }) {
 				break;
 			case 'Edit': startEditing(); break;
 			case 'Delete': deleteComment(deleteRef.current); break;
+			case 'Report':
+				alert('Comment reported.\n\nNOTE: Demonstration purposes only, reporting is not fully implemented.');
+				break;
 			default: break;
 		}
 	}
