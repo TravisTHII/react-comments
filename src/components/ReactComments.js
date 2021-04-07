@@ -7,7 +7,7 @@ import { SelectUser } from './thread/SelectUser'
 import { SelectThread } from './thread/SelectThread'
 import { Thread } from './Thread'
 
-import { Selectors } from './skeleton/Selectors'
+import { SelectorSkeleton } from './skeleton/SelectorSkeleton'
 
 export function ReactComments() {
 
@@ -26,7 +26,7 @@ export function ReactComments() {
 	if (loading) {
 
 		content =
-			<Selectors />
+			<SelectorSkeleton />
 
 	} else if (fetched) {
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Shimmer } from './Shimmer'
 import { ThreadSkeleton } from './ThreadSkeleton'
 
-export function Selectors() {
+export function SelectorSkeleton() {
 	return (
 		<>
 			<div className="selectors_skeleton">

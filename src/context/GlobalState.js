@@ -64,6 +64,10 @@ export const GlobalProvider = ({ children }) => {
 	const selectUser = async (user) => {
 		try {
 
+			dispatch({
+				type: GLOBAL.CHANGE_USER
+			})
+
 			if (state.loggedIn && state.user === user) {
 
 				dispatch({
@@ -76,10 +80,6 @@ export const GlobalProvider = ({ children }) => {
 				})
 
 			} else {
-
-				dispatch({
-					type: GLOBAL.CHANGE_USER
-				})
 
 				const { data: { token } } = await axios.post(`${REACT_APP_API_URL}/api/v1/token`, { user })
 

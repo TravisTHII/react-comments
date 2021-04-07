@@ -3,7 +3,7 @@ import { Shimmer } from './Shimmer'
 
 export function ThreadSkeleton() {
 	return (
-		<>
+		<div className="thread_column_skeleton">
 			<div className="thread_header_skeleton">
 				<div className="thread_header_item_skeleton has_shimmer">
 					<Shimmer />
@@ -33,6 +33,6 @@ export function ThreadSkeleton() {
 					</div>
 				))}
 			</div>
-		</>
+		</div>
 	)
 }
