@@ -8,7 +8,7 @@ export function SelectThreadItem({ thread: { _id, name }, selected }) {
 
 	return (
 		<div
-			className={`thread-selector flex-ui ${selected ? 'thread-is-selected' : ''}`}
+			className={`thread-selector flex_ui ${selected ? 'thread-is-selected' : ''}`}
 			onClick={() => selectThread(_id)}
 		>
 			{name}

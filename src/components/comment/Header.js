@@ -80,7 +80,7 @@ export function Header({ refrence }) {
 				{pinLoad
 					? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '25px', height: '25px' }} />
 					: (pinned_id === _id) &&
-					<span className="opt_ui cmt_pin flex-ui">
+					<span className="opt_ui cmt_pin flex_ui">
 						<TiPin />
 					</span>
 				}

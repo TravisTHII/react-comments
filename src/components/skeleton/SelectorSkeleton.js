@@ -29,7 +29,7 @@ export function SelectorSkeleton() {
 						{[1, 2, 3].map((a, _) => (
 							<div
 								key={a}
-								className="select_thread_item_skeleton flex-ui has_shimmer"
+								className="select_thread_item_skeleton flex_ui has_shimmer"
 							>
 								<Shimmer />
 							</div>
