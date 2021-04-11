@@ -28,13 +28,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TravisTHII/React-comments.git"
+    "url": "git+https://github.com/TravisTHII/comments.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TravisTHII/React-comments/issues"
+    "url": "https://github.com/TravisTHII/comments/issues"
   },
-  "homepage": "https://github.com/TravisTHII/React-comments#readme"
+  "homepage": "https://github.com/TravisTHII/comments#readme"
 }
