@@ -11,3 +11,7 @@ React commenting system
 2. `yarn install`
 3. `cd server`
 4. `npm run dev`
+
+## Preview
+
+![Artboard 1](https://user-images.githubusercontent.com/75787788/114290072-d9f68000-9a4a-11eb-9d5f-b63d7336a445.png)
