@@ -14,7 +14,3 @@ export function expandTextarea(t, h) {
 	t.style.height = "";
 	t.style.height = (t.scrollHeight - t.offsetHeight) + h + "px";
 }
-
-export function invalidValue(s, l) {
-	return s === null || (/^ *$/).test(s) || s.length > l
-}
