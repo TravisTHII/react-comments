@@ -67,7 +67,7 @@ export function Poster() {
 						<div className="author_picture">
 							<div
 								className="background-ui"
-								style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}
+								style={{ backgroundImage: `url(${user.image.avatar})` }}
 							>
 							</div>
 						</div>
@@ -90,7 +90,7 @@ export function Poster() {
 					</div>
 
 					{user.admin &&
-						<span className="userIsAdmin" title="Administrator">
+						<span className="adminBadge flex_ui" title="Administrator">
 							<FaUserShield />
 						</span>
 					}

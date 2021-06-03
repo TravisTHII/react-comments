@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { GlobalProvider } from 'context/Global'
@@ -10,14 +12,14 @@ import 'style/index.css'
 import 'style/App.css'
 
 export const App = () =>
-	<Router>
-		<Header />
-		<Switch>
-			<Route exact path="/">
-				<GlobalProvider>
-					<ReactComments />
-				</GlobalProvider>
-			</Route>
-			<Route component={NotFound} />
-		</Switch>
-	</Router>
+  <Router>
+    <Header />
+    <Switch>
+      <Route exact path="/">
+        <GlobalProvider>
+          <ReactComments />
+        </GlobalProvider>
+      </Route>
+      <Route component={NotFound} />
+    </Switch>
+  </Router>

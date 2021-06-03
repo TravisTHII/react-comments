@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Props } from './types'
 
 export const Spinner = ({ stroke, style }: Props) =>

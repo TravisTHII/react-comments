@@ -5,8 +5,6 @@ import { reducer } from './reducer'
 
 import { State, COMMENT, InitialStateType, ProviderProps } from './types'
 
-const { REACT_APP_API_URL } = process.env
-
 const initialState: State = {
 	paging: {},
 	results: [],
@@ -49,7 +47,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 						replies
 					}
 				} = await axios.post(
-					`${REACT_APP_API_URL}/api/v1/comment/replies`,
+					`${process.env.API_URL}/api/v1/comment/replies`,
 					{ comment: comment._id },
 					{ headers: { '_token': token } }
 				)
@@ -86,7 +84,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 						replies
 					}
 				} = await axios.post(
-					`${REACT_APP_API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
+					`${process.env.API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
 					{ comment: comment._id },
 					{ headers: { '_token': token } }
 				)
@@ -124,7 +122,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 				const {
 					data
 				} = await axios.post(
-					`${REACT_APP_API_URL}/api/v1/comment/reply`,
+					`${process.env.API_URL}/api/v1/comment/reply`,
 					{ comment: comment._id, body, user },
 					{ headers: { '_token': token } }
 				)
@@ -179,7 +177,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 					message
 				}
 			} = await axios.post(
-				`${REACT_APP_API_URL}/api/v1/comment/pin`,
+				`${process.env.API_URL}/api/v1/comment/pin`,
 				{ thread, comment: comment._id }
 			)
 
@@ -211,7 +209,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 						message
 					}
 				} = await axios.post(
-					`${REACT_APP_API_URL}/api/v1/comment/edit`,
+					`${process.env.API_URL}/api/v1/comment/edit`,
 					{ comment: comment._id, body },
 					{ headers: { '_token': token } }
 				)
@@ -262,7 +260,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 					message
 				}
 			} = await axios.post(
-				`${REACT_APP_API_URL}/api/v1/comment/delete`,
+				`${process.env.API_URL}/api/v1/comment/delete`,
 				{ comment: comment._id }
 			)
 

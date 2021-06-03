@@ -217,6 +217,7 @@ Thread
 }
 .cp_opt_icn > svg {
 	cursor: pointer;
+  font-size: 1.5rem;
 }
 .comment_post:hover .cp_opt_icn {
 	opacity: 1;
@@ -252,10 +253,7 @@ Thread
 	margin-bottom: 4px;
 }
 
-.userIsAdmin {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.adminBadge {
 	width: 25px;
 	height: 25px;
 	color: gold;

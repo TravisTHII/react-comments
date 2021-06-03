@@ -7,19 +7,17 @@ import { State, InitialStateType, GLOBAL } from './types'
 
 import { User } from 'types'
 
-const { REACT_APP_API_URL } = process.env
-
 const initialState: State = {
-	user: {} as User,
-	users: [],
-	token: '',
-	loggedIn: false,
-	thread: '',
-	threads: [],
-	loading: false,
-	userLoading: false,
-	fetched: false,
-	updating: false
+  user: {} as User,
+  users: [],
+  token: '',
+  loggedIn: false,
+  thread: '',
+  threads: [],
+  loading: false,
+  userLoading: false,
+  fetched: false,
+  updating: false
 }
 
 export const Context = createContext({} as InitialStateType)
@@ -28,91 +26,91 @@ export const useGlobalContext = () => useContext(Context)
 
 export const Provider: FC = ({ children }) => {
 
-	const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState)
 
-	const getSelectors = async () => {
-		try {
+  const getSelectors = async () => {
+    try {
 
-			dispatch({
-				type: GLOBAL.LOADING
-			})
+      dispatch({
+        type: GLOBAL.LOADING
+      })
 
-			const { data: { threads, users } } = await axios.get(`${REACT_APP_API_URL}/api/v1/thread/selectors`)
+      const { data: { threads, users } } = await axios.get(`${process.env.API_URL}/api/v1/thread/selectors`)
 
-			selectThread(threads[0]._id)
+      selectThread(threads[0]._id)
 
-			dispatch({
-				type: GLOBAL.SELECTORS,
-				payload: {
-					threads,
-					users
-				}
-			})
+      dispatch({
+        type: GLOBAL.SELECTORS,
+        payload: {
+          threads,
+          users
+        }
+      })
 
-		} catch (error) {
+    } catch (error) {
 
-			console.error(error)
+      console.error(error)
 
-		}
-	}
+    }
+  }
 
-	const selectThread = (thread: string) => {
-		dispatch({
-			type: GLOBAL.SELECT_THREAD,
-			payload: {
-				thread
-			}
-		})
-	}
+  const selectThread = (thread: string) => {
+    dispatch({
+      type: GLOBAL.SELECT_THREAD,
+      payload: {
+        thread
+      }
+    })
+  }
 
-	const selectUser = async (user: User) => {
-		try {
+  const selectUser = async (user: User) => {
+    try {
 
-			dispatch({
-				type: GLOBAL.CHANGE_USER
-			})
+      dispatch({
+        type: GLOBAL.CHANGE_USER
+      })
 
-			if (state.loggedIn && state.user === user) {
+      if (state.loggedIn && state.user === user) {
 
-				dispatch({
-					type: GLOBAL.AUTH,
-					payload: {
-						loggedIn: false,
-						token: '',
-						user: null
-					}
-				})
+        dispatch({
+          type: GLOBAL.AUTH,
+          payload: {
+            loggedIn: false,
+            token: '',
+            user: null
+          }
+        })
 
-			} else {
+      } else {
 
-				const { data: { token } } = await axios.post(`${REACT_APP_API_URL}/api/v1/token`, { user })
+        const { data: { token } } = await axios.post(`${process.env.API_URL}/api/v1/token`, { user })
 
-				dispatch({
-					type: GLOBAL.AUTH,
-					payload: {
-						user: user,
-						loggedIn: true,
-						token
-					}
-				})
+        dispatch({
+          type: GLOBAL.AUTH,
+          payload: {
+            user: user,
+            loggedIn: true,
+            token
+          }
+        })
 
-			}
+      }
 
-		} catch (error) {
+    } catch (error) {
 
-			console.error(error)
+      console.error(error)
 
-		}
-	}
+    }
+  }
 
-	return (
-		<Context.Provider value={{
-			...state,
-			getSelectors,
-			selectThread,
-			selectUser
-		}}>
-			{children}
-		</Context.Provider>
-	)
+  return (
+    <Context.Provider value={{
+      ...state,
+      getSelectors,
+      selectThread,
+      selectUser
+    }}>
+      {children}
+    </Context.Provider>
+  )
 }
