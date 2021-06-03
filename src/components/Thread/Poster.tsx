@@ -2,13 +2,13 @@ import React, { useRef, useState } from 'react'
 
 import { FaUserShield } from 'react-icons/fa'
 
-import { useGlobalContext } from '../../context/Global'
-import { useThreadContext } from '../../context/Thread'
+import { useGlobalContext } from 'context/Global'
+import { useThreadContext } from 'context/Thread'
 
 import { Badge } from '../Includes/Badge'
 import { Spinner } from '../Includes/Spinner'
 
-import { validText, expandTextarea } from '../../utils/functions'
+import { validText, expandTextarea } from 'utils/functions'
 
 export function Poster() {
 

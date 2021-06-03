@@ -1,4 +1,4 @@
-import { Paging, Comment } from '../../types'
+import { Paging, Comment } from 'types'
 
 export interface ProviderProps {
   children: React.ReactNode

@@ -1,4 +1,4 @@
-import { User } from '../../types'
+import { User } from 'types'
 
 export interface MenuProps {
   deleteRef: React.RefObject<HTMLDivElement>

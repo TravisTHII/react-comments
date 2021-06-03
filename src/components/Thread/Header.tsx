@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import { useThreadContext } from '../../context/Thread'
+import { useThreadContext } from 'context/Thread'
 
-import { useOutsideClick } from '../../hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
 export function Header() {
 

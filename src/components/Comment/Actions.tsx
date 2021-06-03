@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useCommentContext } from '../../context/Comment'
+import { useCommentContext } from 'context/Comment'
 
 export function Actions() {
 

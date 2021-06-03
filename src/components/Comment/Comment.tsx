@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
-import { useThreadContext } from '../../context/Thread'
-import { useCommentContext } from '../../context/Comment'
+import { useThreadContext } from 'context/Thread'
+import { useCommentContext } from 'context/Comment'
 
 import {
 	Header,

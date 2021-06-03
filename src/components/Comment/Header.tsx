@@ -4,8 +4,8 @@ import Dots from '@material-ui/icons/MoreVert'
 import { TiPin } from 'react-icons/ti'
 import { FaUserShield } from 'react-icons/fa'
 
-import { useThreadContext } from '../../context/Thread'
-import { useCommentContext } from '../../context/Comment'
+import { useThreadContext } from 'context/Thread'
+import { useCommentContext } from 'context/Comment'
 
 import { Badge } from '../Includes/Badge'
 import { Spinner } from '../Includes/Spinner'

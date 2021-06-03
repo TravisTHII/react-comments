@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useGlobalContext } from '../../context/Global'
+import { useGlobalContext } from 'context/Global'
 
 import { SelectThreadItem } from './SelectThreadItem'
 

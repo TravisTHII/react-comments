@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import { useThreadContext } from '../../context/Thread'
-import { useCommentContext } from '../../context/Comment'
+import { useThreadContext } from 'context/Thread'
+import { useCommentContext } from 'context/Comment'
 
-import { useOutsideClick } from '../../hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
-import { offset } from '../../utils/functions'
+import { offset } from 'utils/functions'
 
 import { MenuProps } from './types'
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { useThreadContext } from '../../context/Thread'
+import { useGlobalContext } from 'context/Global'
+import { useThreadContext } from 'context/Thread'
 
 import { Header, Poster, Pinned } from './'
 import { Comment } from '../Comment'

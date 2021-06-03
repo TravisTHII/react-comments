@@ -5,7 +5,7 @@ import { reducer } from './reducer'
 
 import { State, InitialStateType, GLOBAL } from './types'
 
-import { User } from '../../types'
+import { User } from 'types'
 
 const { REACT_APP_API_URL } = process.env
 

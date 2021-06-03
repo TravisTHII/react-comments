@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { ThreadProvider } from '../../context/Thread'
+import { useGlobalContext } from 'context/Global'
+import { ThreadProvider } from 'context/Thread'
 
 import { Thread, SelectUser, SelectThread } from '../Thread'
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { useCommentContext } from '../../context/Comment'
+import { useGlobalContext } from 'context/Global'
+import { useCommentContext } from 'context/Comment'
 
-import { validText, expandTextarea } from '../../utils/functions'
+import { validText, expandTextarea } from 'utils/functions'
 
 import { Spinner } from '../Includes/Spinner'
 
