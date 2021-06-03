@@ -47,10 +47,7 @@ module.exports = {
   ],
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src')],
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    alias: {
-      public: path.join(__dirname, './public')
-    }
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   devtool: 'inline-cheap-source-map',
   context: __dirname,

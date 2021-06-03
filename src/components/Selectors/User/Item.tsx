@@ -2,9 +2,23 @@ import React from 'react'
 
 import { useGlobalContext } from 'context/Global'
 
-import { SelectUserItemProps } from './types'
+import { User } from 'types'
 
-export function SelectUserItem({ user, image, selected, localUser, setLocalUser }: SelectUserItemProps) {
+interface Props {
+  user: User
+  image: string
+  selected: boolean
+  localUser: User | {}
+  setLocalUser: (user: User | {}) => void
+}
+
+export function Item({
+  user,
+  image,
+  selected,
+  localUser,
+  setLocalUser
+}: Props) {
 
   const { userLoading, selectUser } = useGlobalContext()
 

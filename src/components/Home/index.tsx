@@ -3,49 +3,47 @@ import React, { useEffect } from 'react'
 import { useGlobalContext } from 'context/Global'
 import { ThreadProvider } from 'context/Thread'
 
-import { Thread, SelectUser, SelectThread } from '../Thread'
+import { Selectors } from 'components/Selectors'
+import { Thread } from '../Thread'
 
-import { SelectorSkeleton } from '../skeleton/SelectorSkeleton'
+import { SelectorSkeleton } from '../Skeletons/SelectorSkeleton'
 
 export function ReactComments() {
 
-	const { thread, token, loading, fetched, getSelectors } = useGlobalContext()
+  const { thread, token, loading, fetched, getSelectors } = useGlobalContext()
 
-	useEffect(() => {
-		getSelectors()
+  useEffect(() => {
+    getSelectors()
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-	window.onbeforeunload = () => { window.scrollTo(0, 0) }
+  window.onbeforeunload = () => { window.scrollTo(0, 0) }
 
-	let content
+  let content
 
-	if (loading) {
+  if (loading) {
 
-		content =
-			<SelectorSkeleton />
+    content =
+      <SelectorSkeleton />
 
-	} else if (fetched) {
+  } else if (fetched) {
 
-		content =
-			<>
-				<div className="thread_components">
-					<SelectUser />
-					<SelectThread />
-				</div>
-				<ThreadProvider thread={thread} token={token}>
-					<Thread />
-				</ThreadProvider>
-			</>
+    content =
+      <>
+        <Selectors />
+        <ThreadProvider thread={thread} token={token}>
+          <Thread />
+        </ThreadProvider>
+      </>
 
-	}
+  }
 
-	return (
-		<div className="App">
-			<div id="Main">
-				{content}
-			</div>
-		</div>
-	)
+  return (
+    <div className="App">
+      <div id="Main">
+        {content}
+      </div>
+    </div>
+  )
 }
