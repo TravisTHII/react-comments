@@ -1,7 +1,0 @@
-export { Instance as Comment } from './Instance'
-export { Header } from './Header'
-export { Content } from './Content'
-export { Edit } from './Edit'
-export { Actions } from './Actions'
-export { Reply } from './Reply'
-export { Replies } from './Replies'
