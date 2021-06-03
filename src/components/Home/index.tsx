@@ -6,7 +6,7 @@ import { ThreadProvider } from 'context/Thread'
 import { Selectors } from 'components/Selectors'
 import { Thread } from '../Thread'
 
-import { SelectorSkeleton } from '../Skeletons/SelectorSkeleton'
+import { SkeletonLoader } from '../Skeletons'
 
 export function ReactComments() {
 
@@ -25,7 +25,7 @@ export function ReactComments() {
   if (loading) {
 
     content =
-      <SelectorSkeleton />
+      <SkeletonLoader />
 
   } else if (fetched) {
 
