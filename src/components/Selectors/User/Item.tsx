@@ -2,15 +2,7 @@ import React from 'react'
 
 import { useGlobalContext } from 'context/Global'
 
-import { User } from 'types'
-
-interface Props {
-  user: User
-  image: string
-  selected: boolean
-  localUser: User | {}
-  setLocalUser: (user: User | {}) => void
-}
+import { Props } from './types'
 
 export function Item({
   user,

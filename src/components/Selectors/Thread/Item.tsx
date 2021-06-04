@@ -2,13 +2,7 @@ import React from 'react'
 
 import { useGlobalContext } from 'context/Global'
 
-interface Props {
-  thread: {
-    _id: string
-    name: string
-  }
-  selected: boolean
-}
+import { Props } from './types'
 
 export function Item({
   thread: {
