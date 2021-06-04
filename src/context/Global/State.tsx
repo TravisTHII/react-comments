@@ -35,7 +35,7 @@ export const Provider: FC = ({ children }) => {
         type: GLOBAL.LOADING
       })
 
-      console.log(process.env.API_URL);
+      console.log(process.env);
       
 
       const { data: { threads, users } } = await axios.get(`${process.env.API_URL}/api/v1/thread/selectors`)
