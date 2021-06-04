@@ -47,7 +47,7 @@ export function Header({ refrence }: HeaderProps) {
       <div className="comment_author">
 
         <div className="author_picture">
-          <div className="background-ui" style={{ backgroundImage: `url(${user.image.avatar})` }}></div>
+          <div className="background-ui" style={{ backgroundImage: `url(/public/images/users/${user.image.avatar})` }}></div>
         </div>
 
         <div className="author_info text-ui">

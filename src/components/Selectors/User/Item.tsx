@@ -26,8 +26,7 @@ export function Item({
     if (!userLoading) {
       selectUser(user)
 
-      if (localUser === user)
-        return setLocalUser({})
+      if (localUser === user) return setLocalUser({})
 
       setLocalUser(user)
     }
@@ -40,7 +39,7 @@ export function Item({
     >
       <div
         className="background-ui"
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: `url(/public/images/users/${image})` }}
       >
       </div>
     </div>

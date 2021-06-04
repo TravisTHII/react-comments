@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack --mode production"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.13.1",
@@ -13,10 +17,6 @@
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "style-loader": "^2.0.0"
-  },
-  "scripts": {
-    "start": "webpack serve",
-    "build": "webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

@@ -53,7 +53,6 @@ module.exports = {
   context: __dirname,
   target: 'web',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
     port: 3000,
     historyApiFallback: true,
     compress: true,
