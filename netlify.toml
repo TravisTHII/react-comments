@@ -1,2 +1,2 @@
 [context.production]
-  environment = { API_URL = "https://react-comments-backend.herokuapp.com" }
+  API_URL = "https://react-comments-backend.herokuapp.com"
