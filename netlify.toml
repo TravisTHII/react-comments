@@ -1,2 +1,5 @@
 [context.deploy-preview]
   API_URL = "https://react-comments-backend.herokuapp.com"
+
+[context.deploy-preview.environment]
+  API_URL = "https://react-comments-backend.herokuapp.com"
