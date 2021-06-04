@@ -59,7 +59,7 @@ export function Reply() {
 					<div className='reply_user'>
 						<div
 							className='background-ui'
-							style={{ backgroundImage: `url(/public/images/users/${user.image.avatar})` }}
+							style={{ backgroundImage: `url(${user.image.avatar})` }}
 						>
 						</div>
 					</div>

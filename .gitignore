@@ -3,6 +3,3 @@
 
 # production
 /dist
-
-# misc
-.env

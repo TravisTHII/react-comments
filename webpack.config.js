@@ -8,8 +8,7 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].bundle.js',
-    publicPath: '/'
+    filename: '[name].[contenthash].bundle.js'
   },
   module: {
     rules: [
@@ -37,9 +36,16 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      name: 'vendor',
+      chunks: 'all',
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      favicon: './public/favicon.ico'
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.config().parsed)

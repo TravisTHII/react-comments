@@ -67,7 +67,7 @@ export function Poster() {
 						<div className="author_picture">
 							<div
 								className="background-ui"
-								style={{ backgroundImage: `url(/public/images/users/${user.image.avatar})` }}
+								style={{ backgroundImage: `url(${user.image.avatar})` }}
 							>
 							</div>
 						</div>

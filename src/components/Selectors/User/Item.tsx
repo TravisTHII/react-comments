@@ -31,7 +31,7 @@ export function Item({
     >
       <div
         className="background-ui"
-        style={{ backgroundImage: `url(/public/images/users/${image})` }}
+        style={{ backgroundImage: `url(${image})` }}
       >
       </div>
     </div>
