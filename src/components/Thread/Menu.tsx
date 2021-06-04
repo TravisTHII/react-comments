@@ -5,7 +5,7 @@ import { useCommentContext } from 'context/Comment'
 
 import { useOutsideClick } from 'hooks/useOutsideClick'
 
-import { offset } from 'utils/functions'
+import { offset } from 'utils'
 
 import { MenuProps } from './types'
 
@@ -38,13 +38,13 @@ export function Menu({ deleteRef }: MenuProps) {
 
     const copy = [...updatedMenu]
 
-    let index: number = 0
+    let index: number
 
     for (const i of copy) {
       if (/^(Pin|Unpin)$/.test(i)) index = copy.indexOf(i)
     }
 
-    copy[index] = (pinned_id === comment._id) ? 'Unpin' : 'Pin'
+    copy[index!] = (pinned_id === comment._id) ? 'Unpin' : 'Pin'
 
     setUpdatedMenu(copy)
 
@@ -53,14 +53,17 @@ export function Menu({ deleteRef }: MenuProps) {
 
   useEffect(() => {
     const m = menuRef.current
-      , elemTop = offset(commentRef).top
-      , elemLeft = offset(commentRef).left
-      , elemWidth = parseInt(getComputedStyle(commentRef as Element).width)
 
-    if (m) {
-      m.style.top = `${elemTop + 5}px`
-      m.style.left = `${elemLeft + elemWidth}px`
+    if (commentRef) {
+      const elemTop = offset(commentRef).top
+        , elemLeft = offset(commentRef).left
+        , elemWidth = parseInt(getComputedStyle(commentRef).width)
+
+      m!.style.top = `${elemTop + 5}px`
+      m!.style.left = `${elemLeft + elemWidth}px`
+      m!.style.display = 'block'
     }
+
   }, [commentRef, menuRef])
 
   useEffect(() => {

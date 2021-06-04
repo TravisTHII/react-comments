@@ -19,7 +19,7 @@ const initialState: State = {
   pinned: {} as Pinned,
   menu: {
     display: false,
-    commentRef: null!,
+    commentRef: null,
     data: []
   }
 }
@@ -217,7 +217,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
     }
   }
 
-  const getMenu = (ref: HTMLDivElement | null, menu: string[]) => {
+  const getMenu = (ref: HTMLDivElement, menu: string[]) => {
     if (state.menu.commentRef !== ref) {
 
       destroyMenu()
@@ -243,7 +243,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       type: THREAD.GET_MENU,
       payload: {
         display: false,
-        commentRef: null!,
+        commentRef: null,
         data: []
       }
     })

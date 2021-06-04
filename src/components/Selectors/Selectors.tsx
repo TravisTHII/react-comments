@@ -6,7 +6,7 @@ import {
 } from './'
 
 export const Selectors = () =>
-  <div className="thread_components">
+  <div className="thread_selectors">
     <SelectUser />
     <SelectThread />
   </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useGlobalContext } from 'context/Global'
 import { useCommentContext } from 'context/Comment'
 
-import { validText, expandTextarea } from 'utils/functions'
+import { validText, expandTextarea } from 'utils'
 
 import { Spinner } from '../Includes/Spinner'
 
@@ -59,7 +59,7 @@ export function Reply() {
 					<div className='reply_user'>
 						<div
 							className='background-ui'
-							style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}
+							style={{ backgroundImage: `url(/public/images/users/${user.image.avatar})` }}
 						>
 						</div>
 					</div>

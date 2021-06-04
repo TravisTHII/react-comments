@@ -37,7 +37,7 @@ export function Header({ refrence }: HeaderProps) {
   const activateMenu = () => {
     if (menu) {
       setActive(!active)
-      getMenu(refrence.current, menu)
+      getMenu(refrence.current!, menu)
     }
   }
 

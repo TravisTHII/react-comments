@@ -44,10 +44,10 @@ SelectUser & SelectThread
 ===============
 */
 
-.thread_components {
+.thread_selectors {
 	margin-bottom: 30px;
 }
-.thread_components > div:not(:last-child) {
+.thread_selectors > div:not(:last-child) {
 	margin-bottom: 20px;
 }
 
@@ -404,7 +404,7 @@ Thread
 }
 
 .comment_menu{
-	display: block;
+	display: none;
 	width: 150px;
 	min-height: 35px;
 	background-color: rgba(10,10,10,.9);

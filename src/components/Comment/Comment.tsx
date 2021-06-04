@@ -12,7 +12,7 @@ import {
 	Replies
 } from './'
 
-import { Menu } from '../Thread/Menu'
+import { Menu } from '../Thread'
 
 import { Spinner } from '../Includes/Spinner'
 
