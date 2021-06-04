@@ -1,2 +1,2 @@
 # React-comments (SERVER)
-React commenting app
+React commenting system server
