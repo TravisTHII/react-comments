@@ -8,7 +8,8 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].bundle.js'
+    filename: '[name].[contenthash].bundle.js',
+    assetModuleFilename: 'assets/[name].[hash].[ext]'
   },
   module: {
     rules: [
@@ -33,6 +34,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.svg/,
+        type: 'asset/resource'
       }
     ]
   },

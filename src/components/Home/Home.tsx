@@ -8,7 +8,7 @@ import { Thread } from '../Thread'
 
 import { SkeletonLoader } from '../Skeletons'
 
-export function ReactComments() {
+export function Home() {
 
   const { thread, token, loading, fetched, getSelectors } = useGlobalContext()
 
@@ -40,10 +40,8 @@ export function ReactComments() {
   }
 
   return (
-    <div className="App">
-      <div id="Main">
-        {content}
-      </div>
+    <div id="ReactComments">
+      {content}
     </div>
   )
 }

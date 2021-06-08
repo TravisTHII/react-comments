@@ -1,7 +1,7 @@
 ![react-comments-git-logo](https://user-images.githubusercontent.com/75787788/113927690-ce415a00-97bb-11eb-8cf0-e03e0427890b.png)
 
-# React-comments
-React commenting app
+# React Comments
+React commenting app (Witcher 3 themed)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d7f65515-38ea-4a18-98a0-87c217cd14b8/deploy-status)](https://app.netlify.com/sites/react-comments/deploys)
 

@@ -4,16 +4,51 @@
 	--skeleton-color-dark-two: #777;
 }
 
-.App {
-	width: 100%;
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto';
+	background-color: #1a1a1a;
 }
 
-#Main {
+h1, h2, h3, p, ul {
+	padding: 0;
+	margin: 0;
+}
+button {
+	background: none;
+	border: none;
+	padding: 0;
+}
+input[type=button], input[type=submit], button{
+  cursor: pointer
+}
+ul {
+	list-style: none;
+}
+img {
+  width: 100%;
+  height: inherit;
+}
+
+/*
+=============== 
+ReactComments
+===============
+*/
+
+#ReactComments {
 	padding-bottom: 500px;
 	width: 600px;
 	margin: 0 auto;
 	min-height: 900px;
 }
+
+/*
+=============== 
+Header
+===============
+*/
 
 #header {
 	width: 100%;
@@ -22,14 +57,29 @@
 #header .header_container {
 	width: 90%;
 	height: 100%;
+  display: flex;
+  justify-content: space-between;
 	margin: 0 auto;
+}
+#header .header_container .header_logo {
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+#header .header_container .header_logo .react_comments_logo {
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+}
+#header .header_container .header_logo h1 {
+  font-size: 1.5rem;
 }
 #header .header_container .icons_container {
 	display: flex;
 	width: 110px;
 	height: 100%;
 	justify-content: space-between;
-	margin-left: auto;
 }
 #header .header_container .icons_container .icon {
 	color: #fff;
@@ -40,7 +90,7 @@
 
 /*
 =============== 
-SelectUser & SelectThread
+Selectors
 ===============
 */
 
