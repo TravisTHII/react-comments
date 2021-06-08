@@ -6,7 +6,7 @@ React commenting app (Witcher 3 themed)
 ## Overview
 
 This is a react app demonstrating a commenting platform.</br>
-It showcases the core aspects of a commenting system and how they all work together</br>
+It showcases the core aspects of a commenting system and how they all work together.</br>
 
 ## Features
   
