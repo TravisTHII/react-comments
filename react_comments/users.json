@@ -11,7 +11,7 @@
     "textColor": ""
   },
   "image": {
-    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/ciri.png"
+    "avatar": "ciri.png"
   },
   "__v": 0
 },{
@@ -27,7 +27,7 @@
     "textColor": ""
   },
   "image": {
-    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/triss.png"
+    "avatar": "triss.png"
   },
   "__v": 0
 },{
@@ -43,7 +43,7 @@
     "textColor": ""
   },
   "image": {
-    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/yennefer.png"
+    "avatar": "yennefer.png"
   },
   "__v": 0,
   "admin": true
@@ -60,7 +60,7 @@
     "textColor": ""
   },
   "image": {
-    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/vesemir.png"
+    "avatar": "vesemir.png"
   },
   "__v": 0
 },{
@@ -76,7 +76,7 @@
     "textColor": ""
   },
   "image": {
-    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/geralt.png"
+    "avatar": "geralt.png"
   },
   "__v": 0
 },{
@@ -92,7 +92,7 @@
     "textColor": ""
   },
   "image": {
-    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/dandelion.png"
+    "avatar": "dandelion.png"
   },
   "__v": 0
 }]
