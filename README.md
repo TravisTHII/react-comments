@@ -17,11 +17,11 @@ It showcases the core aspects of a commenting system and how they all work toget
  - Sort threads by old or new
  - pin comments to top of threads
 
-## Installation
+## Local Installation
 
 1. Clone both branches of this repo `main` & `server`
-2. Put the contents of `main` into a folder named client
-3. Put the contents of `server` into a folder named server
+2. Put the contents of `main` into a folder named `client`
+3. Put the contents of `server` into a folder named `server` (read the server branch `readme.md` for instructions on how to set up a local `MongoDB` installation)
 4. `yarn` or `npm` install the dependencies of both branches
 5. Put both folders into a single folder named `react-comments` (or your preferred name)
 6. open a terminal from the `react-comments` folder
