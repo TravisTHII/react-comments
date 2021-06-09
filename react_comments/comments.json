@@ -1,0 +1,783 @@
+[{
+  "_id": {
+    "$oid": "605ba173defdf009c08cf76e"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605b9e8e3358631408e4ec60"
+  },
+  "body": "Not much is known about Dandelion's family except that he was of noble birth and was a cousin of Ferrant de Lettenhove, the royal instigator of Kerack.\n\nHe received his early education in a temple school, where, according to Geralt, literacy was \"beaten into him with a cane\". However, he didn't truly get into poetry until he was 19, after being inspired by his love for Countess de Stael.\n\nDandelion studied the seven liberal arts for four years at Oxenfurt University before later becoming a professor, but only taught students for a year before leaving the academy to travel the world. He would, however, visit Oxenfurt from time to time to give guest lectures.\n\nWithin a very few years he gained worldwide fame and became known as one of the best minstrels in the Northern Kingdoms, with his best known song was the Ballad of the Lion Cub of Cintra.",
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-24T20:30:43.193Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba1b2f0530b2120bae44c"
+  },
+  "data": {
+    "edited": true
+  },
+  "thread": {
+    "$oid": "605b9e8e3358631408e4ec60"
+  },
+  "body": "Ciri was born in Skellige in Belleteyn of the following year and initially, Calanthe ordered her advisor Mousesack to kill Geralt, wishing to break free from the Law of Surprise. Mousesack was ready to go, as nobody simply refused the queen, but when he was summoned a short time later Calanthe retracted the order without explanation.\n\nGrowing up, not much is known about Ciri's relationship with her parents, though it appeared Pavetta adored her daughter, with others remarking how it was rare for her to be parted from Ciri.\n\nHowever, this didn't stop Pavetta from secretly sending Ciri ashore just as the small family was set to sail out from Skellige to Cintra, against Calanthe's wishes, who wished for them all to stay. Shortly after, Pavetta and Duny died at sea around the Sedna Abyss, making Ciri an orphan before she was 5 years old. Angry at her nephew-in-law, Crach an Craite, for letting them sail out, Calanthe then had Crach swear a blood oath that he'd always protect Ciri before deciding to forbid Ciri from visiting the isles again. However, this ban only lasted 6 months before Calanthe let Ciri visit Skellige once more every summer and winter.",
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-24T20:31:46.022Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba2bcf0530b2120bae44d"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605b9e8e3358631408e4ec60"
+  },
+  "body": "Considered among the oldest witchers remaining, Vesemir was born early enough to witness the construction of Kaer Morhen in the 11th century. He was claimed by the Law of Surprise by a mysterious individual known as Deglan and was brought to the Kaer Morhen valley to be trained as a witcher. His mentor and tutor was Barmin.\n\nIn the second half of the 12th century, Kaer Morhen was attacked by an enraged mob led by group of mages and priests. Vesemir survived, either not present in the keep during the pogrom or mistaken as dead by the mob as he lay unconscious among the corpses of his fellows. While the pogrom was condemned, the school never regained its full functionality.\n\nVesemir accompanied by witchers-in-training\n\nAfter the massacre, the school was run by Grandmaster Rennes, with Vesemir as second in command: a fencing instructor and precept for the witcher trainees, replacing Varin. At some point, he met Visenna outside Kaer Morhen, a sorceress who decided to give her child, a young boy named Geralt, to train as a witcher. Vesemir became a father figure to Geralt, but treated all young witchers with harsh affection. Apart from participating in the school's life, Vesemir also took some witcher contracts. One of his famous deeds involved disenchanting the curse afflicting the \"Swan of Poviss\".",
+  "user": {
+    "$oid": "6044f34998b59e39f46961b8"
+  },
+  "date": {
+    "$date": "2021-03-24T20:36:12.738Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba369f0530b2120bae44e"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605b9e8e3358631408e4ec60"
+  },
+  "body": "Not much is known about Triss' upbringing. Not even a precise time of her birth, which is a subject to some degree of confusion. What is known is the fact, that she was born and lived as a child in Maribor. Sometime during her childhood, she had a conduit moment and was noticed by sorcerers. Thus, she found her way to Aretuza. Here, she became a sorceress on her own, specializing in making of magical potions, mainly healing ones. This was rather amusing twist of fate as she herself was allergic to magical potions and could only tolerate non magical ones.\n\nAfter the graduation, she became a very well known and respected sorceress taking her assignment as a advisor to the throne of Temeria.\n\nDuring her studies, she befriended a fellow sorceress Yennefer of Vengerberg. During 1249, the two of them were already close friends and colleagues.",
+  "user": {
+    "$oid": "6044f31698b59e39f46961b6"
+  },
+  "date": {
+    "$date": "2021-03-24T20:39:05.812Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba45af0530b2120bae44f"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605b9e8e3358631408e4ec60"
+  },
+  "body": "Born in 1173, Yennefer had a rough childhood from the moment she was born due to her congenital hunchback. Her father immediately detested her due to this deformity and blamed Yennefer's mother for it, claiming it was through her side, with mages and elven blood, not to mention her having had an abortion before, that caused the deformity.\n\nHer mother initially tried to protect Yennefer, believing it was by the will of the gods, but her father still struck Yennefer until one day he left them both for someone else. After this, her mother, upset that her husband had left, also began to beat her own daughter.\n\nAt some point, due to her magical potential, she was received in the Aretuza school for sorceresses, where rectoress Tissaia de Vries became her teacher and mother figure. During her training, Yennefer tried to kill herself by cutting both of her wrists, severing her tendons, though she survived.\n\nTissaia claimed that the purposefulness of her attempt was the only thing that prevented her from feeling contempt for her weakness, and continued her training. In accordance with the sorceresses' tradition, any physical flaw, including her hunchback, was magically removed.\n\nYennefer eventually graduated as a sorceress.",
+  "user": {
+    "$oid": "6044f32e98b59e39f46961b7"
+  },
+  "date": {
+    "$date": "2021-03-24T20:43:06.625Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba493f0530b2120bae450"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605b9e8e3358631408e4ec60"
+  },
+  "body": "Geralt was the son of the sorceress Visenna and, presumably, the warrior Korin, but when he was born Visenna left him with the School of the Wolf at Kaer Morhen. There, Geralt was trained and made to be a witcher.\n\nHe survived the many blistering mutations required to grant witchers their abilities and passed the Trial of the Grasses. Geralt's intensive training and the mutagenic experimentation carried out upon him, granted him considerably greater strength, speed, endurance, resilience, healing, senses, complete immunity to diseases and conventional poisons, and extreme resistance to pain.",
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-24T20:44:03.075Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba595f0530b2120bae452"
+  },
+  "data": {
+    "edited": true
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "\"I don't believe in Melitele, don't believe in the existence of other gods either, but I respect your choice, your sacrifice. Your belief. Because your faith and sacrifice, the price you're paying for your silence, will make you a better, a greater being. Or, at least, it could. But my faithlessness can do nothing. It's powerless.\"\n\n\"You ask me what I believe in, in that case\"\n\n\"I believe in the sword\"\n\n                                                                                           - Geralt to Iola, The Last Wish",
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-24T20:48:21.607Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba605f0530b2120bae454"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "Why men throw their lives away attacking an armed witcher... I'll never know. Something wrong with my face?\n\n                                 - Geralt being attacked at Troubleu, Blood and Wine expansion",
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-24T20:50:13.213Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba64ff0530b2120bae455"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "When they're about to hang you, ask for a glass of water. You never know what might happen before they bring it.\n\n                                                                                        - Vesemir, The Lady of the Lake",
+  "user": {
+    "$oid": "6044f34998b59e39f46961b8"
+  },
+  "date": {
+    "$date": "2021-03-24T20:51:27.333Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba6b1f0530b2120bae457"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "In my book, friendship is all that matters. Well, friendship and love. And art. Oh, and wine...\n\n                                                          - Dandelion to Geralt, Blood and Wine expansion",
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-24T20:53:05.025Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba6f7f0530b2120bae458"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "No! I will not give in and I won't be swayed! I am the \"Fourteenth of the Hill\"! I am not a little frightened girl from a dark Maribor Tower anymore...\n\n                                                                                                      - Triss in Blood of Elves",
+  "user": {
+    "$oid": "6044f31698b59e39f46961b6"
+  },
+  "date": {
+    "$date": "2021-03-24T20:54:15.909Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba798f0530b2120bae45a"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba784f0530b2120bae459"
+  },
+  "body": "Hello everybody 😀",
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-24T20:56:56.562Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba7b1f0530b2120bae45b"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Hey",
+  "reply": {
+    "to": {
+      "$oid": "605ba798f0530b2120bae45a"
+    }
+  },
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-24T20:57:21.412Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba7bbf0530b2120bae45c"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Hi 😀",
+  "reply": {
+    "to": {
+      "$oid": "605ba798f0530b2120bae45a"
+    }
+  },
+  "user": {
+    "$oid": "6044f31698b59e39f46961b6"
+  },
+  "date": {
+    "$date": "2021-03-24T20:57:31.387Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba7c3f0530b2120bae45d"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "How are you?",
+  "reply": {
+    "to": {
+      "$oid": "605ba798f0530b2120bae45a"
+    }
+  },
+  "user": {
+    "$oid": "6044f32e98b59e39f46961b7"
+  },
+  "date": {
+    "$date": "2021-03-24T20:57:39.903Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ba812f0530b2120bae45e"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Hello Dandelion 😎",
+  "reply": {
+    "to": {
+      "$oid": "605ba798f0530b2120bae45a"
+    }
+  },
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-24T20:58:58.675Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bac7bf0530b2120bae45f"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "'Geralt?'\n'Yes, Yen.'\n'When I ... When we weren't together, did you go with any other women?'\n'No.'\n'Not once?'\n'Not once.'\n'Your voice didn't even waver. So I don't know why I don't believe you.'\n'I only ever thought about you, Yen.'\n'Now I believe you.'\n\n                                                                   - Yennefer and Geralt, The Lady of the Lake",
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-24T21:17:47.956Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bac97f0530b2120bae460"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "id you know I caught an arrow with my own hand, It's the truth I swear!\n\n                                                                                                                           - Dandelion",
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-24T21:18:15.478Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd23720920331e4203afe"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba784f0530b2120bae459"
+  },
+  "body": "Hi Ciri 💕",
+  "user": {
+    "$oid": "6044f32e98b59e39f46961b7"
+  },
+  "date": {
+    "$date": "2021-03-24T23:58:47.934Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd24220920331e4203aff"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Hey Yen!",
+  "reply": {
+    "to": {
+      "$oid": "605bd23720920331e4203afe"
+    }
+  },
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-24T23:58:58.548Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd29620920331e4203b00"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "What's up you two?",
+  "reply": {
+    "to": {
+      "$oid": "605bd23720920331e4203afe"
+    }
+  },
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-25T00:00:22.731Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd2b520920331e4203b01"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "I'm fine thanks for asking 💕",
+  "reply": {
+    "to": {
+      "$oid": "605ba7c3f0530b2120bae45d"
+    }
+  },
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-25T00:00:53.726Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd2be20920331e4203b02"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Hi 😀",
+  "reply": {
+    "to": {
+      "$oid": "605ba7bbf0530b2120bae45c"
+    }
+  },
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-25T00:01:02.369Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd2df20920331e4203b03"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Geralt!!!!! My friend, How are you 😊",
+  "reply": {
+    "to": {
+      "$oid": "605ba7b1f0530b2120bae45b"
+    }
+  },
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-25T00:01:35.550Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd34620920331e4203b04"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba4fbf0530b2120bae451"
+  },
+  "body": "Hatred and vengeance blinded me ... But I shall stand before them in humility. I shall remember the expression in their eyes. I hope the memory of those eyes will stop me making a similar mistake.\n\n                                                                                                - Ciri, The Lady of the Lake",
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-25T00:03:18.986Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd3a120920331e4203b05"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba784f0530b2120bae459"
+  },
+  "body": "Dog 🐶 or Cat 🐱",
+  "user": {
+    "$oid": "6044f31698b59e39f46961b6"
+  },
+  "date": {
+    "$date": "2021-03-25T00:04:49.319Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd3b320920331e4203b06"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "How about a wolf? 🐺",
+  "reply": {
+    "to": {
+      "$oid": "605bd3a120920331e4203b05"
+    }
+  },
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-25T00:05:07.576Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd3bc20920331e4203b07"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "No...",
+  "reply": {
+    "to": {
+      "$oid": "605bd3b320920331e4203b06"
+    }
+  },
+  "user": {
+    "$oid": "6044f31698b59e39f46961b6"
+  },
+  "date": {
+    "$date": "2021-03-25T00:05:16.670Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd3d720920331e4203b08"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "I also like wolves 🐺",
+  "reply": {
+    "to": {
+      "$oid": "605bd3b320920331e4203b06"
+    }
+  },
+  "user": {
+    "$oid": "6044f34998b59e39f46961b8"
+  },
+  "date": {
+    "$date": "2021-03-25T00:05:43.327Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd3e520920331e4203b09"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Cat",
+  "reply": {
+    "to": {
+      "$oid": "605bd3a120920331e4203b05"
+    }
+  },
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-25T00:05:57.977Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd42120920331e4203b0a"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "I'll go with the cat 😍",
+  "reply": {
+    "to": {
+      "$oid": "605bd3a120920331e4203b05"
+    }
+  },
+  "user": {
+    "$oid": "6044f32e98b59e39f46961b7"
+  },
+  "date": {
+    "$date": "2021-03-25T00:06:57.765Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd47320920331e4203b0b"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "This reminds me of the time I saved Geralt from a stray cat.",
+  "reply": {
+    "to": {
+      "$oid": "605bd3a120920331e4203b05"
+    }
+  },
+  "user": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "date": {
+    "$date": "2021-03-25T00:08:19.207Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd47f20920331e4203b0c"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "You what?!",
+  "reply": {
+    "to": {
+      "$oid": "605bd47320920331e4203b0b"
+    }
+  },
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-25T00:08:31.024Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd48c20920331e4203b0d"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "LOL 😂",
+  "reply": {
+    "to": {
+      "$oid": "605bd47f20920331e4203b0c"
+    }
+  },
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-25T00:08:44.995Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd57420920331e4203b0e"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba784f0530b2120bae459"
+  },
+  "body": "Geralt...",
+  "user": {
+    "$oid": "6044f32e98b59e39f46961b7"
+  },
+  "date": {
+    "$date": "2021-03-25T00:12:36.663Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd57f20920331e4203b0f"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Yen...",
+  "reply": {
+    "to": {
+      "$oid": "605bd57420920331e4203b0e"
+    }
+  },
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-25T00:12:47.694Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd58920920331e4203b10"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Ciri...",
+  "reply": {
+    "to": {
+      "$oid": "605bd57420920331e4203b0e"
+    }
+  },
+  "user": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "date": {
+    "$date": "2021-03-25T00:12:57.477Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd5f620920331e4203b11"
+  },
+  "data": {
+    "edited": false
+  },
+  "thread": {
+    "$oid": "605ba784f0530b2120bae459"
+  },
+  "body": "Who wants to hunt monsters? 👾",
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-25T00:14:46.668Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd64420920331e4203b12"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Sure, want a crossbow.\n\nWon it in a card game while you ran around. Might come in handy.\n\n🏹",
+  "reply": {
+    "to": {
+      "$oid": "605bd5f620920331e4203b11"
+    }
+  },
+  "user": {
+    "$oid": "6044f34998b59e39f46961b8"
+  },
+  "date": {
+    "$date": "2021-03-25T00:16:04.456Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd66520920331e4203b13"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "A witcher with a crossbow? We breaking with tradition?",
+  "reply": {
+    "to": {
+      "$oid": "605bd64420920331e4203b12"
+    }
+  },
+  "user": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "date": {
+    "$date": "2021-03-25T00:16:37.538Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605bd68120920331e4203b14"
+  },
+  "data": {
+    "edited": false
+  },
+  "body": "Stop talking. Got a griffin to kill.",
+  "reply": {
+    "to": {
+      "$oid": "605bd66520920331e4203b13"
+    }
+  },
+  "user": {
+    "$oid": "6044f34998b59e39f46961b8"
+  },
+  "date": {
+    "$date": "2021-03-25T00:17:05.043Z"
+  },
+  "__v": 0
+}]

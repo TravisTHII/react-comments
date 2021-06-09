@@ -1,0 +1,98 @@
+[{
+  "_id": {
+    "$oid": "6044f2e198b59e39f46961b5"
+  },
+  "username": "Cirilla Fiona Elen Riannon",
+  "slug": "cirilla-fiona-elen-riannon",
+  "motto": "Lady of Space and Time",
+  "badge": {
+    "title": "Elder Blood",
+    "backgroundColor": "teal",
+    "textColor": ""
+  },
+  "image": {
+    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/ciri.png"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6044f31698b59e39f46961b6"
+  },
+  "username": "Triss Merigold",
+  "slug": "triss-merigold",
+  "motto": "Merigold the Fearless",
+  "badge": {
+    "title": "Lodge of Sorceresses",
+    "backgroundColor": "#d44e00",
+    "textColor": ""
+  },
+  "image": {
+    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/triss.png"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6044f32e98b59e39f46961b7"
+  },
+  "username": "Yennefer of Vengerberg",
+  "slug": "yennefer-of-vengerberg",
+  "motto": "Horsewoman of War",
+  "badge": {
+    "title": "Lodge of Sorceresses",
+    "backgroundColor": "#ab0a0a",
+    "textColor": ""
+  },
+  "image": {
+    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/yennefer.png"
+  },
+  "__v": 0,
+  "admin": true
+},{
+  "_id": {
+    "$oid": "6044f34998b59e39f46961b8"
+  },
+  "username": "Vesemir",
+  "slug": "vesemir",
+  "motto": "School of the Wolf",
+  "badge": {
+    "title": "Witcher",
+    "backgroundColor": "#7d7d7d",
+    "textColor": ""
+  },
+  "image": {
+    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/vesemir.png"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6044f35b98b59e39f46961b9"
+  },
+  "username": "Geralt of Rivia",
+  "slug": "geralt-of-rivia",
+  "motto": "White Wolf",
+  "badge": {
+    "title": "Witcher",
+    "backgroundColor": "#7d7d7d",
+    "textColor": ""
+  },
+  "image": {
+    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/geralt.png"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605b9fd93358631408e4ec61"
+  },
+  "username": "Dandelion",
+  "slug": "dandelion",
+  "motto": "Master of the Seven Liberal Arts",
+  "badge": {
+    "title": "Nightingale Prince",
+    "backgroundColor": "#8B1E4A",
+    "textColor": ""
+  },
+  "image": {
+    "avatar": "https://raw.githubusercontent.com/TravisTHII/comments/main/public/images/users/dandelion.png"
+  },
+  "__v": 0
+}]
