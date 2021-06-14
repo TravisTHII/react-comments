@@ -33,7 +33,7 @@ export const Provider: FC = ({ children }) => {
 
       dispatch({
         type: GLOBAL.LOADING
-      })      
+      })
 
       const { data: { threads, users } } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/thread/selectors`)
 

@@ -9,102 +9,102 @@ import { Spinner } from '../Includes/Spinner'
 
 export function Reply() {
 
-	const { user, loggedIn } = useGlobalContext()
+  const { user, loggedIn } = useGlobalContext()
 
-	const { replyLoad, isReplying, postReply, openReply } = useCommentContext()
+  const { replyLoad, isReplying, postReply, openReply } = useCommentContext()
 
-	const [value, setValue] = useState('')
-	const [active, setActive] = useState(false)
+  const [value, setValue] = useState('')
+  const [active, setActive] = useState(false)
 
-	let content
+  let content
 
-	useEffect(() => {
-		return () => {
-			setValue('')
-			setActive(false)
-		}
-	}, [isReplying])
+  useEffect(() => {
+    return () => {
+      setValue('')
+      setActive(false)
+    }
+  }, [isReplying])
 
-	const expandText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setValue(e.target.value)
+  const expandText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.target.value)
 
-		if (!validText(e.target.value)) {
-			expandTextarea(e.target, 45)
-			setActive(true)
-		} else {
-			setActive(false)
-		}
-	}
+    if (!validText(e.target.value)) {
+      expandTextarea(e.target, 45)
+      setActive(true)
+    } else {
+      setActive(false)
+    }
+  }
 
-	const submitReply = () => {
-		if (!validText(value)) {
-			setValue('')
+  const submitReply = () => {
+    if (!validText(value)) {
+      setValue('')
 
-			postReply(value, user._id)
-		}
-	}
+      postReply(value, user._id)
+    }
+  }
 
-	if (!loggedIn) {
+  if (!loggedIn) {
 
-		content =
-			<div className='sitc'>
-				<h3 className='text-ui fwn'>Please select a user to <span className="highlight-red">reply.</span></h3>
-			</div>
+    content =
+      <div className='sitc'>
+        <h3 className='text-ui fwn'>Please select a user to <span className="highlight-red">reply.</span></h3>
+      </div>
 
-	} else {
+  } else {
 
-		content =
-			<>
-				<div className="reply_content">
-					<div className='reply_user'>
-						<div
-							className='background-ui'
-							style={{ backgroundImage: `url(${user.image.avatar})` }}
-						>
-						</div>
-					</div>
-					<div className={`reply_txt${replyLoad ? ' disabled' : ''}`}>
-						<textarea
-							value={value}
-							className="reply_textarea comment_textarea"
-							name="reply_content"
-							placeholder="What's on your mind?"
-							maxLength={9999}
-							spellCheck="false"
-							onChange={expandText}
-						>
-						</textarea>
-					</div>
-				</div>
-				<div className={`comment_actions${replyLoad ? ' disabled' : ''}`}>
-					<div className="cac">
-						<button
-							className="enspr_red_btn"
-							type="button"
-							onClick={() => openReply()}
-						>
-							Cancel
+    content =
+      <>
+        <div className="reply_content">
+          <div className='reply_user'>
+            <div
+              className='background-ui'
+              style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}
+            >
+            </div>
+          </div>
+          <div className={`reply_txt${replyLoad ? ' disabled' : ''}`}>
+            <textarea
+              value={value}
+              className="reply_textarea comment_textarea"
+              name="reply_content"
+              placeholder="What's on your mind?"
+              maxLength={9999}
+              spellCheck="false"
+              onChange={expandText}
+            >
+            </textarea>
+          </div>
+        </div>
+        <div className={`comment_actions${replyLoad ? ' disabled' : ''}`}>
+          <div className="cac">
+            <button
+              className="enspr_red_btn"
+              type="button"
+              onClick={() => openReply()}
+            >
+              Cancel
 						</button>
-						<button
-							className={`enspr_red_btn${!active ? ' disabled' : ''}`}
-							type="button"
-							disabled={!active ? true : false}
-							onClick={submitReply}
-						>
-							{replyLoad
-								? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '30px', height: '30px' }} />
-								: 'Reply'
-							}
-						</button>
-					</div>
-				</div>
-			</>
+            <button
+              className={`enspr_red_btn${!active ? ' disabled' : ''}`}
+              type="button"
+              disabled={!active ? true : false}
+              onClick={submitReply}
+            >
+              {replyLoad
+                ? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '30px', height: '30px' }} />
+                : 'Reply'
+              }
+            </button>
+          </div>
+        </div>
+      </>
 
-	}
+  }
 
-	return (
-		<div className="comment_reply">
-			{isReplying && content}
-		</div>
-	)
+  return (
+    <div className="comment_reply">
+      {isReplying && content}
+    </div>
+  )
 }

@@ -9,11 +9,11 @@ import { InstanceProps } from './types'
 
 export function Instance({ comment }: InstanceProps) {
 
-	const { token } = useGlobalContext()
+  const { token } = useGlobalContext()
 
-	return (
-		<CommentProvider comment={comment} token={token}>
-			<Comment />
-		</CommentProvider>
-	)
+  return (
+    <CommentProvider comment={comment} token={token}>
+      <Comment />
+    </CommentProvider>
+  )
 }

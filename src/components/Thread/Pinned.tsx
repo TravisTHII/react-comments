@@ -8,49 +8,49 @@ import { Spinner } from '../Includes/Spinner'
 
 export function Pinned() {
 
-	const {
-		pinned: {
-			pinned_id,
-			hasPinned,
-			useInitialPinned,
-			useLocalPinned,
-			loading,
-			comment
-		},
-		getPinnedComment
-	} = useThreadContext()
+  const {
+    pinned: {
+      pinned_id,
+      hasPinned,
+      useInitialPinned,
+      useLocalPinned,
+      loading,
+      comment
+    },
+    getPinnedComment
+  } = useThreadContext()
 
-	let content
+  let content
 
-	useEffect(() => {
-		if (useLocalPinned)
-			getPinnedComment()
+  useEffect(() => {
+    if (useLocalPinned)
+      getPinnedComment()
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pinned_id, useLocalPinned])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pinned_id, useLocalPinned])
 
-	if (loading) {
+  if (loading) {
 
-		content =
-			<div>
-				<Spinner style={{ display: 'block', margin: '0 auto' }} />
-			</div>
+    content =
+      <div>
+        <Spinner style={{ display: 'block', margin: '0 auto' }} />
+      </div>
 
-	} else if (comment) {
+  } else if (comment) {
 
-		content =
-			<Comment
-				comment={comment}
-			/>
+    content =
+      <Comment
+        comment={comment}
+      />
 
-	}
+  }
 
-	return (
-		<>
-			{useInitialPinned
-				? <Comment comment={comment} />
-				: hasPinned && content
-			}
-		</>
-	)
+  return (
+    <>
+      {useInitialPinned
+        ? <Comment comment={comment} />
+        : hasPinned && content
+      }
+    </>
+  )
 }
