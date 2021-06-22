@@ -36,26 +36,9 @@ export type State = {
   deleteLoad: boolean
 }
 
-export enum COMMENT {
-  GET_REPLIES = 'GET_REPLIES',
-  LOADING = 'LOADING',
-  OPEN_REPLY = 'OPEN_REPLY',
-  SHOW_MORE = 'SHOW_MORE',
-  POST_REPLY = 'POST_REPLY',
-  REPLY_LOADING = 'REPLY_LOADING',
-  SHOW_REPLIES = 'SHOW_REPLIES',
-  MORE_REPLIES = 'MORE_REPLIES',
-  REPLIES_LOADING = 'REPLIES_LOADING',
-  PIN_LOAD = 'PIN_LOAD',
-  EDIT = 'EDIT',
-  EDIT_LOAD = 'EDIT_LOAD',
-  START_EDITING = 'START_EDITING',
-  DELETE_LOAD = 'DELETE_LOAD',
-}
-
 export type Action =
   | {
-    type: COMMENT.GET_REPLIES
+    type: 'GET_REPLIES'
     payload: {
       fetched?: boolean
       loading?: boolean
@@ -64,19 +47,18 @@ export type Action =
     }
   }
   | {
-    type: COMMENT.LOADING
-    payload?: {}
+    type: 'LOADING'
   }
   | {
-    type: COMMENT.OPEN_REPLY
+    type: 'OPEN_REPLY'
     payload: { isReplying: boolean }
   }
   | {
-    type: COMMENT.SHOW_MORE
+    type: 'SHOW_MORE'
     payload: { showMore: boolean }
   }
   | {
-    type: COMMENT.POST_REPLY
+    type: 'POST_REPLY'
     payload: {
       replyLoad?: boolean
       localReplies?: boolean
@@ -84,15 +66,14 @@ export type Action =
     }
   }
   | {
-    type: COMMENT.REPLY_LOADING
-    payload?: {}
+    type: 'REPLY_LOADING'
   }
   | {
-    type: COMMENT.SHOW_REPLIES
+    type: 'SHOW_REPLIES'
     payload: { showReplies: boolean }
   }
   | {
-    type: COMMENT.MORE_REPLIES
+    type: 'MORE_REPLIES'
     payload: {
       moreLoading?: boolean
       paging: Paging
@@ -100,29 +81,27 @@ export type Action =
     }
   }
   | {
-    type: COMMENT.REPLIES_LOADING
-    payload?: {}
+    type: 'REPLIES_LOADING'
   }
   | {
-    type: COMMENT.PIN_LOAD
+    type: 'PIN_LOAD'
     payload: { pinLoad: boolean }
   }
   | {
-    type: COMMENT.EDIT
+    type: 'EDIT'
     payload?: {
       editLoad: boolean
       isEditing: boolean
     }
   }
   | {
-    type: COMMENT.EDIT_LOAD
-    payload?: {}
+    type: 'EDIT_LOAD'
   }
   | {
-    type: COMMENT.START_EDITING
+    type: 'START_EDITING'
     payload: { isEditing: boolean }
   }
   | {
-    type: COMMENT.DELETE_LOAD
+    type: 'DELETE_LOAD'
     payload: { deleteLoad: boolean }
   }

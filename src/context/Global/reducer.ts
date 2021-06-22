@@ -1,45 +1,43 @@
-// @ts-nocheck
-import { GLOBAL, State, Action } from './types'
+import { State, Action } from './types'
 
 export const reducer = (state: State, action: Action): State => {
-  const { type, payload } = action
 
-  if (type === GLOBAL.SELECTORS) {
+  if (action.type === 'SELECTORS') {
     return {
       ...state,
       loading: false,
       fetched: true,
-      threads: payload.threads,
-      users: payload.users
+      threads: action.payload.threads,
+      users: action.payload.users
     }
   }
 
-  if (type === GLOBAL.SELECT_THREAD) {
+  if (action.type === 'SELECT_THREAD') {
     return {
       ...state,
-      thread: payload.thread
+      thread: action.payload.thread
     }
   }
 
-  if (type === GLOBAL.AUTH) {
+  if (action.type === 'AUTH') {
     return {
       ...state,
       loading: false,
       userLoading: false,
-      loggedIn: payload.loggedIn,
-      token: payload.token,
-      user: payload.user
+      loggedIn: action.payload.loggedIn,
+      token: action.payload.token,
+      user: action.payload.user
     }
   }
 
-  if (type === GLOBAL.CHANGE_USER) {
+  if (action.type === 'CHANGE_USER') {
     return {
       ...state,
       userLoading: true
     }
   }
 
-  if (type === GLOBAL.LOADING) {
+  if (action.type === 'LOADING') {
     return {
       ...state,
       loading: true

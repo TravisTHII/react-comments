@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { reducer } from './reducer'
 
-import { State, InitialStateType, GLOBAL } from './types'
+import { State, InitialStateType } from './types'
 
 import { User } from '../../types'
 
@@ -32,7 +32,7 @@ export const Provider: FC = ({ children }) => {
     try {
 
       dispatch({
-        type: GLOBAL.LOADING
+        type: 'LOADING'
       })
 
       const { data: { threads, users } } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/thread/selectors`)
@@ -40,7 +40,7 @@ export const Provider: FC = ({ children }) => {
       selectThread(threads[0]._id)
 
       dispatch({
-        type: GLOBAL.SELECTORS,
+        type: 'SELECTORS',
         payload: {
           threads,
           users
@@ -56,7 +56,7 @@ export const Provider: FC = ({ children }) => {
 
   const selectThread = (thread: string) => {
     dispatch({
-      type: GLOBAL.SELECT_THREAD,
+      type: 'SELECT_THREAD',
       payload: {
         thread
       }
@@ -67,17 +67,17 @@ export const Provider: FC = ({ children }) => {
     try {
 
       dispatch({
-        type: GLOBAL.CHANGE_USER
+        type: 'CHANGE_USER'
       })
 
       if (state.loggedIn && state.user === user) {
 
         dispatch({
-          type: GLOBAL.AUTH,
+          type: 'AUTH',
           payload: {
             loggedIn: false,
             token: '',
-            user: null
+            user: {} as User
           }
         })
 
@@ -86,7 +86,7 @@ export const Provider: FC = ({ children }) => {
         const { data: { token } } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/token`, { user })
 
         dispatch({
-          type: GLOBAL.AUTH,
+          type: 'AUTH',
           payload: {
             user: user,
             loggedIn: true,

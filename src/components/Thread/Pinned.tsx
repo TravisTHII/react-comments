@@ -48,7 +48,7 @@ export function Pinned() {
   return (
     <>
       {useInitialPinned
-        ? <Comment comment={comment} />
+        ? <Comment comment={comment!} />
         : hasPinned && content
       }
     </>
