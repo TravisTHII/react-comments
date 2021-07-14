@@ -43,7 +43,7 @@ export type Action =
       fetched?: boolean
       total: number
       paging: Paging
-      pinned: Comment
+      pinned: Pinned
       comments: Comment[]
     }
   }
@@ -52,7 +52,7 @@ export type Action =
     payload: {
       sortLoad?: boolean
       paging: Paging
-      pinned: Comment
+      pinned: Pinned
       comments: Comment[]
     }
   }

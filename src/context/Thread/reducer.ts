@@ -10,8 +10,7 @@ export const reducer = (state: State, action: Action): State => {
       total: action.payload.total,
       paging: action.payload.paging,
       pinned: {
-        ...state.pinned,
-        comment: action.payload.pinned
+        ...action.payload.pinned
       },
       comments: action.payload.comments
     }
@@ -23,8 +22,7 @@ export const reducer = (state: State, action: Action): State => {
       sortLoad: false,
       paging: action.payload.paging,
       pinned: {
-        ...state.pinned,
-        comment: action.payload.pinned
+        ...action.payload.pinned
       },
       comments: action.payload.comments
     }
