@@ -26,9 +26,7 @@ export function Thread() {
 
   useEffect(() => {
     getThread()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, thread])
+  }, [user, thread, getThread])
 
   let content
     , sorted

@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext, useReducer } from 'react'
+import React, { createContext, FC, useCallback, useContext, useReducer } from 'react'
 import axios from 'axios'
 
 import { reducer } from './reducer'
@@ -28,7 +28,7 @@ export const Provider: FC = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const getSelectors = async () => {
+  const getSelectors = useCallback(async () => {
     try {
 
       dispatch({
@@ -52,7 +52,7 @@ export const Provider: FC = ({ children }) => {
       console.error(error)
 
     }
-  }
+  }, [])
 
   const selectThread = (thread: string) => {
     dispatch({

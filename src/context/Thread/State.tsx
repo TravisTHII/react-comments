@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useReducer, useCallback } from 'react'
 import axios from 'axios'
 
 import { reducer } from './reducer'
@@ -32,7 +32,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const getThread = async () => {
+  const getThread = useCallback(async () => {
     try {
 
       dispatch({
@@ -72,7 +72,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       })
 
     }
-  }
+  }, [thread, token])
 
   const sortThread = async (sort: string) => {
     try {

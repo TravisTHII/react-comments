@@ -14,9 +14,7 @@ export function Home() {
 
   useEffect(() => {
     getSelectors()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [getSelectors])
 
   window.onbeforeunload = () => { window.scrollTo(0, 0) }
 
