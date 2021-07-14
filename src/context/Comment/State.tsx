@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { reducer } from './reducer'
 
-import { State, COMMENT, InitialStateType, ProviderProps } from './types'
+import { State, InitialStateType, ProviderProps } from './types'
 
 const initialState: State = {
   paging: {},
@@ -33,12 +33,12 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
   const getReplies = async () => {
     try {
 
-      dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: !state.showReplies } })
+      dispatch({ type: 'SHOW_REPLIES', payload: { showReplies: !state.showReplies } })
 
       if (!state.fetched && !state.showReplies) {
 
         dispatch({
-          type: COMMENT.LOADING
+          type: 'LOADING'
         })
 
         const {
@@ -53,7 +53,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         )
 
         dispatch({
-          type: COMMENT.GET_REPLIES,
+          type: 'GET_REPLIES',
           payload: {
             paging,
             replies
@@ -75,7 +75,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
       if (!state.moreLoading) {
 
         dispatch({
-          type: COMMENT.REPLIES_LOADING
+          type: 'REPLIES_LOADING'
         })
 
         const {
@@ -90,7 +90,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         )
 
         dispatch({
-          type: COMMENT.MORE_REPLIES,
+          type: 'MORE_REPLIES',
           payload: {
             paging,
             replies
@@ -112,12 +112,12 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
       if (!state.replyLoad) {
 
         dispatch({
-          type: COMMENT.REPLY_LOADING
+          type: 'REPLY_LOADING'
         })
 
-        dispatch({ type: COMMENT.OPEN_REPLY, payload: { isReplying: false } })
+        dispatch({ type: 'OPEN_REPLY', payload: { isReplying: false } })
 
-        dispatch({ type: COMMENT.SHOW_REPLIES, payload: { showReplies: true } })
+        dispatch({ type: 'SHOW_REPLIES', payload: { showReplies: true } })
 
         const {
           data
@@ -134,7 +134,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         }
 
         dispatch({
-          type: COMMENT.POST_REPLY,
+          type: 'POST_REPLY',
           payload: {
             reply: data.comment
           }
@@ -151,7 +151,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
   const seeMore = () => {
     dispatch({
-      type: COMMENT.SHOW_MORE,
+      type: 'SHOW_MORE',
       payload: {
         showMore: !state.showMore
       }
@@ -160,7 +160,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
   const openReply = () => {
     dispatch({
-      type: COMMENT.OPEN_REPLY,
+      type: 'OPEN_REPLY',
       payload: {
         isReplying: !state.isReplying
       }
@@ -170,7 +170,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
   const pinComment = async (thread: string) => {
     try {
 
-      dispatch({ type: COMMENT.PIN_LOAD, payload: { pinLoad: true } })
+      dispatch({ type: 'PIN_LOAD', payload: { pinLoad: true } })
 
       const {
         data: {
@@ -181,7 +181,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         { thread, comment: comment._id }
       )
 
-      dispatch({ type: COMMENT.PIN_LOAD, payload: { pinLoad: false } })
+      dispatch({ type: 'PIN_LOAD', payload: { pinLoad: false } })
 
       console.log(`%c${message}`, 'color: #fff; font-size: 15px')
 
@@ -200,7 +200,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
       if (!state.editLoad) {
 
         dispatch({
-          type: COMMENT.EDIT_LOAD
+          type: 'EDIT_LOAD'
         })
 
         const {
@@ -218,7 +218,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         comment.data = editedComment.data
 
         dispatch({
-          type: COMMENT.EDIT
+          type: 'EDIT'
         })
 
         console.log(`%c${message}`, 'color: #fff; font-size: 15px')
@@ -236,7 +236,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
     if (!state.editLoad) {
 
       dispatch({
-        type: COMMENT.START_EDITING,
+        type: 'START_EDITING',
         payload: {
           isEditing: !state.isEditing
         }
@@ -249,7 +249,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
     try {
 
       dispatch({
-        type: COMMENT.DELETE_LOAD,
+        type: 'DELETE_LOAD',
         payload: {
           deleteLoad: true
         }
@@ -267,7 +267,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
       deleteRef.parentNode.removeChild(deleteRef)
 
       dispatch({
-        type: COMMENT.DELETE_LOAD,
+        type: 'DELETE_LOAD',
         payload: {
           deleteLoad: false
         }

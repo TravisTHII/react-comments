@@ -19,25 +19,15 @@ export type State = {
   updating: boolean
 }
 
-export enum GLOBAL {
-  LOADING = 'LOADING',
-  CHANGE_USER = 'CHANGE_USER',
-  SELECTORS = 'SELECTORS',
-  SELECT_THREAD = 'SELECT_THREAD',
-  AUTH = 'AUTH',
-}
-
 export type Action =
   | {
-    type: GLOBAL.LOADING
-    payload?: {}
+    type: 'LOADING'
   }
   | {
-    type: GLOBAL.CHANGE_USER
-    payload?: {}
+    type: 'CHANGE_USER'
   }
   | {
-    type: GLOBAL.SELECTORS
+    type: 'SELECTORS'
     payload: {
       loading?: boolean
       fetched?: boolean
@@ -46,17 +36,17 @@ export type Action =
     }
   }
   | {
-    type: GLOBAL.SELECT_THREAD
+    type: 'SELECT_THREAD'
     payload: { thread: string }
   }
   | {
-    type: GLOBAL.AUTH
+    type: 'AUTH'
     payload: {
       loading?: boolean
       userLoading?: boolean
       loggedIn: boolean,
       token: string,
-      user: User | null
+      user: User
     }
   }
 

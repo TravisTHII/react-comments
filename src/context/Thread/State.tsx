@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { reducer } from './reducer'
 
-import { THREAD, ProviderProps, State, InitialStateType, Pinned } from './types'
+import { ProviderProps, State, InitialStateType, Pinned } from './types'
 
 const initialState: State = {
   total: 0,
@@ -36,7 +36,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
     try {
 
       dispatch({
-        type: THREAD.LOAD_THREAD
+        type: 'LOAD_THREAD'
       })
 
       const {
@@ -54,7 +54,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       )
 
       dispatch({
-        type: THREAD.GET_THREAD,
+        type: 'GET_THREAD',
         payload: {
           total,
           paging,
@@ -66,7 +66,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
     } catch (error) {
 
       dispatch({
-        type: THREAD.THREAD_ERROR
+        type: 'THREAD_ERROR'
       })
 
     }
@@ -78,10 +78,10 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       if (!state.sortLoad) {
 
         dispatch({
-          type: THREAD.LOAD_SORT
+          type: 'LOAD_SORT'
         })
 
-        dispatch({ type: THREAD.SET_T_SORT, payload: { sort } })
+        dispatch({ type: 'SET_T_SORT', payload: { sort } })
 
         const {
           data: {
@@ -95,7 +95,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         )
 
         dispatch({
-          type: THREAD.SORT_THREAD,
+          type: 'SORT_THREAD',
           payload: {
             paging,
             pinned,
@@ -118,7 +118,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       if (!state.moreLoad) {
 
         dispatch({
-          type: THREAD.LOAD_T_MORE
+          type: 'LOAD_T_MORE'
         })
 
         const {
@@ -132,7 +132,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         )
 
         dispatch({
-          type: THREAD.MORE_THREAD,
+          type: 'MORE_THREAD',
           payload: {
             paging,
             comments
@@ -154,7 +154,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       if (!state.postLoad) {
 
         dispatch({
-          type: THREAD.TP_LOAD
+          type: 'TP_LOAD'
         })
 
         const {
@@ -169,7 +169,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         )
 
         dispatch({
-          type: THREAD.POST_COMMENT,
+          type: 'POST_COMMENT',
           payload: {
             comment
           }
@@ -190,7 +190,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       if (!state.pinned.loading) {
 
         dispatch({
-          type: THREAD.PIN_LOADING
+          type: 'PIN_LOADING'
         })
 
         const {
@@ -204,7 +204,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         )
 
         dispatch({
-          type: THREAD.PIN_COMMENT,
+          type: 'PIN_COMMENT',
           payload: {
             comment
           }
@@ -223,7 +223,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       destroyMenu()
 
       dispatch({
-        type: THREAD.GET_MENU,
+        type: 'GET_MENU',
         payload: {
           display: true,
           commentRef: ref,
@@ -240,7 +240,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
 
   const destroyMenu = () => {
     dispatch({
-      type: THREAD.GET_MENU,
+      type: 'GET_MENU',
       payload: {
         display: false,
         commentRef: null,
@@ -253,7 +253,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
     switch (type) {
       case 'Pin':
         dispatch({
-          type: THREAD.UPDATE_PIN,
+          type: 'UPDATE_PIN',
           payload: {
             pinned_id: _id,
             useLocalPinned: true
@@ -262,12 +262,12 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         break;
       case 'Unpin':
         dispatch({
-          type: THREAD.UPDATE_PIN,
+          type: 'UPDATE_PIN',
           payload: {
             pinned_id: "",
             hasPinned: false,
             useInitialPinned: false,
-            comment: {}
+            comment: null
           }
         })
         break;

@@ -35,46 +35,29 @@ export type State = {
   menu: Menu
 }
 
-export enum THREAD {
-  GET_THREAD = 'GET_THREAD',
-  SORT_THREAD = 'SORT_THREAD',
-  LOAD_THREAD = 'LOAD_THREAD',
-  MORE_THREAD = 'MORE_THREAD',
-  LOAD_SORT = 'LOAD_SORT',
-  SET_T_SORT = 'SET_T_SORT',
-  LOAD_T_MORE = 'LOAD_T_MORE',
-  TP_LOAD = 'TP_LOAD',
-  POST_COMMENT = 'POST_COMMENT',
-  GET_MENU = 'GET_MENU',
-  PIN_COMMENT = 'PIN_COMMENT',
-  UPDATE_PIN = 'UPDATE_PIN',
-  PIN_LOADING = 'PIN_LOADING',
-  THREAD_ERROR = 'THREAD_ERROR'
-}
-
 export type Action =
   | {
-    type: THREAD.GET_THREAD
+    type: 'GET_THREAD'
     payload: {
       loading?: boolean
       fetched?: boolean
       total: number
       paging: Paging
-      pinned: Comment
+      pinned: Pinned
       comments: Comment[]
     }
   }
   | {
-    type: THREAD.SORT_THREAD
+    type: 'SORT_THREAD'
     payload: {
       sortLoad?: boolean
       paging: Paging
-      pinned: Comment
+      pinned: Pinned
       comments: Comment[]
     }
   }
   | {
-    type: THREAD.MORE_THREAD
+    type: 'MORE_THREAD'
     payload: {
       moreLoad?: boolean
       paging: Paging
@@ -82,21 +65,21 @@ export type Action =
     }
   }
   | {
-    type: THREAD.POST_COMMENT
+    type: 'POST_COMMENT'
     payload: {
       postLoad?: boolean
       comment: Comment
     }
   }
   | {
-    type: THREAD.PIN_COMMENT
+    type: 'PIN_COMMENT'
     payload: {
       comment: Comment
       loading?: boolean
     }
   }
   | {
-    type: THREAD.UPDATE_PIN
+    type: 'UPDATE_PIN'
     payload: {
       pinned_id: string,
       useLocalPinned: boolean
@@ -104,41 +87,36 @@ export type Action =
       pinned_id: string,
       hasPinned: boolean,
       useInitialPinned: boolean,
-      comment: {}
+      comment: null
     }
   }
   | {
-    type: THREAD.GET_MENU
+    type: 'GET_MENU'
     payload: Menu
   }
   | {
-    type: THREAD.SET_T_SORT
+    type: 'SET_T_SORT'
     payload: {
       sort: string
     }
   }
   | {
-    type: THREAD.LOAD_THREAD
-    payload?: {}
+    type: 'LOAD_THREAD'
   }
   | {
-    type: THREAD.LOAD_SORT
-    payload?: {}
+    type: 'LOAD_SORT'
   }
   | {
-    type: THREAD.LOAD_T_MORE
-    payload?: {}
+    type: 'LOAD_T_MORE'
   }
   | {
-    type: THREAD.TP_LOAD
-    payload?: {}
+    type: 'TP_LOAD'
   }
   | {
-    type: THREAD.PIN_LOADING
-    payload?: {}
+    type: 'PIN_LOADING'
   }
   | {
-    type: THREAD.THREAD_ERROR
+    type: 'THREAD_ERROR'
     payload?: {
       loading?: boolean
       error?: boolean
@@ -150,7 +128,7 @@ export type Pinned = {
   hasPinned: boolean
   useInitialPinned: boolean
   useLocalPinned: boolean
-  comment: Comment
+  comment: Comment | null
   loading: boolean
 }
 

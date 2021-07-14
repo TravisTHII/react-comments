@@ -1,38 +1,36 @@
-// @ts-nocheck
-import { COMMENT, Action, State } from './types'
+import { Action, State } from './types'
 
 export const reducer = (state: State, action: Action): State => {
-  const { type, payload } = action
 
-  if (type === COMMENT.GET_REPLIES) {
+  if (action.type === 'GET_REPLIES') {
     return {
       ...state,
       fetched: true,
       loading: false,
-      paging: payload.paging,
-      results: payload.replies
+      paging: action.payload.paging,
+      results: action.payload.replies
     }
   }
 
-  if (type === COMMENT.MORE_REPLIES) {
+  if (action.type === 'MORE_REPLIES') {
     return {
       ...state,
       moreLoading: false,
-      paging: payload.paging,
-      results: state.results.concat(payload.replies)
+      paging: action.payload.paging,
+      results: state.results.concat(action.payload.replies)
     }
   }
 
-  if (type === COMMENT.POST_REPLY) {
+  if (action.type === 'POST_REPLY') {
     return {
       ...state,
       replyLoad: false,
       localReplies: true,
-      results: [payload.reply, ...state.results]
+      results: [action.payload.reply, ...state.results]
     }
   }
 
-  if (type === COMMENT.EDIT) {
+  if (action.type === 'EDIT') {
     return {
       ...state,
       editLoad: false,
@@ -40,73 +38,73 @@ export const reducer = (state: State, action: Action): State => {
     }
   }
 
-  if (type === COMMENT.SHOW_MORE) {
+  if (action.type === 'SHOW_MORE') {
     return {
       ...state,
-      showMore: payload.showMore
+      showMore: action.payload.showMore
     }
   }
 
-  if (type === COMMENT.OPEN_REPLY) {
+  if (action.type === 'OPEN_REPLY') {
     return {
       ...state,
-      isReplying: payload.isReplying
+      isReplying: action.payload.isReplying
     }
   }
 
-  if (type === COMMENT.SHOW_REPLIES) {
+  if (action.type === 'SHOW_REPLIES') {
     return {
       ...state,
-      showReplies: payload.showReplies
+      showReplies: action.payload.showReplies
     }
   }
 
-  if (type === COMMENT.LOADING) {
+  if (action.type === 'LOADING') {
     return {
       ...state,
       loading: true
     }
   }
 
-  if (type === COMMENT.REPLIES_LOADING) {
+  if (action.type === 'REPLIES_LOADING') {
     return {
       ...state,
       moreLoading: true
     }
   }
 
-  if (type === COMMENT.REPLY_LOADING) {
+  if (action.type === 'REPLY_LOADING') {
     return {
       ...state,
       replyLoad: true
     }
   }
 
-  if (type === COMMENT.PIN_LOAD) {
+  if (action.type === 'PIN_LOAD') {
     return {
       ...state,
-      pinLoad: payload.pinLoad
+      pinLoad: action.payload.pinLoad
     }
   }
 
-  if (type === COMMENT.START_EDITING) {
+  if (action.type === 'START_EDITING') {
     return {
       ...state,
-      isEditing: payload.isEditing
+      isEditing: action.payload.isEditing
     }
   }
 
-  if (type === COMMENT.EDIT_LOAD) {
+  if (action.type === 'EDIT_LOAD') {
     return {
       ...state,
       editLoad: true
     }
   }
 
-  if (type === COMMENT.DELETE_LOAD) {
+  if (action.type === 'DELETE_LOAD') {
     return {
       ...state,
-      deleteLoad: payload.deleteLoad
+      deleteLoad: action.payload.deleteLoad
     }
   }
 

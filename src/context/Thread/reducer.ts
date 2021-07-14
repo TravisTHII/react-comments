@@ -1,120 +1,118 @@
-// @ts-nocheck
-import { THREAD, State, Action } from './types'
+import { State, Action } from './types'
 
 export const reducer = (state: State, action: Action): State => {
-  const { type, payload } = action
 
-  if (type === THREAD.GET_THREAD) {
+  if (action.type === 'GET_THREAD') {
     return {
       ...state,
       loading: false,
       fetched: true,
-      total: payload.total,
-      paging: payload.paging,
+      total: action.payload.total,
+      paging: action.payload.paging,
       pinned: {
-        ...payload.pinned
+        ...action.payload.pinned
       },
-      comments: payload.comments
+      comments: action.payload.comments
     }
   }
 
-  if (type === THREAD.SORT_THREAD) {
+  if (action.type === 'SORT_THREAD') {
     return {
       ...state,
       sortLoad: false,
-      paging: payload.paging,
+      paging: action.payload.paging,
       pinned: {
-        ...payload.pinned
+        ...action.payload.pinned
       },
-      comments: payload.comments
+      comments: action.payload.comments
     }
   }
 
-  if (type === THREAD.MORE_THREAD) {
+  if (action.type === 'MORE_THREAD') {
     return {
       ...state,
       moreLoad: false,
-      paging: payload.paging,
-      comments: state.comments.concat(payload.comments)
+      paging: action.payload.paging,
+      comments: state.comments.concat(action.payload.comments)
     }
   }
 
-  if (type === THREAD.POST_COMMENT) {
+  if (action.type === 'POST_COMMENT') {
     return {
       ...state,
       postLoad: false,
-      comments: [payload.comment, ...state.comments]
+      comments: [action.payload.comment, ...state.comments]
     }
   }
 
-  if (type === THREAD.PIN_COMMENT) {
+  if (action.type === 'PIN_COMMENT') {
     return {
       ...state,
       pinned: {
         ...state.pinned,
-        comment: payload.comment,
+        comment: action.payload.comment,
         loading: false
       }
     }
   }
 
-  if (type === THREAD.UPDATE_PIN) {
+  if (action.type === 'UPDATE_PIN') {
     return {
       ...state,
       pinned: {
         ...state.pinned,
-        ...payload
+        ...action.payload
       }
     }
   }
 
-  if (type === THREAD.GET_MENU) {
+  if (action.type === 'GET_MENU') {
     return {
       ...state,
       menu: {
-        display: payload.display,
-        commentRef: payload.commentRef,
-        data: payload.data
+        display: action.payload.display,
+        commentRef: action.payload.commentRef,
+        data: action.payload.data
       }
     }
   }
 
-  if (type === THREAD.SET_T_SORT) {
+  if (action.type === 'SET_T_SORT') {
     return {
       ...state,
-      sort: payload.sort
+      sort: action.payload.sort
     }
   }
 
-  if (type === THREAD.LOAD_THREAD) {
+  if (action.type === 'LOAD_THREAD') {
     return {
       ...state,
       loading: true
     }
   }
 
-  if (type === THREAD.LOAD_SORT) {
+  if (action.type === 'LOAD_SORT') {
     return {
       ...state,
       sortLoad: true
     }
   }
 
-  if (type === THREAD.LOAD_T_MORE) {
+  if (action.type === 'LOAD_T_MORE') {
     return {
       ...state,
       moreLoad: true
     }
   }
 
-  if (type === THREAD.TP_LOAD) {
+  if (action.type === 'TP_LOAD') {
     return {
       ...state,
       postLoad: true
     }
   }
 
-  if (type === THREAD.PIN_LOADING) {
+  if (action.type === 'PIN_LOADING') {
     return {
       ...state,
       pinned: {
@@ -126,7 +124,7 @@ export const reducer = (state: State, action: Action): State => {
     }
   }
 
-  if (type === THREAD.THREAD_ERROR) {
+  if (action.type === 'THREAD_ERROR') {
     return {
       ...state,
       loading: false,
