@@ -212,8 +212,10 @@ exports.Pin = async (req, res) => {
 
     const { _thread_name } = req.params
 
+    const comment = await getPinnedComment(_thread_name, _id)
+
     return res.status(200).json({
-      comment: await getPinnedComment(_thread_name, _id)
+      comment
     })
 
   } catch (error) {

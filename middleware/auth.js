@@ -1,31 +1,31 @@
 const jwt = require('jsonwebtoken')
 
 const Auth = (req, res, next) => {
-	try {
+  try {
 
-		const access = req.header('_token')
+    const access = req.header('_token')
 
-		if (!access) {
+    if (!access) {
 
-			req.token = { _id: "" }
+      req.token = { _id: "" }
 
-		} else {
+    } else {
 
-			const verified = jwt.verify(access, process.env.ACCESS_SIGNATURE)
+      const verified = jwt.verify(access, process.env.ACCESS_SIGNATURE)
 
-			req.token = verified
+      req.token = verified
 
-		}
+    }
 
-		next()
+    next()
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			dev: error.message
-		})
+    return res.status(500).json({
+      dev: error.message
+    })
 
-	}
+  }
 }
 
 module.exports = Auth

@@ -7,82 +7,82 @@ const Comment = require('../models/Comment')
 
 exports.generateComment = async (comment, _id) => {
 
-	const total = await Comment.find({ "reply.to": comment._id }).countDocuments()
+  const total = await Comment.find({ "reply.to": comment._id }).countDocuments()
 
-	const pinned = await Thread.findOne().where('pinned').equals(comment._id)
+  const pinned = await Thread.findOne().where('pinned').equals(comment._id)
 
-	const { data: { edited } } = await Comment.findById({ _id: comment._id }).select('data')
+  const { data: { edited } } = await Comment.findById({ _id: comment._id }).select('data')
 
-	const isPinned = Boolean(pinned)
+  const isPinned = Boolean(pinned)
 
-	return {
-		...comment,
-		reply: {
-			...comment.reply,
-			total,
-			hasReplies: total ? true : false
-		},
-		date: {
-			published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
-			posted: format(comment.date, 'MMMM do, y | h:mm a')
-		},
-		menu: _id ? await generateMenu(comment, _id, isPinned) : null,
-		data: {
-			pinned: isPinned,
-			edited,
-			overflow: isOverflowed(comment.body)
-		},
-		react: {
-			key: uniqueString()
-		}
-	}
+  return {
+    ...comment,
+    reply: {
+      ...comment.reply,
+      total,
+      hasReplies: total ? true : false
+    },
+    date: {
+      published: formatDistance(comment.date, Date.now(), { addSuffix: true }),
+      posted: format(comment.date, 'MMMM do, y | h:mm a')
+    },
+    menu: _id ? await generateMenu(comment, _id, isPinned) : null,
+    data: {
+      pinned: isPinned,
+      edited,
+      overflow: isOverflowed(comment.body)
+    },
+    react: {
+      key: uniqueString()
+    }
+  }
 
 }
 
 const isOverflowed = (content) => {
 
-	let s = content.split(/\r\n|\r|\n/m)
+  let s = content.split(/\r\n|\r|\n/m)
 
-	return (s.length > 9 || content.length > 999) ? true : false
+  return (s.length > 9 || content.length > 999) ? true : false
 
 }
 
 const generateMenu = async (comment, _id, pinned) => {
 
-	let menu
+  let menu
 
-	const { admin } = await User.findById({ _id }).select('-_id admin').lean()
+  const { admin } = await User.findById({ _id }).select('-_id admin').lean()
 
-	const myComment = String(comment.user._id) === _id
+  const myComment = String(comment.user._id) === _id
 
-	const isPinned = pinned ? 'Unpin' : 'Pin'
+  const isPinned = pinned ? 'Unpin' : 'Pin'
 
-	if (admin) {
+  if (admin) {
 
-		if (myComment) {
+    if (myComment) {
 
-			menu = [isPinned, 'Edit', 'Delete']
+      menu = [isPinned, 'Edit', 'Delete']
 
-		} else {
+    } else {
 
-			menu = [isPinned, 'Delete', 'Report']
+      menu = [isPinned, 'Delete', 'Report']
 
-		}
+    }
 
-	} else {
+  } else {
 
-		if (myComment) {
+    if (myComment) {
 
-			menu = ['Edit', 'Delete']
+      menu = ['Edit', 'Delete']
 
-		} else {
+    } else {
 
-			menu = ['Report']
+      menu = ['Report']
 
-		}
+    }
 
-	}
+  }
 
-	return menu
+  return menu
 
 }

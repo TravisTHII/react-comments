@@ -21,6 +21,6 @@ app.use('/api/v1/comment', require('./routes/comment'))
 app.use('/api/v1/token', require('./routes/token'))
 
 app.listen(
-	PORT,
-	console.log(`Running server on port ${PORT}`.yellow)
+  PORT,
+  console.log(`Running server on port ${PORT}`.yellow)
 )

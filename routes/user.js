@@ -3,11 +3,11 @@ const router = Router()
 const { getUsers, createUser } = require('../controllers/user')
 
 router
-	.route('/')
-	.get(getUsers)
+  .route('/')
+  .get(getUsers)
 
-router
-	.route('/create')
-	.post(createUser)
+// router
+// 	.route('/create')
+// 	.post(createUser)
 
 module.exports = router

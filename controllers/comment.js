@@ -8,55 +8,66 @@ const { generateComment } = require('../utils/generateComment')
 // @route 	POST /api/v1/comment/reply
 // @access 	Public
 exports.Reply = async (req, res) => {
-	try {
+  try {
 
-		const { _id } = req.token
+    const { _id } = req.token
 
-		const { comment, body, user } = req.body
+    const { comment, body, user } = req.body
 
-		// get user
-		const u = await User.findById({ _id: user })
+    // get user
+    const u = await User.findById({ _id: user })
 
-		// get comment to reply to
-		const c = await Comment.findById({ _id: comment })
+    // get comment to reply to
+    const c = await Comment.findById({ _id: comment })
 
-		// create reply
-		const r = new Comment({
-			body,
-			reply: {
-				total: 0,
-				hasReplies: false,
-				to: c
-			},
-			user: u,
-			date: Date.now()
-		})
+    // if comment exist and has not been deleted
+    if (c) {
 
-		// save reply
-		await r.save()
+      // create reply
+      const r = new Comment({
+        body,
+        reply: {
+          total: 0,
+          hasReplies: false,
+          to: c
+        },
+        user: u,
+        date: Date.now()
+      })
 
-		// get reply to return
-		const reply = await Comment
-			.findById({ _id: r._id }, '-__v')
-			.lean()
-			.populate('user', '-__v')
-			.then(async comment => {
+      // save reply
+      await r.save()
 
-				return await generateComment(comment, _id)
+      // get reply to return
+      const reply = await Comment
+        .findById({ _id: r._id }, '-__v')
+        .lean()
+        .populate('user', '-__v')
+        .then(async comment => {
 
-			})
+          return await generateComment(comment, _id)
 
-		return res.status(200).json({
-			comment: reply
-		})
+        })
 
-	} catch (error) {
+      return res.status(200).json({
+        comment: reply
+      })
 
-		return res.status(500).json({
-			error: error.message
-		})
+    } else {
 
-	}
+      return res.status(500).json({
+        error: 'Comment does not exist'
+      })
+
+    }
+
+  } catch (error) {
+
+    return res.status(500).json({
+      error: error.message
+    })
+
+  }
 
 }
 
@@ -64,71 +75,71 @@ exports.Reply = async (req, res) => {
 // @route 	POST /api/v1/comment/replies
 // @access 	Public
 exports.Replies = async (req, res) => {
-	try {
+  try {
 
-		const { _id } = req.token
+    const { _id } = req.token
 
-		const { comment } = req.body
+    const { comment } = req.body
 
-		let { cursor } = req.query
+    let { cursor } = req.query
 
-		const limit = 9
+    const limit = 9
 
-		const { end, replies } = await Comment
-			.paginate(
-				{
-					"reply.to": comment
-				},
-				{
-					offset: cursor || 0,
-					limit,
-					lean: true,
-					select: '-__v',
-					sort: { date: 'desc' },
-					populate: {
-						path: 'user',
-						select: '-__v'
-					},
-					customLabels: {
-						docs: 'replies',
-						hasNextPage: 'end'
-					}
-				})
-			.then(async doc => {
+    const { end, replies } = await Comment
+      .paginate(
+        {
+          "reply.to": comment
+        },
+        {
+          offset: cursor || 0,
+          limit,
+          lean: true,
+          select: '-__v',
+          sort: { date: 'desc' },
+          populate: {
+            path: 'user',
+            select: '-__v'
+          },
+          customLabels: {
+            docs: 'replies',
+            hasNextPage: 'end'
+          }
+        })
+      .then(async doc => {
 
-				const a = []
+        const a = []
 
-				for (const i of doc.replies) {
+        for (const i of doc.replies) {
 
-					delete i.id
+          delete i.id
 
-					a.push(await generateComment(i, _id))
+          a.push(await generateComment(i, _id))
 
-				}
+        }
 
-				doc.replies = a
+        doc.replies = a
 
-				return doc
+        return doc
 
-			})
+      })
 
-		cursor = parseInt(cursor) + limit || limit
+    cursor = parseInt(cursor) + limit || limit
 
-		return res.status(200).json({
-			paging: {
-				end: !end,
-				cursor
-			},
-			replies
-		})
+    return res.status(200).json({
+      paging: {
+        end: !end,
+        cursor
+      },
+      replies
+    })
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			error: error.message
-		})
+    return res.status(500).json({
+      error: error.message
+    })
 
-	}
+  }
 
 }
 
@@ -136,108 +147,108 @@ exports.Replies = async (req, res) => {
 // @route 	POST /api/v1/comment/pin
 // @access 	Public
 exports.Pin = async (req, res) => {
-	try {
+  try {
 
-		const { thread, comment } = req.body
+    const { thread, comment } = req.body
 
-		const { pinned } = await Thread.findOne({ _id: thread }).select('pinned')
+    const { pinned } = await Thread.findOne({ _id: thread }).select('pinned')
 
-		await Thread.findByIdAndUpdate(
-			{ _id: thread },
-			{ pinned: (String(pinned) === comment) ? null : comment }
-		)
+    await Thread.findByIdAndUpdate(
+      { _id: thread },
+      { pinned: (String(pinned) === comment) ? null : comment }
+    )
 
-		return res.status(200).json({
-			message: `Comment successfully ${pinned ? 'Unpinned' : 'Pinned'}.`
-		})
+    return res.status(200).json({
+      message: `Comment successfully ${pinned ? 'Unpinned' : 'Pinned'}.`
+    })
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			error: error.message
-		})
+    return res.status(500).json({
+      error: error.message
+    })
 
-	}
+  }
 }
 
 // @desc 		Edit a comment
 // @route 	POST /api/v1/comment/edit
 // @access 	Public
 exports.Edit = async (req, res) => {
-	try {
+  try {
 
-		const { _id } = req.token
+    const { _id } = req.token
 
-		const { comment, body } = req.body
+    const { comment, body } = req.body
 
-		await Comment.findByIdAndUpdate(
-			{ _id: comment },
-			{
-				body,
-				data: {
-					edited: true
-				}
-			}
-		)
+    await Comment.findByIdAndUpdate(
+      { _id: comment },
+      {
+        body,
+        data: {
+          edited: true
+        }
+      }
+    )
 
-		const editedComment = await Comment.findById({ _id: comment }, '-__v')
-			.lean()
-			.populate({
-				path: 'user',
-				select: '-__v'
-			})
-			.then(async doc => {
+    const editedComment = await Comment.findById({ _id: comment }, '-__v')
+      .lean()
+      .populate({
+        path: 'user',
+        select: '-__v'
+      })
+      .then(async doc => {
 
-				return await generateComment(doc, _id)
+        return await generateComment(doc, _id)
 
-			})
+      })
 
-		return res.status(200).json({
-			message: 'Comment was updated successfully.',
-			comment: editedComment
-		})
+    return res.status(200).json({
+      message: 'Comment was updated successfully.',
+      comment: editedComment
+    })
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			error: error.message
-		})
+    return res.status(500).json({
+      error: error.message
+    })
 
-	}
+  }
 }
 
 // @desc 		Delete a comment
 // @route 	POST /api/v1/comment/delete
 // @access 	Public
 exports.Delete = async (req, res) => {
-	try {
+  try {
 
-		const { comment } = req.body
+    const { comment } = req.body
 
-		const pinned = await Thread.findOne().where('pinned').equals(comment)
+    const pinned = await Thread.findOne().where('pinned').equals(comment)
 
-		if (Boolean(pinned)) {
-			await Thread.findByIdAndUpdate(
-				{ _id: pinned._id },
-				{ pinned: null }
-			)
-		}
+    if (Boolean(pinned)) {
+      await Thread.findByIdAndUpdate(
+        { _id: pinned._id },
+        { pinned: null }
+      )
+    }
 
-		const deleteComment = await Comment.findByIdAndDelete({ _id: comment })
+    const deleteComment = await Comment.findByIdAndDelete({ _id: comment })
 
-		let message = deleteComment
-			? 'Comment deleted successfully.'
-			: 'Comment could not be deleted.'
+    let message = deleteComment
+      ? 'Comment deleted successfully.'
+      : 'Comment could not be deleted.'
 
-		return res.status(200).json({
-			message
-		})
+    return res.status(200).json({
+      message
+    })
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			error: error.message
-		})
+    return res.status(500).json({
+      error: error.message
+    })
 
-	}
+  }
 }

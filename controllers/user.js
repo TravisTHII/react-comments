@@ -6,21 +6,21 @@ const { Slugify } = require("../utils/functions")
 // @route 	GET /api/v1/user
 // @access 	Public
 exports.getUsers = async (req, res) => {
-	try {
+  try {
 
-		const users = await User.find().select('-__v')
+    const users = await User.find().select('-__v')
 
-		return res.status(200).json({
-			users
-		})
+    return res.status(200).json({
+      users
+    })
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			error: error.message
-		})
+    return res.status(500).json({
+      error: error.message
+    })
 
-	}
+  }
 
 }
 
@@ -28,37 +28,37 @@ exports.getUsers = async (req, res) => {
 // @route 	GET /api/v1/user/create
 // @access 	Public
 exports.createUser = async (req, res) => {
-	try {
+  try {
 
-		const { username, motto, badge, image } = req.body
+    const { username, motto, badge, image } = req.body
 
-		if (!username)
-			throw new Error('Please enter a username.')
+    if (!username)
+      throw new Error('Please enter a username.')
 
-		const newUser = new User({
-			username,
-			slug: Slugify(username),
-			motto,
-			badge: {
-				...badge
-			},
-			image: {
-				...image
-			}
-		})
+    const newUser = new User({
+      username,
+      slug: Slugify(username),
+      motto,
+      badge: {
+        ...badge
+      },
+      image: {
+        ...image
+      }
+    })
 
-		const user = await newUser.save()
+    const user = await newUser.save()
 
-		return res.status(200).json({
-			user
-		})
+    return res.status(200).json({
+      user
+    })
 
-	} catch (error) {
+  } catch (error) {
 
-		return res.status(500).json({
-			error: error.message
-		})
+    return res.status(500).json({
+      error: error.message
+    })
 
-	}
+  }
 
 }
