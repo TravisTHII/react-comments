@@ -53,8 +53,8 @@ export function Menu({ deleteRef }: MenuProps) {
   const menuAction = async (m: string) => {
     switch (m) {
       case 'Pin': case 'Unpin':
-        await pinComment(thread)
-        updatePinnedComment(comment._id, m)
+        const update = await pinComment(thread)
+        if (update) updatePinnedComment(comment._id, m)
         break;
       case 'Edit': startEditing(); break;
       case 'Delete': deleteComment(deleteRef.current); break;

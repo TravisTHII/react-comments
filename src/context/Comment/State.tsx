@@ -174,7 +174,8 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
       const {
         data: {
-          message
+          message,
+          exist
         }
       } = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/v1/comment/pin`,
@@ -184,6 +185,8 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
       dispatch({ type: 'PIN_LOAD', payload: { pinLoad: false } })
 
       console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+
+      return exist
 
     } catch (error) {
 
