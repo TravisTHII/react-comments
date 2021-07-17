@@ -16,7 +16,7 @@ export type Comment = {
     hasReplies: boolean
   }
   user: User
-  menu: string[] | null
+  menu: string[]
   data: {
     edited: boolean
     overflow: boolean

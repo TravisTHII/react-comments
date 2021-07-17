@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { useThreadContext } from '../../context/Thread'
 import { useCommentContext } from '../../context/Comment'
@@ -17,39 +17,17 @@ export function Menu({ deleteRef }: MenuProps) {
       commentRef,
       data
     },
-    pinned: {
-      pinned_id
-    },
     destroyMenu,
     updatePinnedComment
   } = useThreadContext()
 
   const { comment, pinComment, startEditing, deleteComment } = useCommentContext()
 
-  const [updatedMenu, setUpdatedMenu] = useState(data)
-
   const menuRef = useOutsideClick((e) => {
     if (!(e.target as Element).closest('.comment_options')) {
       destroyMenu()
     }
   })
-
-  useEffect(() => {
-
-    const copy = [...updatedMenu]
-
-    let index: number
-
-    for (const i of copy) {
-      if (/^(Pin|Unpin)$/.test(i)) index = copy.indexOf(i)
-    }
-
-    copy[index!] = (pinned_id === comment._id) ? 'Unpin' : 'Pin'
-
-    setUpdatedMenu(copy)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   useEffect(() => {
     const m = menuRef.current
@@ -94,7 +72,7 @@ export function Menu({ deleteRef }: MenuProps) {
       ref={menuRef}
     >
       <div className="opt_menu_container">
-        {updatedMenu.map((m, i) => (
+        {data.map((m, i) => (
           <div
             key={i}
             className="opt_menu_item"

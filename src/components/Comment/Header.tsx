@@ -34,10 +34,24 @@ export function Header({ refrence }: HeaderProps) {
     return () => window.removeEventListener('scroll', y)
   }, [])
 
+  const updatedMenu = () => {
+    const copy = [...menu]
+
+    let index: number
+
+    for (const i of copy) {
+      if (/^(Pin|Unpin)$/.test(i)) index = copy.indexOf(i)
+    }
+
+    copy[index!] = (pinned_id === _id) ? 'Unpin' : 'Pin'
+
+    return copy
+  }
+
   const activateMenu = () => {
-    if (menu) {
+    if (menu.length) {
       setActive(!active)
-      getMenu(refrence.current!, menu)
+      getMenu(refrence.current!, updatedMenu())
     }
   }
 

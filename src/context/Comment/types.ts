@@ -20,19 +20,19 @@ export type InitialStateType = {
 } & State
 
 export type State = {
-  paging: Paging,
-  results: Comment[],
-  isReplying: boolean,
-  showMore: boolean,
-  showReplies: boolean,
-  localReplies: boolean,
-  fetched: boolean,
-  loading: boolean,
-  replyLoad: boolean,
-  moreLoading: boolean,
-  pinLoad: boolean,
-  isEditing: boolean,
-  editLoad: boolean,
+  paging: Paging
+  results: Comment[]
+  isReplying: boolean
+  showMore: boolean
+  showReplies: boolean
+  localReplies: boolean
+  fetched: boolean
+  loading: boolean
+  replyLoad: boolean
+  moreLoading: boolean
+  pinLoad: boolean
+  isEditing: boolean
+  editLoad: boolean
   deleteLoad: boolean
 }
 

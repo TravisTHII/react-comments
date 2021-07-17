@@ -254,27 +254,28 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
   }
 
   const updatePinnedComment = (_id: string, type: string) => {
-    switch (type) {
-      case 'Pin':
-        dispatch({
-          type: 'UPDATE_PIN',
-          payload: {
-            pinned_id: _id,
-            useLocalPinned: true
-          }
-        })
-        break;
-      case 'Unpin':
-        dispatch({
-          type: 'UPDATE_PIN',
-          payload: {
-            pinned_id: "",
-            hasPinned: false,
-            useInitialPinned: false,
-            comment: null
-          }
-        })
-        break;
+    if (type === 'Pin') {
+
+      dispatch({
+        type: 'UPDATE_PIN',
+        payload: {
+          pinned_id: _id,
+          useLocalPinned: true
+        }
+      })
+
+    } else if (type === 'Unpin') {
+
+      dispatch({
+        type: 'UPDATE_PIN',
+        payload: {
+          pinned_id: "",
+          hasPinned: false,
+          useInitialPinned: false,
+          comment: null
+        }
+      })
+
     }
   }
 
