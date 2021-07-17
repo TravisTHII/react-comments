@@ -26,12 +26,13 @@ export function Item({
 
   return (
     <div
-      className={`user-select ${selected ? 'user-is-selected' : ''}`}
+      className={`user-select${selected ? ' user-is-selected' : ''}`}
       onClick={() => setUser()}
     >
       <div
         className="background-ui"
         style={{ backgroundImage: `url(/images/users/${image})` }}
+        title={user.username}
       >
       </div>
     </div>
