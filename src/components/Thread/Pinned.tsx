@@ -23,11 +23,8 @@ export function Pinned() {
   let content
 
   useEffect(() => {
-    if (useLocalPinned)
-      getPinnedComment()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pinned_id, useLocalPinned])
+    if (useLocalPinned) getPinnedComment()
+  }, [pinned_id, useLocalPinned, getPinnedComment])
 
   if (loading) {
 

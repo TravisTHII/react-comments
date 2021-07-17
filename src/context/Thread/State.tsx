@@ -186,40 +186,36 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
     }
   }
 
-  const getPinnedComment = async () => {
+  const getPinnedComment = useCallback(async () => {
     try {
 
-      if (!state.pinned.loading) {
+      dispatch({
+        type: 'PIN_LOADING'
+      })
 
-        dispatch({
-          type: 'PIN_LOADING'
-        })
+      const {
+        data: {
+          comment
+        }
+      } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}/pin`,
+        {},
+        { headers: { '_token': token } }
+      )
 
-        const {
-          data: {
-            comment
-          }
-        } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}/pin`,
-          {},
-          { headers: { '_token': token } }
-        )
-
-        dispatch({
-          type: 'PIN_COMMENT',
-          payload: {
-            comment
-          }
-        })
-
-      }
+      dispatch({
+        type: 'PIN_COMMENT',
+        payload: {
+          comment
+        }
+      })
 
     } catch (error) {
 
       console.error(error)
 
     }
-  }
+  }, [thread, token])
 
   const getMenu = (ref: HTMLDivElement, menu: string[]) => {
     if (state.menu.commentRef !== ref) {
