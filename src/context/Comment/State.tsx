@@ -185,8 +185,6 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
       console.log(`%c${message}`, 'color: #fff; font-size: 15px')
 
-      return Promise
-
     } catch (error) {
 
       console.error(error)
