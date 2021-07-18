@@ -35,7 +35,7 @@ export function Header({ refrence }: HeaderProps) {
   }, [])
 
   const updatedMenu = () => {
-    const copy = [...menu]
+    const copy = [...menu!]
 
     let index: number
 
@@ -49,7 +49,7 @@ export function Header({ refrence }: HeaderProps) {
   }
 
   const activateMenu = () => {
-    if (menu.length) {
+    if (menu) {
       setActive(!active)
       getMenu(refrence.current!, updatedMenu())
     }
