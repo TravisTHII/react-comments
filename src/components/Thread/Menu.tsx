@@ -13,6 +13,10 @@ export function Menu({ deleteRef }: MenuProps) {
 
   const {
     thread,
+    pinned: {
+      pinned_id,
+      loading
+    },
     menu: {
       commentRef,
       data
@@ -53,11 +57,19 @@ export function Menu({ deleteRef }: MenuProps) {
   const menuAction = async (m: string) => {
     switch (m) {
       case 'Pin': case 'Unpin':
-        const update = await pinComment(thread)
-        if (update) updatePinnedComment(comment._id, m)
+        if (!loading) {
+          await pinComment(thread)
+          updatePinnedComment(comment._id, m)
+        }
         break;
       case 'Edit': startEditing(); break;
-      case 'Delete': deleteComment(deleteRef.current); break;
+      case 'Delete':
+        if (comment._id === pinned_id) {
+          alert('Cannot delete comment while pinned. Unpin comment first.')
+        } else {
+          deleteComment(deleteRef.current)
+        }
+        break;
       case 'Report':
         alert('Comment reported.\n\nNOTE: Demonstration purposes only, reporting is not fully implemented.');
         break;

@@ -170,23 +170,24 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
   const pinComment = async (thread: string) => {
     try {
 
-      dispatch({ type: 'PIN_LOAD', payload: { pinLoad: true } })
+      if (!state.pinLoad) {
 
-      const {
-        data: {
-          message,
-          exist
-        }
-      } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/comment/pin`,
-        { thread, comment: comment._id }
-      )
+        dispatch({ type: 'PIN_LOAD', payload: { pinLoad: true } })
 
-      dispatch({ type: 'PIN_LOAD', payload: { pinLoad: false } })
+        const {
+          data: {
+            message
+          }
+        } = await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/v1/comment/pin`,
+          { thread, comment: comment._id }
+        )
 
-      console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+        dispatch({ type: 'PIN_LOAD', payload: { pinLoad: false } })
 
-      return exist
+        console.log(`%c${message}`, 'color: #fff; font-size: 15px')
+
+      }
 
     } catch (error) {
 

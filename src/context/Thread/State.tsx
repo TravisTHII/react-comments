@@ -217,6 +217,32 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
     }
   }, [thread, token])
 
+  const updatePinnedComment = (_id: string, type: string) => {
+    if (type === 'Pin') {
+
+      dispatch({
+        type: 'UPDATE_PIN',
+        payload: {
+          pinned_id: _id,
+          useLocalPinned: true
+        }
+      })
+
+    } else if (type === 'Unpin') {
+
+      dispatch({
+        type: 'UPDATE_PIN',
+        payload: {
+          pinned_id: "",
+          hasPinned: false,
+          useInitialPinned: false,
+          comment: null
+        }
+      })
+
+    }
+  }
+
   const getMenu = (ref: HTMLDivElement, menu: string[]) => {
     if (state.menu.commentRef !== ref) {
 
@@ -247,32 +273,6 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         data: []
       }
     })
-  }
-
-  const updatePinnedComment = (_id: string, type: string) => {
-    if (type === 'Pin') {
-
-      dispatch({
-        type: 'UPDATE_PIN',
-        payload: {
-          pinned_id: _id,
-          useLocalPinned: true
-        }
-      })
-
-    } else if (type === 'Unpin') {
-
-      dispatch({
-        type: 'UPDATE_PIN',
-        payload: {
-          pinned_id: "",
-          hasPinned: false,
-          useInitialPinned: false,
-          comment: null
-        }
-      })
-
-    }
   }
 
   return (
