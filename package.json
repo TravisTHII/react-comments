@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "tsc --build && node dist/index.js",
     "server": "nodemon dist/index.js",
+    "build": "tsc",
     "watch": "tsc -w",
     "client": "npm start --prefix ../client",
     "server:client": "concurrently \"npm run server\" \"npm run client\""
