@@ -5,7 +5,6 @@ import { useThreadContext } from '../../context/Thread'
 import { useOutsideClick } from '../../hooks/useOutsideClick'
 
 export function Header() {
-
   const { total, sortThread } = useThreadContext()
 
   const [open, setOpen] = useState(false)
@@ -28,18 +27,12 @@ export function Header() {
       >
         <div className="menu-item">Sort</div>
         <ul className={open ? 'menu-open' : ''}>
-          <li
-            className="menu-item"
-            onClick={() => sortThread('newest')}
-          >
+          <li className="menu-item" onClick={() => sortThread('newest')}>
             Newest
-					</li>
-          <li
-            className="menu-item"
-            onClick={() => sortThread('oldest')}
-          >
+          </li>
+          <li className="menu-item" onClick={() => sortThread('oldest')}>
             Oldest
-					</li>
+          </li>
         </ul>
       </div>
     </div>

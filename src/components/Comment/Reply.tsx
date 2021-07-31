@@ -8,7 +8,6 @@ import { validText, expandTextarea } from '../../utils'
 import { Spinner } from '../Includes/Spinner'
 
 export function Reply() {
-
   const { user, loggedIn } = useGlobalContext()
 
   const { replyLoad, isReplying, postReply, openReply } = useCommentContext()
@@ -45,23 +44,24 @@ export function Reply() {
   }
 
   if (!loggedIn) {
-
-    content =
-      <div className='sitc'>
-        <h3 className='text-ui fwn'>Please select a user to <span className="highlight-red">reply.</span></h3>
+    content = (
+      <div className="sitc">
+        <h3 className="text-ui fwn">
+          Please select a user to <span className="highlight-red">reply.</span>
+        </h3>
       </div>
-
+    )
   } else {
-
-    content =
+    content = (
       <>
         <div className="reply_content">
-          <div className='reply_user'>
+          <div className="reply_user">
             <div
-              className='background-ui'
-              style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}
-            >
-            </div>
+              className="background-ui"
+              style={{
+                backgroundImage: `url(/images/users/${user.image.avatar})`,
+              }}
+            ></div>
           </div>
           <div className={`reply_txt${replyLoad ? ' disabled' : ''}`}>
             <textarea
@@ -72,8 +72,7 @@ export function Reply() {
               maxLength={9999}
               spellCheck="false"
               onChange={expandText}
-            >
-            </textarea>
+            ></textarea>
           </div>
         </div>
         <div className={`comment_actions${replyLoad ? ' disabled' : ''}`}>
@@ -84,27 +83,32 @@ export function Reply() {
               onClick={() => openReply()}
             >
               Cancel
-						</button>
+            </button>
             <button
               className={`enspr_red_btn${!active ? ' disabled' : ''}`}
               type="button"
               disabled={!active ? true : false}
               onClick={submitReply}
             >
-              {replyLoad
-                ? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '30px', height: '30px' }} />
-                : 'Reply'
-              }
+              {replyLoad ? (
+                <Spinner
+                  stroke="#fff"
+                  style={{
+                    display: 'block',
+                    margin: '0 auto',
+                    width: '30px',
+                    height: '30px',
+                  }}
+                />
+              ) : (
+                'Reply'
+              )}
             </button>
           </div>
         </div>
       </>
-
+    )
   }
 
-  return (
-    <div className="comment_reply">
-      {isReplying && content}
-    </div>
-  )
+  return <div className="comment_reply">{isReplying && content}</div>
 }

@@ -5,7 +5,6 @@ import { useGlobalContext } from '../../../context/Global'
 import { Item } from './Item'
 
 export function SelectUser() {
-
   const { users } = useGlobalContext()
 
   const [localUser, setLocalUser] = useState({})
@@ -16,7 +15,7 @@ export function SelectUser() {
         <p>Select user</p>
       </div>
       <div className="users">
-        {users.map(u => (
+        {users.map((u) => (
           <Item
             key={u._id}
             user={u}

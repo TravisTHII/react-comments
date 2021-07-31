@@ -8,7 +8,6 @@ import { Comment } from '../Comment'
 import { Spinner } from '../Includes/Spinner'
 
 export function Thread() {
-
   const { user, thread, userLoading } = useGlobalContext()
 
   const {
@@ -21,64 +20,61 @@ export function Thread() {
     paging,
     moreLoad,
     getThread,
-    loadMoreComments
+    loadMoreComments,
   } = useThreadContext()
 
   useEffect(() => {
     getThread()
   }, [user, thread, getThread])
 
-  let content
-    , sorted
+  let content, sorted
 
-  const Loading =
-    <Spinner style={{ display: 'block', margin: '0 auto', paddingTop: '50px' }} />
+  const Loading = (
+    <Spinner
+      style={{ display: 'block', margin: '0 auto', paddingTop: '50px' }}
+    />
+  )
 
   if (loading || userLoading) {
-
     content = Loading
-
   } else if (error) {
-
-    content =
-      <div className='sitc'>
-        <h3 className='text-ui fwn'>An error occurred while retrieving this thread...</h3>
+    content = (
+      <div className="sitc">
+        <h3 className="text-ui fwn">
+          An error occurred while retrieving this thread...
+        </h3>
       </div>
-
+    )
   } else if (fetched) {
-
     if (sortLoad) {
-
       sorted = Loading
-
     } else {
-
-      sorted =
+      sorted = (
         <div className="thread">
           <div className="thread_comments">
-
             <Pinned />
 
-            {postLoad &&
-              <Spinner stroke="#fff" style={{ display: 'block', margin: '10px auto' }} />
-            }
-
-            {!comments.length &&
-              <div className='sitc'>
-                <h3 className='text-ui fwn'>There are no comments, be the first.</h3>
-              </div>
-            }
-
-            {comments.map(c => (
-              <Comment
-                key={`${c.react.key}`}
-                comment={c}
+            {postLoad && (
+              <Spinner
+                stroke="#fff"
+                style={{ display: 'block', margin: '10px auto' }}
               />
-            ))}
+            )}
 
+            {!comments.length && (
+              <div className="sitc">
+                <h3 className="text-ui fwn">
+                  There are no comments, be the first.
+                </h3>
+              </div>
+            )}
+
+            {comments.map((c) => (
+              <Comment key={`${c.react.key}`} comment={c} />
+            ))}
           </div>
 
-          {!paging.end &&
+          {!paging.end && (
             <div className="load_comments">
               <button
                 type="button"
@@ -86,30 +82,34 @@ export function Thread() {
                 disabled={moreLoad ? true : false}
                 onClick={() => loadMoreComments()}
               >
-                {!moreLoad
-                  ? 'see more comments'
-                  : <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '30px', height: '30px' }} />
-                }
+                {!moreLoad ? (
+                  'see more comments'
+                ) : (
+                  <Spinner
+                    stroke="#fff"
+                    style={{
+                      display: 'block',
+                      margin: '0 auto',
+                      width: '30px',
+                      height: '30px',
+                    }}
+                  />
+                )}
               </button>
             </div>
-          }
-
+          )}
         </div>
-
+      )
     }
 
-    content =
+    content = (
       <>
         <Header />
         <Poster />
         {sorted}
       </>
-
+    )
   }
 
-  return (
-    <div className="thread_column">
-      {content}
-    </div>
-  )
+  return <div className="thread_column">{content}</div>
 }

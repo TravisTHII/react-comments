@@ -7,7 +7,6 @@ import { Comment } from '../Comment'
 import { Spinner } from '../Includes/Spinner'
 
 export function Pinned() {
-
   const {
     pinned: {
       pinned_id,
@@ -15,9 +14,9 @@ export function Pinned() {
       useInitialPinned,
       useLocalPinned,
       loading,
-      comment
+      comment,
     },
-    getPinnedComment
+    getPinnedComment,
   } = useThreadContext()
 
   let content
@@ -27,27 +26,18 @@ export function Pinned() {
   }, [pinned_id, useLocalPinned, getPinnedComment])
 
   if (loading) {
-
-    content =
+    content = (
       <div>
         <Spinner style={{ display: 'block', margin: '0 auto' }} />
       </div>
-
+    )
   } else if (comment) {
-
-    content =
-      <Comment
-        comment={comment}
-      />
-
+    content = <Comment comment={comment} />
   }
 
   return (
     <>
-      {useInitialPinned
-        ? <Comment comment={comment!} />
-        : hasPinned && content
-      }
+      {useInitialPinned ? <Comment comment={comment!} /> : hasPinned && content}
     </>
   )
 }

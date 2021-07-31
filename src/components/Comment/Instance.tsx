@@ -8,7 +8,6 @@ import { Comment } from './Comment'
 import { InstanceProps } from './types'
 
 export function Instance({ comment }: InstanceProps) {
-
   const { token } = useGlobalContext()
 
   return (

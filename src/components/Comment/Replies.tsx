@@ -7,7 +7,6 @@ import { Comment } from '../Comment'
 import { Spinner } from '../Includes/Spinner'
 
 export function Replies() {
-
   const {
     paging,
     results,
@@ -17,28 +16,19 @@ export function Replies() {
     showReplies,
     replyLoad,
     moreLoading,
-    moreReplies
+    moreReplies,
   } = useCommentContext()
 
   let content
 
-  const Loading =
+  const Loading = (
     <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto' }} />
+  )
 
   if (loading) {
-
     content = Loading
-
   } else if (fetched || localReplies) {
-
-    content =
-      results.map(c => (
-        <Comment
-          key={`${c.react.key}`}
-          comment={c}
-        />
-      ))
-
+    content = results.map((c) => <Comment key={`${c.react.key}`} comment={c} />)
   }
 
   return (
@@ -47,14 +37,29 @@ export function Replies() {
         {replyLoad && Loading}
         {content}
       </div>
-      {(!paging.end && fetched) &&
+      {!paging.end && fetched && (
         <div className="load_replies">
-          {moreLoading
-            ? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '35px', height: '35px' }} />
-            : <button className="cmt_btn" type="button" onClick={() => moreReplies()}>see more comments</button>
-          }
+          {moreLoading ? (
+            <Spinner
+              stroke="#fff"
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                width: '35px',
+                height: '35px',
+              }}
+            />
+          ) : (
+            <button
+              className="cmt_btn"
+              type="button"
+              onClick={() => moreReplies()}
+            >
+              see more comments
+            </button>
+          )}
         </div>
-      }
+      )}
     </div>
   )
 }

@@ -9,9 +9,8 @@ export function Item({
   image,
   selected,
   localUser,
-  setLocalUser
+  setLocalUser,
 }: Props) {
-
   const { userLoading, selectUser } = useGlobalContext()
 
   const setUser = () => {
@@ -33,8 +32,7 @@ export function Item({
         className="background-ui"
         style={{ backgroundImage: `url(/images/users/${image})` }}
         title={user.username}
-      >
-      </div>
+      ></div>
     </div>
   )
 }

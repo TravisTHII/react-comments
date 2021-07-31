@@ -1,7 +1,6 @@
 import { State, Action } from './types'
 
 export const reducer = (state: State, action: Action): State => {
-
   if (action.type === 'GET_THREAD') {
     return {
       ...state,
@@ -10,9 +9,9 @@ export const reducer = (state: State, action: Action): State => {
       total: action.payload.total,
       paging: action.payload.paging,
       pinned: {
-        ...action.payload.pinned
+        ...action.payload.pinned,
       },
-      comments: action.payload.comments
+      comments: action.payload.comments,
     }
   }
 
@@ -22,9 +21,9 @@ export const reducer = (state: State, action: Action): State => {
       sortLoad: false,
       paging: action.payload.paging,
       pinned: {
-        ...action.payload.pinned
+        ...action.payload.pinned,
       },
-      comments: action.payload.comments
+      comments: action.payload.comments,
     }
   }
 
@@ -33,7 +32,7 @@ export const reducer = (state: State, action: Action): State => {
       ...state,
       moreLoad: false,
       paging: action.payload.paging,
-      comments: state.comments.concat(action.payload.comments)
+      comments: state.comments.concat(action.payload.comments),
     }
   }
 
@@ -41,7 +40,7 @@ export const reducer = (state: State, action: Action): State => {
     return {
       ...state,
       postLoad: false,
-      comments: [action.payload.comment, ...state.comments]
+      comments: [action.payload.comment, ...state.comments],
     }
   }
 
@@ -51,8 +50,8 @@ export const reducer = (state: State, action: Action): State => {
       pinned: {
         ...state.pinned,
         comment: action.payload.comment,
-        loading: false
-      }
+        loading: false,
+      },
     }
   }
 
@@ -61,8 +60,8 @@ export const reducer = (state: State, action: Action): State => {
       ...state,
       pinned: {
         ...state.pinned,
-        ...action.payload
-      }
+        ...action.payload,
+      },
     }
   }
 
@@ -72,43 +71,43 @@ export const reducer = (state: State, action: Action): State => {
       menu: {
         display: action.payload.display,
         commentRef: action.payload.commentRef,
-        data: action.payload.data
-      }
+        data: action.payload.data,
+      },
     }
   }
 
   if (action.type === 'SET_T_SORT') {
     return {
       ...state,
-      sort: action.payload.sort
+      sort: action.payload.sort,
     }
   }
 
   if (action.type === 'LOAD_THREAD') {
     return {
       ...state,
-      loading: true
+      loading: true,
     }
   }
 
   if (action.type === 'LOAD_SORT') {
     return {
       ...state,
-      sortLoad: true
+      sortLoad: true,
     }
   }
 
   if (action.type === 'LOAD_T_MORE') {
     return {
       ...state,
-      moreLoad: true
+      moreLoad: true,
     }
   }
 
   if (action.type === 'TP_LOAD') {
     return {
       ...state,
-      postLoad: true
+      postLoad: true,
     }
   }
 
@@ -119,8 +118,8 @@ export const reducer = (state: State, action: Action): State => {
         ...state.pinned,
         loading: true,
         hasPinned: true,
-        useInitialPinned: false
-      }
+        useInitialPinned: false,
+      },
     }
   }
 
@@ -128,7 +127,7 @@ export const reducer = (state: State, action: Action): State => {
     return {
       ...state,
       loading: false,
-      error: true
+      error: true,
     }
   }
 

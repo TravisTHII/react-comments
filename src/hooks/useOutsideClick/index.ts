@@ -6,7 +6,6 @@ export const useOutsideClick = (
   const domRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-
     const outsideClick: any = (e: React.MouseEvent<HTMLDivElement>) => {
       handler(e)
     }

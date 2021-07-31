@@ -38,70 +38,70 @@ export type State = {
 
 export type Action =
   | {
-    type: 'GET_REPLIES'
-    payload: {
-      fetched?: boolean
-      loading?: boolean
-      paging: Paging
-      replies: Comment[]
+      type: 'GET_REPLIES'
+      payload: {
+        fetched?: boolean
+        loading?: boolean
+        paging: Paging
+        replies: Comment[]
+      }
     }
-  }
   | {
-    type: 'LOADING'
-  }
-  | {
-    type: 'OPEN_REPLY'
-    payload: { isReplying: boolean }
-  }
-  | {
-    type: 'SHOW_MORE'
-    payload: { showMore: boolean }
-  }
-  | {
-    type: 'POST_REPLY'
-    payload: {
-      replyLoad?: boolean
-      localReplies?: boolean
-      reply: Comment
+      type: 'LOADING'
     }
-  }
   | {
-    type: 'REPLY_LOADING'
-  }
-  | {
-    type: 'SHOW_REPLIES'
-    payload: { showReplies: boolean }
-  }
-  | {
-    type: 'MORE_REPLIES'
-    payload: {
-      moreLoading?: boolean
-      paging: Paging
-      replies: Comment[]
+      type: 'OPEN_REPLY'
+      payload: { isReplying: boolean }
     }
-  }
   | {
-    type: 'REPLIES_LOADING'
-  }
-  | {
-    type: 'PIN_LOAD'
-    payload: { pinLoad: boolean }
-  }
-  | {
-    type: 'EDIT'
-    payload?: {
-      editLoad: boolean
-      isEditing: boolean
+      type: 'SHOW_MORE'
+      payload: { showMore: boolean }
     }
-  }
   | {
-    type: 'EDIT_LOAD'
-  }
+      type: 'POST_REPLY'
+      payload: {
+        replyLoad?: boolean
+        localReplies?: boolean
+        reply: Comment
+      }
+    }
   | {
-    type: 'START_EDITING'
-    payload: { isEditing: boolean }
-  }
+      type: 'REPLY_LOADING'
+    }
   | {
-    type: 'DELETE_LOAD'
-    payload: { deleteLoad: boolean }
-  }
+      type: 'SHOW_REPLIES'
+      payload: { showReplies: boolean }
+    }
+  | {
+      type: 'MORE_REPLIES'
+      payload: {
+        moreLoading?: boolean
+        paging: Paging
+        replies: Comment[]
+      }
+    }
+  | {
+      type: 'REPLIES_LOADING'
+    }
+  | {
+      type: 'PIN_LOAD'
+      payload: { pinLoad: boolean }
+    }
+  | {
+      type: 'EDIT'
+      payload?: {
+        editLoad: boolean
+        isEditing: boolean
+      }
+    }
+  | {
+      type: 'EDIT_LOAD'
+    }
+  | {
+      type: 'START_EDITING'
+      payload: { isEditing: boolean }
+    }
+  | {
+      type: 'DELETE_LOAD'
+      payload: { deleteLoad: boolean }
+    }

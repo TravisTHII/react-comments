@@ -7,8 +7,12 @@ import { expandTextarea, validText } from '../../utils'
 import { Spinner } from '../Includes/Spinner'
 
 export function Edit() {
-
-  const { editLoad, comment: { body }, startEditing, editComment } = useCommentContext()
+  const {
+    editLoad,
+    comment: { body },
+    startEditing,
+    editComment,
+  } = useCommentContext()
 
   const [value, setValue] = useState(body)
 
@@ -43,31 +47,39 @@ export function Edit() {
           onChange={expandText}
           disabled={editLoad ? true : false}
           ref={textRef}
-        >
-        </textarea>
+        ></textarea>
       </div>
       <div className="edit_actions">
-        <div className='cac'>
+        <div className="cac">
           <button
             className={`enspr_red_btn${editLoad ? ' disabled' : ''}`}
-            type='button'
-            value='cancel'
+            type="button"
+            value="cancel"
             disabled={editLoad ? true : false}
             onClick={() => startEditing()}
           >
             Cancel
-					</button>
+          </button>
           <button
-            className={`enspr_red_btn${(body === value) ? ' disabled' : ''}`}
-            type='button'
-            value='edit'
-            disabled={(editLoad || (body === value)) ? true : false}
+            className={`enspr_red_btn${body === value ? ' disabled' : ''}`}
+            type="button"
+            value="edit"
+            disabled={editLoad || body === value ? true : false}
             onClick={() => submitEdit()}
           >
-            {editLoad
-              ? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '30px', height: '30px' }} />
-              : 'Edit'
-            }
+            {editLoad ? (
+              <Spinner
+                stroke="#fff"
+                style={{
+                  display: 'block',
+                  margin: '0 auto',
+                  width: '30px',
+                  height: '30px',
+                }}
+              />
+            ) : (
+              'Edit'
+            )}
           </button>
         </div>
       </div>

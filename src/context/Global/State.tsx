@@ -1,4 +1,10 @@
-import React, { createContext, FC, useCallback, useContext, useReducer } from 'react'
+import React, {
+  createContext,
+  FC,
+  useCallback,
+  useContext,
+  useReducer,
+} from 'react'
 import axios from 'axios'
 
 import { reducer } from './reducer'
@@ -17,7 +23,7 @@ const initialState: State = {
   loading: false,
   userLoading: false,
   fetched: false,
-  updating: false
+  updating: false,
 }
 
 export const Context = createContext({} as InitialStateType)
@@ -25,17 +31,19 @@ export const Context = createContext({} as InitialStateType)
 export const useGlobalContext = () => useContext(Context)
 
 export const Provider: FC = ({ children }) => {
-
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const getSelectors = useCallback(async () => {
     try {
-
       dispatch({
-        type: 'LOADING'
+        type: 'LOADING',
       })
 
-      const { data: { threads, users } } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/thread/selectors`)
+      const {
+        data: { threads, users },
+      } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/v1/thread/selectors`
+      )
 
       selectThread(threads[0]._id)
 
@@ -43,14 +51,11 @@ export const Provider: FC = ({ children }) => {
         type: 'SELECTORS',
         payload: {
           threads,
-          users
-        }
+          users,
+        },
       })
-
     } catch (error) {
-
       console.error(error)
-
     }
   }, [])
 
@@ -58,58 +63,56 @@ export const Provider: FC = ({ children }) => {
     dispatch({
       type: 'SELECT_THREAD',
       payload: {
-        thread
-      }
+        thread,
+      },
     })
   }
 
   const selectUser = async (user: User) => {
     try {
-
       dispatch({
-        type: 'CHANGE_USER'
+        type: 'CHANGE_USER',
       })
 
       if (state.loggedIn && state.user === user) {
-
         dispatch({
           type: 'AUTH',
           payload: {
             loggedIn: false,
             token: '',
-            user: {} as User
-          }
+            user: {} as User,
+          },
         })
-
       } else {
-
-        const { data: { token } } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/token`, { user })
+        const {
+          data: { token },
+        } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/token`, {
+          user,
+        })
 
         dispatch({
           type: 'AUTH',
           payload: {
             user: user,
             loggedIn: true,
-            token
-          }
+            token,
+          },
         })
-
       }
-
     } catch (error) {
-
       console.error(error)
-
     }
   }
 
   return (
-    <Context.Provider value={{
-      ...state,
-      getSelectors,
-      selectThread,
-      selectUser
-    }}>
+    <Context.Provider
+      value={{
+        ...state,
+        getSelectors,
+        selectThread,
+        selectUser,
+      }}
+    >
       {children}
     </Context.Provider>
   )

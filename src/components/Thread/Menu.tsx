@@ -10,22 +10,16 @@ import { offset } from '../../utils'
 import { MenuProps } from './types'
 
 export function Menu({ deleteRef }: MenuProps) {
-
   const {
     thread,
-    pinned: {
-      pinned_id,
-      loading
-    },
-    menu: {
-      commentRef,
-      data
-    },
+    pinned: { pinned_id, loading },
+    menu: { commentRef, data },
     destroyMenu,
-    updatePinnedComment
+    updatePinnedComment,
   } = useThreadContext()
 
-  const { comment, pinComment, startEditing, deleteComment } = useCommentContext()
+  const { comment, pinComment, startEditing, deleteComment } =
+    useCommentContext()
 
   const menuRef = useOutsideClick((e) => {
     if (!(e.target as Element).closest('.comment_options')) {
@@ -37,15 +31,14 @@ export function Menu({ deleteRef }: MenuProps) {
     const m = menuRef.current
 
     if (commentRef) {
-      const elemTop = offset(commentRef).top
-        , elemLeft = offset(commentRef).left
-        , elemWidth = parseInt(getComputedStyle(commentRef).width)
+      const elemTop = offset(commentRef).top,
+        elemLeft = offset(commentRef).left,
+        elemWidth = parseInt(getComputedStyle(commentRef).width)
 
       m!.style.top = `${elemTop + 5}px`
       m!.style.left = `${elemLeft + elemWidth}px`
       m!.style.display = 'block'
     }
-
   }, [commentRef, menuRef])
 
   useEffect(() => {
@@ -56,40 +49,38 @@ export function Menu({ deleteRef }: MenuProps) {
 
   const menuAction = async (m: string) => {
     switch (m) {
-      case 'Pin': case 'Unpin':
+      case 'Pin':
+      case 'Unpin':
         if (!loading) {
           await pinComment(thread)
           updatePinnedComment(comment._id, m)
         }
-        break;
-      case 'Edit': startEditing(); break;
+        break
+      case 'Edit':
+        startEditing()
+        break
       case 'Delete':
         if (comment._id === pinned_id) {
           alert('Cannot delete comment while pinned. Unpin comment first.')
         } else {
           deleteComment(deleteRef.current)
         }
-        break;
+        break
       case 'Report':
-        alert('Comment reported.\n\nNOTE: Demonstration purposes only, reporting is not fully implemented.');
-        break;
-      default: break;
+        alert(
+          'Comment reported.\n\nNOTE: Demonstration purposes only, reporting is not fully implemented.'
+        )
+        break
+      default:
+        break
     }
   }
 
   return (
-    <span
-      id="menu_render"
-      className="comment_menu"
-      ref={menuRef}
-    >
+    <span id="menu_render" className="comment_menu" ref={menuRef}>
       <div className="opt_menu_container">
         {data.map((m, i) => (
-          <div
-            key={i}
-            className="opt_menu_item"
-            onClick={() => menuAction(m)}
-          >
+          <div key={i} className="opt_menu_item" onClick={() => menuAction(m)}>
             {m}
           </div>
         ))}

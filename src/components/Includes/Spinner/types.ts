@@ -1,4 +1,4 @@
 export interface Props {
-	stroke?: string
-	style: React.CSSProperties
+  stroke?: string
+  style: React.CSSProperties
 }

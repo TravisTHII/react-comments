@@ -13,10 +13,16 @@ import { Spinner } from '../Includes/Spinner'
 import { HeaderProps } from './types'
 
 export function Header({ refrence }: HeaderProps) {
+  const {
+    pinned: { pinned_id },
+    menu: { commentRef },
+    getMenu,
+  } = useThreadContext()
 
-  const { pinned: { pinned_id }, menu: { commentRef }, getMenu } = useThreadContext()
-
-  const { pinLoad, comment: { _id, user, date, data, menu } } = useCommentContext()
+  const {
+    pinLoad,
+    comment: { _id, user, date, data, menu },
+  } = useCommentContext()
 
   const [active, setActive] = useState(false)
 
@@ -43,7 +49,7 @@ export function Header({ refrence }: HeaderProps) {
       if (/^(Pin|Unpin)$/.test(i)) index = copy.indexOf(i)
     }
 
-    copy[index!] = (pinned_id === _id) ? 'Unpin' : 'Pin'
+    copy[index!] = pinned_id === _id ? 'Unpin' : 'Pin'
 
     return copy
   }
@@ -57,49 +63,56 @@ export function Header({ refrence }: HeaderProps) {
 
   return (
     <div className="comment_header">
-
       <div className="comment_author">
-
         <div className="author_picture">
-          <div className="background-ui" style={{ backgroundImage: `url(/images/users/${user.image.avatar})` }}></div>
+          <div
+            className="background-ui"
+            style={{
+              backgroundImage: `url(/images/users/${user.image.avatar})`,
+            }}
+          ></div>
         </div>
 
         <div className="author_info text-ui">
           <div className="author_username">
-            <div>
-              {user.username}
-            </div>
-            {user.badge.title &&
-              <Badge badge={user.badge} />
-            }
+            <div>{user.username}</div>
+            {user.badge.title && <Badge badge={user.badge} />}
           </div>
 
-          {user.motto &&
+          {user.motto && (
             <div className="author_motto ellipsis-ui">{user.motto}</div>
-          }
+          )}
 
           <div title={date.posted} className="author_date">
             {`${date.published} ${data.edited ? '(edited)' : ''}`}
           </div>
         </div>
-
       </div>
 
       <div className="comment_options">
-
-        {user.admin &&
+        {user.admin && (
           <span className="adminBadge flex_ui" title="Administrator">
             <FaUserShield />
           </span>
-        }
+        )}
 
-        {pinLoad
-          ? <Spinner stroke="#fff" style={{ display: 'block', margin: '0 auto', width: '25px', height: '25px' }} />
-          : (pinned_id === _id) &&
-          <span className="opt_ui cmt_pin flex_ui">
-            <TiPin />
-          </span>
-        }
+        {pinLoad ? (
+          <Spinner
+            stroke="#fff"
+            style={{
+              display: 'block',
+              margin: '0 auto',
+              width: '25px',
+              height: '25px',
+            }}
+          />
+        ) : (
+          pinned_id === _id && (
+            <span className="opt_ui cmt_pin flex_ui">
+              <TiPin />
+            </span>
+          )
+        )}
 
         <button
           type="button"
@@ -108,9 +121,7 @@ export function Header({ refrence }: HeaderProps) {
         >
           <BiDotsVerticalRounded />
         </button>
-
       </div>
-
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Shimmer } from './Shimmer'
 
-export const ThreadSkeleton = () =>
+export const ThreadSkeleton = () => (
   <div className="thread_column_skeleton">
     <div className="thread_header_skeleton">
       <div className="thread_header_item_skeleton has_shimmer">
@@ -19,10 +19,7 @@ export const ThreadSkeleton = () =>
 
     <div className="thread_comment_skeleton">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((a, _) => (
-        <div
-          key={a}
-          className="comment_skeleton has_shimmer"
-        >
+        <div key={a} className="comment_skeleton has_shimmer">
           <div className="comment_picture_skeleton"></div>
           <div className="comment_info_skeleton">
             <div className="paragraph_skeleton"></div>
@@ -34,3 +31,4 @@ export const ThreadSkeleton = () =>
       ))}
     </div>
   </div>
+)

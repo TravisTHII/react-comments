@@ -3,7 +3,7 @@ import { FaCode, FaGithub } from 'react-icons/fa'
 
 import Logo from '../../svg/react.svg'
 
-export const Header = () =>
+export const Header = () => (
   <header id="header">
     <div className="header_container">
       <div className="header_logo text-ui">
@@ -32,3 +32,4 @@ export const Header = () =>
       </div>
     </div>
   </header>
+)

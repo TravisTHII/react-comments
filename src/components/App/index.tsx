@@ -7,7 +7,7 @@ import { NotFound } from '../../components/NotFound'
 
 import '../../style/App.css'
 
-export const App = () =>
+export const App = () => (
   <Router>
     <Header />
     <Switch>
@@ -15,3 +15,4 @@ export const App = () =>
       <Route component={NotFound} />
     </Switch>
   </Router>
+)
