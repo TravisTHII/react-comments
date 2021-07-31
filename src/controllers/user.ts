@@ -1,64 +1,54 @@
-const User = require("../models/User")
+import { Request, Response } from 'express'
 
-const { Slugify } = require("../utils/functions")
+import User from '../models/User'
+import { Slugify } from '../utils/functions'
 
 // @desc 		Get all users
 // @route 	GET /api/v1/user
 // @access 	Public
-exports.getUsers = async (req, res) => {
+export const getUsers = async (_: Request, res: Response) => {
   try {
-
     const users = await User.find().select('-__v')
 
     return res.status(200).json({
-      users
+      users,
     })
-
   } catch (error) {
-
     return res.status(500).json({
-      error: error.message
+      error: error.message,
     })
-
   }
-
 }
 
 // @desc 		Create a user
 // @route 	GET /api/v1/user/create
 // @access 	Public
-exports.createUser = async (req, res) => {
+export const createUser = async (req: Request, res: Response) => {
   try {
-
     const { username, motto, badge, image } = req.body
 
-    if (!username)
-      throw new Error('Please enter a username.')
+    if (!username) throw new Error('Please enter a username.')
 
     const newUser = new User({
       username,
       slug: Slugify(username),
       motto,
       badge: {
-        ...badge
+        ...badge,
       },
       image: {
-        ...image
-      }
+        ...image,
+      },
     })
 
     const user = await newUser.save()
 
     return res.status(200).json({
-      user
+      user,
     })
-
   } catch (error) {
-
     return res.status(500).json({
-      error: error.message
+      error: error.message,
     })
-
   }
-
 }

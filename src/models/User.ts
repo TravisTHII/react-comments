@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     trim: true,
-    required: true
+    required: true,
   },
   slug: String,
   motto: String,
@@ -14,8 +14,8 @@ const UserSchema = new mongoose.Schema({
     textColor: String,
   },
   image: {
-    avatar: String
-  }
+    avatar: String,
+  },
 })
 
-module.exports = mongoose.model('User', UserSchema)
+export default mongoose.model('User', UserSchema)
