@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import ReactDOM from 'react-dom'
 
 import { useThreadContext } from '../../context/Thread'
 import { useCommentContext } from '../../context/Comment'
@@ -76,8 +77,8 @@ export function Menu({ deleteRef }: MenuProps) {
     }
   }
 
-  return (
-    <span id="menu_render" className="comment_menu" ref={menuRef}>
+  return ReactDOM.createPortal(
+    <div id="menu_render" className="comment_menu" ref={menuRef}>
       <div className="opt_menu_container">
         {data.map((m, i) => (
           <div key={i} className="opt_menu_item" onClick={() => menuAction(m)}>
@@ -85,6 +86,7 @@ export function Menu({ deleteRef }: MenuProps) {
           </div>
         ))}
       </div>
-    </span>
+    </div>,
+    document.body
   )
 }
