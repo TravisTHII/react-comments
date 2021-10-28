@@ -1,4 +1,4 @@
-# React Comments (SERVER)
+# React Comments (Server)
 React Comments backend
 
 ## Local Installation
