@@ -23,7 +23,7 @@ export const Header = () => (
         </a>
         <a
           className="icon flex_ui"
-          href="https://github.com/TravisTHII/comments"
+          href="https://github.com/TravisTHII/react-comments"
           target="_blank"
           rel="noopener noreferrer"
         >
