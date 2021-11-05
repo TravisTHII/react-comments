@@ -3,8 +3,8 @@
 # React Comments [![Netlify Status](https://api.netlify.com/api/v1/badges/d7f65515-38ea-4a18-98a0-87c217cd14b8/deploy-status)](https://react-comments.netlify.app/)
 React commenting app (Witcher 3 themed)
 
-# Live website
-https://react-comments.netlify.app
+Visit the website:
+ - https://react-comments.netlify.app
 
 ## Overview
 
