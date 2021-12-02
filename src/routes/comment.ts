@@ -1,12 +1,12 @@
 import { Router } from 'express'
-import { Auth } from '../middleware/auth'
+import { Auth, SoftAccess } from '../middleware/auth'
 import { Reply, Replies, Pin, Edit, Delete } from '../controllers/comment'
 
 const router = Router()
 
 router.route('/reply').post(Auth, Reply)
 
-router.route('/replies').post(Auth, Replies)
+router.route('/replies').post(SoftAccess, Replies)
 
 router.route('/pin').post(Pin)
 
