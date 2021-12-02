@@ -46,7 +46,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         } = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/v1/comment/replies`,
           { comment: comment._id },
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         dispatch({
@@ -74,7 +74,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         } = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
           { comment: comment._id },
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         dispatch({
@@ -104,7 +104,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         const { data } = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/v1/comment/reply`,
           { comment: comment._id, body, user },
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         comment.reply.total += 1
@@ -176,7 +176,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
         } = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/v1/comment/edit`,
           { comment: comment._id, body },
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         comment.body = editedComment.body

@@ -51,7 +51,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         },
       } = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}`,
-        { headers: { _token: token } }
+        { headers: { Authorization: `Bearer ${token}` } }
       )
 
       dispatch({
@@ -85,7 +85,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
           data: { paging, pinned, comments },
         } = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}?sort=${sort}`,
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         dispatch({
@@ -113,7 +113,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
           data: { paging, comments },
         } = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         dispatch({
@@ -141,7 +141,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
         } = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/v1/thread/comment`,
           { thread, user, body },
-          { headers: { _token: token } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
 
         dispatch({
@@ -167,7 +167,7 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
       } = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}/pin`,
         {},
-        { headers: { _token: token } }
+        { headers: { Authorization: `Bearer ${token}` } }
       )
 
       dispatch({
