@@ -18,5 +18,5 @@ app.use('/api/v1/thread', routes_1.thread);
 app.use('/api/v1/comment', routes_1.comment);
 app.use('/api/v1/token', routes_1.token);
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(safe_1.default.yellow(`Running server on port ${PORT}`)));
+app.listen(PORT, () => console.log(safe_1.default.yellow(`Running server on port ${PORT} in ${process.env.ENV} mode`)));
 //# sourceMappingURL=index.js.map

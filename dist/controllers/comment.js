@@ -19,7 +19,7 @@ const Comment_1 = require("../models/Comment");
 const generateComment_1 = require("../utils/generateComment");
 const Reply = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.token;
+        const { _id } = req.user;
         const { comment, body, user } = req.body;
         const u = yield User_1.default.findById({ _id: user });
         const c = yield Comment_1.Comment.findById({ _id: comment });
@@ -60,7 +60,7 @@ const Reply = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Reply = Reply;
 const Replies = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.token;
+        const { _id } = req.user;
         const { comment } = req.body;
         let cursor = req.query.cursor;
         const limit = 9;
@@ -123,7 +123,7 @@ const Pin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Pin = Pin;
 const Edit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.token;
+        const { _id } = req.user;
         const { comment, body } = req.body;
         yield Comment_1.Comment.findByIdAndUpdate({ _id: comment }, {
             body,

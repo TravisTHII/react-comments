@@ -21,5 +21,7 @@ app.use('/api/v1/token', token)
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () =>
-  console.log(colors.yellow(`Running server on port ${PORT}`))
+  console.log(
+    colors.yellow(`Running server on port ${PORT} in ${process.env.ENV} mode`)
+  )
 )

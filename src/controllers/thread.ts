@@ -53,11 +53,11 @@ export const createThread = async (req: Request, res: Response) => {
 }
 
 // @desc 		Get a thread
-// @route 	GET /api/v1/thread
+// @route 	GET /api/v1/thread/[thread _id]
 // @access 	Public
 export const getThread = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.token
+    const { _id } = req.user
 
     const { _thread_name } = req.params
 
@@ -133,7 +133,7 @@ export const getThread = async (req: Request, res: Response) => {
 // @access Public
 export const Comment = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.token
+    const { _id } = req.user
 
     const { thread, user, body } = req.body
 
@@ -177,7 +177,7 @@ export const Comment = async (req: Request, res: Response) => {
 // @access Public
 export const Pin = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.token
+    const { _id } = req.user
 
     const { _thread_name } = req.params
 

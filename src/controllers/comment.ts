@@ -13,7 +13,7 @@ import { CommentType } from '../types'
 // @access 	Public
 export const Reply = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.token
+    const { _id } = req.user
 
     const { comment, body, user } = req.body
 
@@ -68,7 +68,7 @@ export const Reply = async (req: Request, res: Response) => {
 // @access 	Public
 export const Replies = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.token
+    const { _id } = req.user
 
     const { comment } = req.body
 
@@ -154,7 +154,7 @@ export const Pin = async (req: Request, res: Response) => {
 // @access 	Public
 export const Edit = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.token
+    const { _id } = req.user
 
     const { comment, body } = req.body
 

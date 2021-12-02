@@ -56,7 +56,7 @@ const createThread = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.createThread = createThread;
 const getThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.token;
+        const { _id } = req.user;
         const { _thread_name } = req.params;
         let { sort } = req.query;
         let cursor = req.query.cursor;
@@ -115,7 +115,7 @@ const getThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getThread = getThread;
 const Comment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.token;
+        const { _id } = req.user;
         const { thread, user, body } = req.body;
         if (!user)
             throw new Error();
@@ -146,7 +146,7 @@ const Comment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Comment = Comment;
 const Pin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.token;
+        const { _id } = req.user;
         const { _thread_name } = req.params;
         const comment = yield getPinnedComment_1.getPinnedComment(_thread_name, _id);
         return res.status(200).json({

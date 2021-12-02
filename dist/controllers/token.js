@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Token = void 0;
+exports.TestToken = exports.Token = void 0;
+const User_1 = __importDefault(require("../models/User"));
 const createToken_1 = require("../utils/createToken");
 const Token = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -26,4 +30,19 @@ const Token = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.Token = Token;
+const TestToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { _id } = req.user;
+        const user = yield User_1.default.findById({ _id });
+        return res.status(200).json({
+            user,
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            error: error.message,
+        });
+    }
+});
+exports.TestToken = TestToken;
 //# sourceMappingURL=token.js.map
