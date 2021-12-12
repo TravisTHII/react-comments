@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { ThreadProvider } from '../../context/Thread'
+import { useGlobalContext } from '../../context/global'
+import { ThreadProvider } from '../../context/thread'
 
-import { Selectors } from '../../components/Selectors'
-import { Thread } from '../Thread'
+import { Selectors } from '../selectors'
+import { Thread } from '../thread'
 
-import { SkeletonLoader } from '../Skeletons'
+import { SkeletonLoader } from '../skeletons'
 
 export function Home() {
   const { thread, token, loading, fetched, getSelectors } = useGlobalContext()

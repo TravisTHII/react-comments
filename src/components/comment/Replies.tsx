@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { useCommentContext } from '../../context/Comment'
+import { useCommentContext } from '../../context/comment'
 
-import { Comment } from '../Comment'
+import { Comment } from './'
 
-import { Spinner } from '../Includes/Spinner'
+import { Spinner } from '../includes/spinner'
 
 export function Replies() {
   const {

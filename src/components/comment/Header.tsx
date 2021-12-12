@@ -4,11 +4,11 @@ import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { TiPin } from 'react-icons/ti'
 import { FaUserShield } from 'react-icons/fa'
 
-import { useThreadContext } from '../../context/Thread'
-import { useCommentContext } from '../../context/Comment'
+import { useThreadContext } from '../../context/thread'
+import { useCommentContext } from '../../context/comment'
 
-import { Badge } from '../Includes/Badge'
-import { Spinner } from '../Includes/Spinner'
+import { Badge } from '../includes/badge'
+import { Spinner } from '../includes/spinner'
 
 import { HeaderProps } from './types'
 

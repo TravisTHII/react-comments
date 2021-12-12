@@ -1,13 +1,13 @@
 import React, { useRef } from 'react'
 
-import { useThreadContext } from '../../context/Thread'
-import { useCommentContext } from '../../context/Comment'
+import { useThreadContext } from '../../context/thread'
+import { useCommentContext } from '../../context/comment'
 
 import { Header, Content, Edit, Actions, Reply, Replies } from './'
 
-import { Menu } from '../Thread'
+import { Menu } from '../thread'
 
-import { Spinner } from '../Includes/Spinner'
+import { Spinner } from '../includes/spinner'
 
 export function Comment() {
   const {

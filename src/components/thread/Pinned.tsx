@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 
-import { useThreadContext } from '../../context/Thread'
+import { useThreadContext } from '../../context/thread'
 
-import { Comment } from '../Comment'
+import { Comment } from '../comment'
 
-import { Spinner } from '../Includes/Spinner'
+import { Spinner } from '../includes/spinner'
 
 export function Pinned() {
   const {

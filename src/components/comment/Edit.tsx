@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useCommentContext } from '../../context/Comment'
+import { useCommentContext } from '../../context/comment'
 
 import { expandTextarea, validText } from '../../utils'
 
-import { Spinner } from '../Includes/Spinner'
+import { Spinner } from '../includes/spinner'
 
 export function Edit() {
   const {

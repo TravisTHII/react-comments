@@ -2,11 +2,11 @@ import React, { useRef, useState } from 'react'
 
 import { FaUserShield } from 'react-icons/fa'
 
-import { useGlobalContext } from '../../context/Global'
-import { useThreadContext } from '../../context/Thread'
+import { useGlobalContext } from '../../context/global'
+import { useThreadContext } from '../../context/thread'
 
-import { Badge } from '../Includes/Badge'
-import { Spinner } from '../Includes/Spinner'
+import { Badge } from '../includes/badge'
+import { Spinner } from '../includes/spinner'
 
 import { validText, expandTextarea } from '../../utils'
 

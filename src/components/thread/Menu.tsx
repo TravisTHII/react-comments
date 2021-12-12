@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
-import { useThreadContext } from '../../context/Thread'
-import { useCommentContext } from '../../context/Comment'
+import { useThreadContext } from '../../context/thread'
+import { useCommentContext } from '../../context/comment'
 
 import { useOutsideClick } from '../../hooks/useOutsideClick'
 

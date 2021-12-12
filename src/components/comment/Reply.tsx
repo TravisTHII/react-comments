@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { useCommentContext } from '../../context/Comment'
+import { useGlobalContext } from '../../context/global'
+import { useCommentContext } from '../../context/comment'
 
 import { validText, expandTextarea } from '../../utils'
 
-import { Spinner } from '../Includes/Spinner'
+import { Spinner } from '../includes/spinner'
 
 export function Reply() {
   const { user, loggedIn } = useGlobalContext()

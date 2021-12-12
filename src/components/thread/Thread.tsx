@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { useThreadContext } from '../../context/Thread'
+import { useGlobalContext } from '../../context/global'
+import { useThreadContext } from '../../context/thread'
 
 import { Header, Poster, Pinned } from './'
-import { Comment } from '../Comment'
-import { Spinner } from '../Includes/Spinner'
+import { Comment } from '../comment'
+import { Spinner } from '../includes/spinner'
 
 export function Thread() {
   const { user, thread, userLoading } = useGlobalContext()

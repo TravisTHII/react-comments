@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { Header } from '../../components/Header'
-import { Home } from '../../components/Home'
-import { NotFound } from '../../components/NotFound'
+import { Header } from '../header'
+import { Home } from '../home'
+import { NotFound } from '../notfound'
 
 import '../../style/App.css'
 

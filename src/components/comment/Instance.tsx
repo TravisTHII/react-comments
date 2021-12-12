@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useGlobalContext } from '../../context/Global'
-import { CommentProvider } from '../../context/Comment'
+import { useGlobalContext } from '../../context/global'
+import { CommentProvider } from '../../context/comment'
 
 import { Comment } from './Comment'
 
