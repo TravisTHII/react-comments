@@ -4,8 +4,7 @@ import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { TiPin } from 'react-icons/ti'
 import { FaUserShield } from 'react-icons/fa'
 
-import { useThreadContext } from '../../context/thread'
-import { useCommentContext } from '../../context/comment'
+import { useThreadContext, useCommentContext } from '../../context'
 
 import { Badge, Spinner } from '../includes'
 

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { useGlobalContext } from '../../context/global'
-import { ThreadProvider } from '../../context/thread'
+import { useGlobalContext, ThreadProvider } from '../../context'
 
 import { Selectors } from '../selectors'
 import { Thread } from '../thread'

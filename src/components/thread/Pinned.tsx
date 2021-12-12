@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { useThreadContext } from '../../context/thread'
+import { useThreadContext } from '../../context'
 
 import { Comment } from '../comment'
 

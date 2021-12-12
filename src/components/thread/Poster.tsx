@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react'
 
 import { FaUserShield } from 'react-icons/fa'
 
-import { useGlobalContext } from '../../context/global'
-import { useThreadContext } from '../../context/thread'
+import { useGlobalContext, useThreadContext } from '../../context'
 
 import { Badge, Spinner } from '../includes'
 

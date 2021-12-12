@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useThreadContext } from '../../context/thread'
+import { useThreadContext } from '../../context'
 
 import { useOutsideClick } from '../../hooks/useOutsideClick'
 

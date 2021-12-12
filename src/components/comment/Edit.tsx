@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useCommentContext } from '../../context/comment'
+import { useCommentContext } from '../../context'
 
 import { expandTextarea, validText } from '../../utils'
 

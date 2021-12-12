@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useGlobalContext } from '../../../context/global'
+import { useGlobalContext } from '../../../context'
 
 import { User } from './User'
 

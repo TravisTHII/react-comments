@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GlobalProvider } from '../../context/global'
+import { GlobalProvider } from '../../context'
 
 import { Home } from './Home'
 
