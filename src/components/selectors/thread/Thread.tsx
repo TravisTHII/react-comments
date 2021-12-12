@@ -4,17 +4,17 @@ import { useGlobalContext } from '../../../context/global'
 
 import { Props } from './types'
 
-export function Item({ thread: { _id, name }, selected }: Props) {
+export function Thread({ thread: { _id, name }, selected }: Props) {
   const { selectThread } = useGlobalContext()
 
   return (
-    <div
-      className={`thread-selector flex_ui ${
-        selected ? 'thread-is-selected' : ''
+    <li
+      className={`thread-selector flex_ui${
+        selected ? ' thread-is-selected' : ''
       }`}
       onClick={() => selectThread(_id)}
     >
       {name}
-    </div>
+    </li>
   )
 }

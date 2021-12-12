@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { SelectUser, SelectThread } from './'
+import { SelectUser } from './user'
+import { SelectThread } from './thread'
 
 export const Selectors = () => (
   <div className="thread_selectors">

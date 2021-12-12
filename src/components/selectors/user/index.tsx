@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { useGlobalContext } from '../../../context/global'
 
-import { Item } from './Item'
+import { User } from './User'
 
 export function SelectUser() {
   const { users } = useGlobalContext()
@@ -14,9 +14,9 @@ export function SelectUser() {
       <div className="su-header">
         <p>Select user</p>
       </div>
-      <div className="users">
+      <ul className="users">
         {users.map((u) => (
-          <Item
+          <User
             key={u._id}
             user={u}
             image={u.image.avatar}
@@ -25,7 +25,7 @@ export function SelectUser() {
             setLocalUser={setLocalUser}
           />
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

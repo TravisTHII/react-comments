@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useGlobalContext } from '../../../context/global'
 
-import { Item } from './Item'
+import { Thread } from './Thread'
 
 export function SelectThread() {
   const { thread, threads } = useGlobalContext()
@@ -12,11 +12,11 @@ export function SelectThread() {
       <div className="st-header">
         <p>Select thread</p>
       </div>
-      <div className="st-threads">
+      <ul className="st-threads">
         {threads.map((t) => (
-          <Item key={t._id} selected={thread === t._id} thread={t} />
+          <Thread key={t._id} selected={thread === t._id} thread={t} />
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

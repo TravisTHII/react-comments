@@ -4,7 +4,7 @@ import { useGlobalContext } from '../../../context/global'
 
 import { Props } from './types'
 
-export function Item({
+export function User({
   user,
   image,
   selected,
@@ -24,7 +24,7 @@ export function Item({
   }
 
   return (
-    <div
+    <li
       className={`user-select${selected ? ' user-is-selected' : ''}`}
       onClick={() => setUser()}
     >
@@ -33,6 +33,6 @@ export function Item({
         style={{ backgroundImage: `url(/images/users/${image})` }}
         title={user.username}
       ></div>
-    </div>
+    </li>
   )
 }
