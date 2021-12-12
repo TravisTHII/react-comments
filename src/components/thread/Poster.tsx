@@ -5,8 +5,7 @@ import { FaUserShield } from 'react-icons/fa'
 import { useGlobalContext } from '../../context/global'
 import { useThreadContext } from '../../context/thread'
 
-import { Badge } from '../includes/badge'
-import { Spinner } from '../includes/spinner'
+import { Badge, Spinner } from '../includes'
 
 import { validText, expandTextarea } from '../../utils'
 

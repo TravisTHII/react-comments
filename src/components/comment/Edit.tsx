@@ -4,7 +4,7 @@ import { useCommentContext } from '../../context/comment'
 
 import { expandTextarea, validText } from '../../utils'
 
-import { Spinner } from '../includes/spinner'
+import { Spinner } from '../includes'
 
 export function Edit() {
   const {

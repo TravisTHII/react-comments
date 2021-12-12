@@ -7,8 +7,7 @@ import { FaUserShield } from 'react-icons/fa'
 import { useThreadContext } from '../../context/thread'
 import { useCommentContext } from '../../context/comment'
 
-import { Badge } from '../includes/badge'
-import { Spinner } from '../includes/spinner'
+import { Badge, Spinner } from '../includes'
 
 import { HeaderProps } from './types'
 

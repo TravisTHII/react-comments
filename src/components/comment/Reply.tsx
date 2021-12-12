@@ -5,7 +5,7 @@ import { useCommentContext } from '../../context/comment'
 
 import { validText, expandTextarea } from '../../utils'
 
-import { Spinner } from '../includes/spinner'
+import { Spinner } from '../includes'
 
 export function Reply() {
   const { user, loggedIn } = useGlobalContext()

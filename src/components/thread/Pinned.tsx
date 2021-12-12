@@ -4,7 +4,7 @@ import { useThreadContext } from '../../context/thread'
 
 import { Comment } from '../comment'
 
-import { Spinner } from '../includes/spinner'
+import { Spinner } from '../includes'
 
 export function Pinned() {
   const {

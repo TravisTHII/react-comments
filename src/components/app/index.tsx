@@ -5,7 +5,7 @@ import { Header } from '../header'
 import { Home } from '../home'
 import { NotFound } from '../notfound'
 
-import '../../style/App.css'
+import '../../style/index.css'
 
 export const App = () => (
   <Router>

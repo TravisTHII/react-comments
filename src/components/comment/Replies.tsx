@@ -4,7 +4,7 @@ import { useCommentContext } from '../../context/comment'
 
 import { Comment } from './'
 
-import { Spinner } from '../includes/spinner'
+import { Spinner } from '../includes'
 
 export function Replies() {
   const {

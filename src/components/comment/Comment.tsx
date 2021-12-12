@@ -7,7 +7,7 @@ import { Header, Content, Edit, Actions, Reply, Replies } from './'
 
 import { Menu } from '../thread'
 
-import { Spinner } from '../includes/spinner'
+import { Spinner } from '../includes'
 
 export function Comment() {
   const {

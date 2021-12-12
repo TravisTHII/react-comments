@@ -5,7 +5,7 @@ import { useThreadContext } from '../../context/thread'
 
 import { Header, Poster, Pinned } from './'
 import { Comment } from '../comment'
-import { Spinner } from '../includes/spinner'
+import { Spinner } from '../includes'
 
 export function Thread() {
   const { user, thread, userLoading } = useGlobalContext()
