@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { Header } from '../header'
 import { Home } from '../home'
@@ -10,9 +10,9 @@ import '../../style/App.css'
 export const App = () => (
   <Router>
     <Header />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route component={NotFound} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   </Router>
 )
