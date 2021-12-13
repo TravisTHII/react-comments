@@ -19,8 +19,7 @@ const Comment_1 = require("../models/Comment");
 const generateComment_1 = require("../utils/generateComment");
 const Reply = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.user;
-        const { comment, body, user } = req.body;
+        let { user: { _id }, body: { comment, body, user }, } = req;
         const u = yield User_1.default.findById({ _id: user });
         const c = yield Comment_1.Comment.findById({ _id: comment });
         if (c) {
@@ -60,14 +59,13 @@ const Reply = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Reply = Reply;
 const Replies = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.user;
-        const { comment } = req.body;
-        let cursor = req.query.cursor;
+        let { user: { _id }, body: { comment }, query: { cursor }, } = req;
+        const newCursor = Number(cursor) || 0;
         const limit = 9;
         const { end, replies } = yield Comment_1.Comment.paginate({
             'reply.to': comment,
         }, {
-            offset: cursor || 0,
+            offset: newCursor,
             limit,
             lean: true,
             select: '-__v',
@@ -89,11 +87,10 @@ const Replies = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             doc.replies = a;
             return doc;
         }));
-        cursor = cursor + limit || limit;
         return res.status(200).json({
             paging: {
                 end: !end,
-                cursor,
+                cursor: newCursor + limit || limit,
             },
             replies,
         });
@@ -123,8 +120,7 @@ const Pin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Pin = Pin;
 const Edit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.user;
-        const { comment, body } = req.body;
+        let { user: { _id }, body: { comment, body }, } = req;
         yield Comment_1.Comment.findByIdAndUpdate({ _id: comment }, {
             body,
             data: {

@@ -13,9 +13,10 @@ import { CommentType } from '../types'
 // @access 	Public
 export const Reply = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.user
-
-    const { comment, body, user } = req.body
+    let {
+      user: { _id },
+      body: { comment, body, user },
+    } = req
 
     // get user
     const u = await User.findById({ _id: user })
@@ -68,12 +69,13 @@ export const Reply = async (req: Request, res: Response) => {
 // @access 	Public
 export const Replies = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.user
+    let {
+      user: { _id },
+      body: { comment },
+      query: { cursor },
+    } = req
 
-    const { comment } = req.body
-
-    let cursor = req.query.cursor as unknown as number
-
+    const newCursor = Number(cursor) || 0
     const limit = 9
 
     const { end, replies } = await CommentSchema.paginate(
@@ -81,7 +83,7 @@ export const Replies = async (req: Request, res: Response) => {
         'reply.to': comment,
       },
       {
-        offset: cursor || 0,
+        offset: newCursor,
         limit,
         lean: true,
         select: '-__v',
@@ -109,12 +111,10 @@ export const Replies = async (req: Request, res: Response) => {
       return doc
     })
 
-    cursor = cursor + limit || limit
-
     return res.status(200).json({
       paging: {
         end: !end,
-        cursor,
+        cursor: newCursor + limit || limit,
       },
       replies,
     })
@@ -154,9 +154,10 @@ export const Pin = async (req: Request, res: Response) => {
 // @access 	Public
 export const Edit = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.user
-
-    const { comment, body } = req.body
+    let {
+      user: { _id },
+      body: { comment, body },
+    } = req
 
     await CommentSchema.findByIdAndUpdate(
       { _id: comment },

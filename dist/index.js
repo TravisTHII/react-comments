@@ -8,16 +8,11 @@ const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
 const safe_1 = __importDefault(require("colors/safe"));
 const helmet_1 = __importDefault(require("helmet"));
-const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const mongo_1 = require("./config/mongo");
 const routes_1 = require("./routes");
 mongo_1.mongoDb();
 const app = express_1.default();
 app.set('trust proxy', 1);
-app.use(express_rate_limit_1.default({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-}));
 app.use(express_1.default.json());
 app.use(helmet_1.default());
 app.use(cors_1.default());

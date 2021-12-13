@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Pin = exports.Comment = exports.getThread = exports.createThread = exports.Selectors = void 0;
+exports.createThread = exports.Pin = exports.Comment = exports.getThread = exports.Selectors = void 0;
 const Comment_1 = require("../models/Comment");
 const Thread_1 = __importDefault(require("../models/Thread"));
 const User_1 = __importDefault(require("../models/User"));
@@ -34,38 +34,16 @@ const Selectors = (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.Selectors = Selectors;
-const createThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { name } = req.body;
-        if (!name)
-            throw new Error('Please enter a thread name.');
-        const thread = new Thread_1.default({
-            name,
-        });
-        yield thread.save();
-        return res.status(200).json({
-            message: `successfully created Thread ${name}!`,
-        });
-    }
-    catch (error) {
-        return res.status(500).json({
-            error: error.message,
-        });
-    }
-});
-exports.createThread = createThread;
 const getThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.user;
-        const { _thread_name } = req.params;
-        let { sort } = req.query;
-        let cursor = req.query.cursor;
-        const limit = 18;
+        let { user: { _id }, params: { _thread_name }, query: { sort, cursor }, } = req;
+        const newCursor = Number(cursor) || 0;
+        const limit = 2;
         const pinned = yield getPinnedComment_1.getPinnedComment(_thread_name, _id);
         const { total, end, comments } = yield Comment_1.Comment.paginate({
             thread: _thread_name,
         }, {
-            offset: cursor || 0,
+            offset: newCursor,
             limit,
             lean: true,
             select: '-__v',
@@ -88,14 +66,13 @@ const getThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             doc.comments = a;
             return doc;
         }));
-        cursor = cursor + limit || limit;
         return res.status(200).json({
             data: {
                 total,
             },
             paging: {
                 end: !end,
-                cursor,
+                cursor: newCursor + limit || limit,
             },
             pinned: {
                 pinned_id: Boolean(pinned) ? pinned._id : '',
@@ -115,8 +92,7 @@ const getThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getThread = getThread;
 const Comment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.user;
-        const { thread, user, body } = req.body;
+        let { user: { _id }, body: { thread, user, body }, } = req;
         if (!user)
             throw new Error();
         const u = yield User_1.default.findById({ _id: user });
@@ -146,8 +122,7 @@ const Comment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Comment = Comment;
 const Pin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { _id } = req.user;
-        const { _thread_name } = req.params;
+        let { user: { _id }, params: { _thread_name }, } = req;
         const comment = yield getPinnedComment_1.getPinnedComment(_thread_name, _id);
         return res.status(200).json({
             comment,
@@ -160,4 +135,24 @@ const Pin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.Pin = Pin;
+const createThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name } = req.body;
+        if (!name)
+            throw new Error('Please enter a thread name.');
+        const thread = new Thread_1.default({
+            name,
+        });
+        yield thread.save();
+        return res.status(200).json({
+            message: `successfully created Thread ${name}!`,
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            error: error.message,
+        });
+    }
+});
+exports.createThread = createThread;
 //# sourceMappingURL=thread.js.map

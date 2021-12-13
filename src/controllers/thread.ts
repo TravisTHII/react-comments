@@ -27,46 +27,19 @@ export const Selectors = async (_: Request, res: Response) => {
   }
 }
 
-// @desc 		Create a thread
-// @route 	GET /api/v1/thread/create
-// @access 	Public
-export const createThread = async (req: Request, res: Response) => {
-  try {
-    const { name } = req.body
-
-    if (!name) throw new Error('Please enter a thread name.')
-
-    const thread = new Thread({
-      name,
-    })
-
-    await thread.save()
-
-    return res.status(200).json({
-      message: `successfully created Thread ${name}!`,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      error: error.message,
-    })
-  }
-}
-
 // @desc 		Get a thread
-// @route 	GET /api/v1/thread/[thread _id]
+// @route 	GET /api/v1/thread
 // @access 	Public
 export const getThread = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.user
+    let {
+      user: { _id },
+      params: { _thread_name },
+      query: { sort, cursor },
+    } = req
 
-    const { _thread_name } = req.params
-
-    let { sort } = req.query
-
-    let cursor = req.query.cursor as unknown as number
-
-    const limit = 18
-
+    const newCursor = Number(cursor) || 0
+    const limit = 2
     const pinned = await getPinnedComment(_thread_name, _id)
 
     const { total, end, comments } = await CommentModel.paginate(
@@ -74,7 +47,7 @@ export const getThread = async (req: Request, res: Response) => {
         thread: _thread_name,
       },
       {
-        offset: cursor || 0,
+        offset: newCursor,
         limit,
         lean: true,
         select: '-__v',
@@ -103,15 +76,13 @@ export const getThread = async (req: Request, res: Response) => {
       return doc
     })
 
-    cursor = cursor + limit || limit
-
     return res.status(200).json({
       data: {
         total,
       },
       paging: {
         end: !end,
-        cursor,
+        cursor: newCursor + limit || limit,
       },
       pinned: {
         pinned_id: Boolean(pinned) ? pinned._id : '',
@@ -133,9 +104,10 @@ export const getThread = async (req: Request, res: Response) => {
 // @access Public
 export const Comment = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.user
-
-    const { thread, user, body } = req.body
+    let {
+      user: { _id },
+      body: { thread, user, body },
+    } = req
 
     // if no user throw error
     if (!user) throw new Error()
@@ -173,18 +145,44 @@ export const Comment = async (req: Request, res: Response) => {
 }
 
 // @desc Get pinned comment
-// @route POST /api/v1/thread/pin
+// @route POST /api/v1/thread/:_thread_name/pin
 // @access Public
 export const Pin = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.user
-
-    const { _thread_name } = req.params
+    let {
+      user: { _id },
+      params: { _thread_name },
+    } = req
 
     const comment = await getPinnedComment(_thread_name, _id)
 
     return res.status(200).json({
       comment,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    })
+  }
+}
+
+// @desc 		Create a thread
+// @route 	GET /api/v1/thread/create_thread
+// @access 	Public
+export const createThread = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.body
+
+    if (!name) throw new Error('Please enter a thread name.')
+
+    const thread = new Thread({
+      name,
+    })
+
+    await thread.save()
+
+    return res.status(200).json({
+      message: `successfully created Thread ${name}!`,
     })
   } catch (error) {
     return res.status(500).json({
