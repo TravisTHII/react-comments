@@ -4,9 +4,10 @@ import React, {
   useReducer,
   useCallback,
 } from 'react'
-import axios from 'axios'
 
 import { reducer } from './reducer'
+
+import { api } from '../../utils'
 
 import { ProviderProps, State, InitialStateType, Pinned } from './types'
 
@@ -49,10 +50,9 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
           pinned,
           comments,
         },
-      } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      } = await api.get(`/api/v1/thread/${thread}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
 
       dispatch({
         type: 'GET_THREAD',
@@ -83,10 +83,9 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
 
         const {
           data: { paging, pinned, comments },
-        } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}?sort=${sort}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
+        } = await api.get(`/api/v1/thread/${thread}?sort=${sort}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
 
         dispatch({
           type: 'SORT_THREAD',
@@ -111,8 +110,8 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
 
         const {
           data: { paging, comments },
-        } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
+        } = await api.get(
+          `/api/v1/thread/${thread}?cursor=${state.paging.cursor}&sort=${state.sort}`,
           { headers: { Authorization: `Bearer ${token}` } }
         )
 
@@ -138,8 +137,8 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
 
         const {
           data: { comment },
-        } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/thread/comment`,
+        } = await api.post(
+          '/api/v1/thread/comment',
           { thread, user, body },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -164,8 +163,8 @@ export const Provider = ({ children, thread, token }: ProviderProps) => {
 
       const {
         data: { comment },
-      } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/thread/${thread}/pin`,
+      } = await api.post(
+        `/api/v1/thread/${thread}/pin`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

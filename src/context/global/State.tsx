@@ -5,9 +5,10 @@ import React, {
   useContext,
   useReducer,
 } from 'react'
-import axios from 'axios'
 
 import { reducer } from './reducer'
+
+import { api } from '../../utils'
 
 import { State, InitialStateType } from './types'
 
@@ -41,9 +42,7 @@ export const Provider: FC = ({ children }) => {
 
       const {
         data: { threads, users },
-      } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/thread/selectors`
-      )
+      } = await api.get('/api/v1/thread/selectors')
 
       selectThread(threads[0]._id)
 
@@ -86,7 +85,7 @@ export const Provider: FC = ({ children }) => {
       } else {
         const {
           data: { token },
-        } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/token`, {
+        } = await api.post('/api/v1/token', {
           user,
         })
 

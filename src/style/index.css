@@ -165,33 +165,24 @@ Thread
   color: #fff;
 }
 
-.header-menu {
+.header_menu {
   width: 150px;
   height: 35px;
   cursor: pointer;
   z-index: 5;
 }
-
-.header-menu,
-.header-menu > ul {
+.header_menu,
+.header_menu > ul {
   background-color: rgba(10, 10, 10, 0.9);
 }
-
-.header-menu > ul {
+.header_menu > ul {
   overflow: hidden;
   height: 0;
-  transition: height 0.2s linear;
 }
-
-.header-menu > ul li:hover {
+.header_menu > ul li:hover {
   background-color: var(--red);
 }
-
-.menu-open {
-  height: 70px !important;
-}
-
-.menu-item {
+.menu_item {
   height: 35px;
   line-height: 35px;
   padding-left: 15px;

@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useReducer } from 'react'
-import axios from 'axios'
 
 import { reducer } from './reducer'
+
+import { api } from '../../utils'
 
 import { State, InitialStateType, ProviderProps } from './types'
 
@@ -43,8 +44,8 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
         const {
           data: { paging, replies },
-        } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/comment/replies`,
+        } = await api.post(
+          '/api/v1/comment/replies',
           { comment: comment._id },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -71,8 +72,8 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
         const {
           data: { paging, replies },
-        } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/comment/replies?cursor=${state.paging.cursor}`,
+        } = await api.post(
+          `/api/v1/comment/replies?cursor=${state.paging.cursor}`,
           { comment: comment._id },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -101,8 +102,8 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
         dispatch({ type: 'SHOW_REPLIES', payload: { showReplies: true } })
 
-        const { data } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/comment/reply`,
+        const { data } = await api.post(
+          '/api/v1/comment/reply',
           { comment: comment._id, body, user },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -150,10 +151,10 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
         const {
           data: { message },
-        } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/comment/pin`,
-          { thread, comment: comment._id }
-        )
+        } = await api.post('/api/v1/comment/pin', {
+          thread,
+          comment: comment._id,
+        })
 
         dispatch({ type: 'PIN_LOAD', payload: { pinLoad: false } })
 
@@ -173,8 +174,8 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
         const {
           data: { comment: editedComment, message },
-        } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/v1/comment/edit`,
+        } = await api.post(
+          '/api/v1/comment/edit',
           { comment: comment._id, body },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -215,10 +216,7 @@ export const Provider = ({ children, comment, token }: ProviderProps) => {
 
       const {
         data: { message },
-      } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/comment/delete`,
-        { comment: comment._id }
-      )
+      } = await api.post('/api/v1/comment/delete', { comment: comment._id })
 
       deleteRef.parentNode.removeChild(deleteRef)
 
