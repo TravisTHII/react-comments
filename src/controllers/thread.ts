@@ -39,7 +39,7 @@ export const getThread = async (req: Request, res: Response) => {
     } = req
 
     const newCursor = Number(cursor) || 0
-    const limit = 2
+    const limit = 9
     const pinned = await getPinnedComment(_thread_name, _id)
 
     const { total, end, comments } = await CommentModel.paginate(
