@@ -33,5 +33,5 @@ export function Home() {
     )
   }
 
-  return <div id="ReactComments">{content}</div>
+  return <div id="react_comments">{content}</div>
 }

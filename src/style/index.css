@@ -39,19 +39,6 @@ img {
 
 /*
 =============== 
-ReactComments
-===============
-*/
-
-#ReactComments {
-  padding-bottom: 500px;
-  width: 600px;
-  margin: 0 auto;
-  min-height: 900px;
-}
-
-/*
-=============== 
 Header
 ===============
 */
@@ -103,6 +90,7 @@ Selectors
 
 .thread_selectors {
   margin-bottom: 30px;
+  height: 190px;
 }
 .thread_selectors > div:not(:last-child) {
   margin-bottom: 20px;
@@ -155,6 +143,13 @@ Selectors
 Thread
 ===============
 */
+
+#react_comments {
+  padding-bottom: 500px;
+  width: 600px;
+  margin: 0 auto;
+  min-height: 900px;
+}
 
 .thread_column {
   width: 100%;
