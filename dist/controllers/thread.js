@@ -38,7 +38,7 @@ const getThread = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let { user: { _id }, params: { _thread_name }, query: { sort, cursor }, } = req;
         const newCursor = Number(cursor) || 0;
-        const limit = 2;
+        const limit = 9;
         const pinned = yield getPinnedComment_1.getPinnedComment(_thread_name, _id);
         const { total, end, comments } = yield Comment_1.Comment.paginate({
             thread: _thread_name,
